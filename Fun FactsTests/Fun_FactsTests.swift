@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Fun_Facts
+//@testable import Fun_Facts
 
 class Fun_FactsTests: XCTestCase {
     
