@@ -16,7 +16,6 @@
 
 import UIKit
 
-
 let plotList = PlotList()
 let colorWheel = ColorWheel()
 
@@ -61,7 +60,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        view.backgroundColor = randomColor
 //        newMovieButton.tintColor = randomColor
         print("User wants another movie.")
-        plotList.randomMovie()
+        userGuess.text = ""
+        answerArray = plotList.randomMovie()
         emojiPlot.text = answerArray[0]
         print("The secret movie is " + answerArray[1])
     }
