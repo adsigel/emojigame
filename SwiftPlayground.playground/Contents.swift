@@ -12,5 +12,7 @@ var state = "Massachusetts"
 let interpolatedAddress = "\(state + " " + country)"
 
 let name = "Adam"
-// let greeting = "\("Hi there , " + name.)"
 let greeting = "\("Hi there, " + name + ".")"
+
+let count = 4
+print("\("User has guessed " + count + "times.")")

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Fun Facts
+//  emojigame
 //
 //  Created by Adam Sigel on 7/7/16.
 //  Copyright © 2016 Adam Sigel. All rights reserved.

@@ -11,13 +11,23 @@ import Foundation
 struct PlotList {
     
     let plotArray = [
-        "💣🚌",
+        "🚍💣",
         "💾🚤🔫😶💻🆗",
         "👮🏻👱🏿🚌🔥💤🐚🐚🐚👮🏻👱🏿🔫☮️",
         "👱🚿👩🔪👣",
         "🏠👩📺💥🌀💡🔆💡👵🛀👩👿💫🌀💡💥🚫🚘🏥",
         "👩🔭🌌🚙💥💪🌀👑🔨❄️😏😡🚫🔨☕️💑",
-        "🇯🇵😴➡️😴💰✈️😴😴😴➡️😴➡️😴☔️🚄🚓☔️😴🔫➡️😴❄️😴🔫🏢🔙😴➡️👫😳"
+        "🇯🇵😴➡️😴💰✈️😴😴😴➡️😴➡️😴☔️🚄🚓☔️😴🔫➡️😴❄️😴🔫🏢🔙😴➡️👫😳",
+        "🇲🇽🌵⛪️😄😀😃🐎🎤😚🌳🎤🔥🏕👀✈️🐎🎉🎂👨🔫🔫🔫💃",
+        "👦🏢😐😬😏📝📚🎧🔨🔦💩😅💰👴🔫⛵️🌅",
+        "😰😩😉🚗🙋🏙🍸🎨⚾️🎤🎉🚗💥👟😎",
+        "⏰⏰🎸😀👴⏱🚙⌛️⏳😀👦🚙💩🎸😘🌩⏳⌛️😊",
+        "👦👧💻📚🌹💞",
+        "👦🖥🎠👳💤👨🌠🎹🤖👨‍❤️‍💋‍👨🎮👳👦",
+        "✋🎠🔫👼💣👨🔀👨🔫🚤🔫👨🔀👨👦✋",
+        "😀🔍🐶🚙🏈🐬⁉️👩🔀👨😖🐬🔍😉",
+        "😠💪🚔➡️🎓👨👔👿💥🚙",
+        "🌏🤖🌱😍🚀🌌💑🌎"
         ]
     
     let titleArray = [
@@ -27,7 +37,37 @@ struct PlotList {
         "psycho",
         "poltergeist",
         "thor",
-        "inception"
+        "inception",
+        "the three amigos",
+        "the shawshank redemption",
+        "ferris bueller's day off",
+        "back to the future",
+        "you've got mail",
+        "big",
+        "face off",
+        "ace ventura",
+        "kindergarten cop",
+        "wall-e"
+    ]
+    
+    let hintArray = [
+        "'Yeah, but I'm taller.'",
+        "'Just give us the disk and we'll give you your life back.'",
+        "'Teddy bear.'",
+        "Directed by Alfred Hitchcock",
+        "Written by Steven Spielberg, released in 1982",
+        "The first emoji represents Natalie Portman",
+        "'You've got to dream a little bigger darling.'",
+        "'It's a sweater!'",
+        "The last emoji represents Zihuatanejo",
+        "'Pardon my French, but you're an asshole!'",
+        "'1.21 gigawatts!'",
+        "'Don't cry, Shopgirl.'",
+        "'...Shimmy shimmy, cocoa pop. Shimmy shimmy rock...'",
+        "Released in 1997, directed by John Woo",
+        "'Alrighty then!'",
+        "'It's not a tumor!'",
+        "39 minutes pass before the first spoken dialog"
     ]
 
     var userGuess: String = "nil"
@@ -35,7 +75,7 @@ struct PlotList {
     func randomMovie () -> Array<String> {
         var randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
         var secretTitle = titleArray[randomNumber]
-        var answerArray = [plotArray[randomNumber], titleArray[randomNumber]]
+        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber]]
         return answerArray
     }
     

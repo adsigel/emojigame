@@ -8,16 +8,16 @@
 
 //  TODO:
 //  * Fix styling issues for multiple device sizes
-//  * Show another movie when a user is right
-//  * Count user guesses
-//  * Track correct guesses
-//  * Share movie
+//  * Add scores
 //  * Add more movies
+//  * Allow for fuzzy matching (ignore the word 'the')
+//  # 3D touch to see a GIF from the movie
 
 import UIKit
 
 let plotList = PlotList()
 let colorWheel = ColorWheel()
+var count = 0
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -38,6 +38,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var answerArray = plotList.randomMovie()
     // answerArray[0] is the emoji plot
     // answerArray[1] is the secret title
+    // answerArray[2] is the hint
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +62,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        newMovieButton.tintColor = randomColor
         print("User wants another movie.")
         userGuess.text = ""
+        guessFeedback.text = ""
+        guessFeedback.backgroundColor = UIColor.clearColor()
         answerArray = plotList.randomMovie()
         emojiPlot.text = answerArray[0]
         print("The secret movie is " + answerArray[1])
+        count = 0
     }
 
     func dismissKeyboard() {
@@ -72,8 +76,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func checkGuess() {
-        var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        count = count + 1
         print("User has guessed " + guess!)
+        print("User has guessed " + String(count) + " times.")
         if guess == answerArray[1] {
             print("userGuess is correct")
             dispatch_async(dispatch_get_main_queue(), { () -> () in
@@ -91,5 +97,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    @IBAction func hintButton(sender: AnyObject) {
+        print("User has asked for a hint.")
+        var alert = UIAlertController(title: "Here's a hint", message: answerArray[2], preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 }
 
