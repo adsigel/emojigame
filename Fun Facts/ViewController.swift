@@ -9,6 +9,7 @@
 //  TODO:
 //  * Fix styling issues for multiple device sizes
 //  * Fix guessRightAlert so users can't win points multiple times for the same movie
+//  * Exclude movies after a user sees them. Wipe excludeArray when all movies have been played.
 //  * Add more movies
 //  * Allow for fuzzy matching (ignore the word 'the')
 //  # 3D touch to see a GIF from the movie
@@ -20,6 +21,7 @@ let colorWheel = ColorWheel()
 var count = 0
 var userScoreValue: Int = 0
 var movieValue: Int = 0
+var excludeArray = [0]
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -53,6 +55,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
         emojiPlot.text = answerArray[0]
         print("The secret movie is " + answerArray[1])
+        print("Movies excluded are in positions" + String(excludeArray))
         guessFeedback.text = ""
         guessFeedback.backgroundColor = UIColor.clearColor()
         newMovieButton.setTitle("", forState: .Normal)
@@ -75,6 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         answerArray = plotList.randomMovie()
         emojiPlot.text = answerArray[0]
         print("The secret movie is " + answerArray[1])
+        print("Movies excluded are in positions" + String(excludeArray))
         count = 0
         movieValue = Int(answerArray[3])!
     }

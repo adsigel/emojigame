@@ -11,6 +11,7 @@ import Foundation
 struct PlotList {
     
     let plotArray = [
+        "💀",
         "🚍💣",
         "💾🚤🔫😶💻🆗",
         "👮🏻👱🏿🚌🔥💤🐚🐚🐚👮🏻👱🏿🔫☮️",
@@ -31,6 +32,7 @@ struct PlotList {
         ]
     
     let titleArray = [
+        "test/exclude",
         "speed",
         "the net",
         "demolition man",
@@ -51,6 +53,7 @@ struct PlotList {
     ]
     
     let hintArray = [
+        "'This is just a test.'",
         "'Yeah, but I'm taller.'",
         "'Just give us the disk and we'll give you your life back.'",
         "'Teddy bear.'",
@@ -71,6 +74,7 @@ struct PlotList {
     ]
     
     let scoreArray = [
+        "0",
         "10",
         "50",
         "30",
@@ -93,9 +97,16 @@ struct PlotList {
     var userGuess: String = "nil"
     
     func randomMovie () -> Array<String> {
-        var randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
+        var randomNumber : Int
+        repeat {
+            randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
+        } while excludeArray.contains(randomNumber)
         var secretTitle = titleArray[randomNumber]
         var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
+        excludeArray.append(randomNumber)
+        if excludeArray.count == plotArray.count {
+            excludeArray = [0]
+        }
         return answerArray
     }
     
