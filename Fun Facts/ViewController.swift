@@ -97,7 +97,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                self.guessFeedback.text = "You got it!"
 //                self.newMovieButton.setTitle("Go again?", forState: .Normal)
 //                });
-            let guessRightAlert = UIAlertController(title: "You got it!", message: "Great job. You got it in " + String(count) + " guess(es).", preferredStyle: UIAlertControllerStyle.Alert)
+            var guessMessageBase = "Great job! You got it in " + String(count)
+            let guessOnce = " guess!"
+            let guessMany = " guesses!"
+            if count == 1 {
+                guessMessageBase = guessMessageBase + guessOnce
+            } else {
+                guessMessageBase = guessMessageBase + guessMany
+            }
+            let guessRightAlert = UIAlertController(title: "You got it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Play again", style: .Default) { (action) in
                 self.nextRound()
             }
@@ -146,6 +154,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let OKAction = UIAlertAction(title: "Skip", style: .Default) { (action) in
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
+            self.userScore.text = String(userScoreValue)
             self.nextRound()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in

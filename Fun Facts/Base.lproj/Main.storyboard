@@ -108,11 +108,16 @@
                                     <action selector="skipMovie:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o47-4t-KQV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccC-K9-FLk">
+                                <rect key="frame" x="137" y="31" width="46" height="30"/>
+                                <state key="normal" title="Peek"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44032102823257446" green="0.91122901439666748" blue="0.71445590257644653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="top" secondItem="7Ff-9S-isv" secondAttribute="bottom" constant="20" id="2Hb-ho-paF"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="top" secondItem="SMe-BA-53k" secondAttribute="bottom" id="4bs-Kq-6vV"/>
+                            <constraint firstItem="ccC-K9-FLk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="11" id="CkH-SN-UYc"/>
                             <constraint firstItem="2Dw-XL-jNu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="ERy-2f-Hct"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KBO-5J-TAN"/>
                             <constraint firstItem="W6s-FM-JnA" firstAttribute="leading" secondItem="le0-5o-5M5" secondAttribute="leading" id="MCy-Rv-7zZ"/>
@@ -120,6 +125,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="2Dw-XL-jNu" secondAttribute="leading" id="OlF-si-9zq"/>
                             <constraint firstItem="7Ff-9S-isv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q3k-9u-KMw"/>
                             <constraint firstItem="wMs-0E-51f" firstAttribute="top" secondItem="W6s-FM-JnA" secondAttribute="bottom" constant="78" id="dS0-eF-tih"/>
+                            <constraint firstItem="ccC-K9-FLk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eKo-Bs-d1E"/>
                             <constraint firstItem="hcD-ct-gjq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="65" id="eMm-Gj-u3l"/>
                             <constraint firstItem="nMv-g7-Cdw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eex-XB-N6X"/>
                             <constraint firstItem="uLY-0b-caI" firstAttribute="trailing" secondItem="le0-5o-5M5" secondAttribute="trailing" id="fAo-9y-gFq"/>
@@ -143,16 +149,17 @@
                         <outlet property="skipButton" destination="uLY-0b-caI" id="yaj-gi-siK"/>
                         <outlet property="userGuess" destination="le0-5o-5M5" id="sKF-ds-NEm"/>
                         <outlet property="userScore" destination="SMe-BA-53k" id="gxA-Wt-r16"/>
+                        <outlet property="view" destination="ccC-K9-FLk" id="Ke6-rB-YAC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="226" y="200"/>
         </scene>
-        <!--View Controller-->
+        <!--PeekController-->
         <scene sceneID="yIE-bL-Wjf">
             <objects>
-                <viewController id="dBy-Lh-x3J" sceneMemberID="viewController">
+                <viewController title="PeekController" id="dBy-Lh-x3J" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="weS-ZB-xDG"/>
                         <viewControllerLayoutGuide type="bottom" id="bNR-JZ-amX"/>
@@ -160,7 +167,21 @@
                     <view key="view" contentMode="scaleToFill" id="zPR-4m-fDa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSK-2w-eGI">
+                                <rect key="frame" x="41" y="134" width="238" height="300"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="0Wl-XY-OGL"/>
+                                    <constraint firstAttribute="width" constant="238" id="wxA-6g-5ve"/>
+                                </constraints>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PSK-2w-eGI" firstAttribute="centerY" secondItem="zPR-4m-fDa" secondAttribute="centerY" id="F6Z-4M-dY0"/>
+                            <constraint firstItem="PSK-2w-eGI" firstAttribute="centerX" secondItem="zPR-4m-fDa" secondAttribute="centerX" id="KKB-9Y-UUB"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1m-UO-h2I" userLabel="First Responder" sceneMemberID="firstResponder"/>

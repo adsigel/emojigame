@@ -73,3 +73,12 @@ titleArray[1]
 titleArray.indexOf("the net")
 titleArray.indexOf("pyscho")
 
+var guessMessageBase = "Great job! You got it in " + String(count)
+let guessOnce = " guess!"
+let guessMany = " guesses!"
+if count == 1 {
+    guessMessageBase = guessMessageBase + guessOnce
+} else {
+    guessMessageBase = guessMessageBase + guessMany
+}
+
