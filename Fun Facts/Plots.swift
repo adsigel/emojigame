@@ -69,13 +69,33 @@ struct PlotList {
         "'It's not a tumor!'",
         "39 minutes pass before the first spoken dialog"
     ]
+    
+    let scoreArray = [
+        "10",
+        "50",
+        "30",
+        "15",
+        "50",
+        "30",
+        "25",
+        "35",
+        "20",
+        "25",
+        "15",
+        "30",
+        "25",
+        "50",
+        "15",
+        "50",
+        "15"
+    ]
 
     var userGuess: String = "nil"
     
     func randomMovie () -> Array<String> {
         var randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
         var secretTitle = titleArray[randomNumber]
-        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber]]
+        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
         return answerArray
     }
     
