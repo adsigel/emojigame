@@ -7,12 +7,12 @@
 //
 
 //  TODO:
-//  * Fix styling issues for multiple device sizes
 //  * Fix guessRightAlert so users can't win points multiple times for the same movie
 //  * Add more movies
 //  * Allow for fuzzy matching (ignore the word 'the')
 //  * 3D touch to see a GIF from the movie
 //  * Figure out why Shawshank emojis get cut off
+//  * Refactor and pull functions out of core game logic
 
 import UIKit
 
@@ -99,36 +99,34 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                self.guessFeedback.text = "You got it!"
 //                self.newMovieButton.setTitle("Go again?", forState: .Normal)
 //                });
-            var guessMessageBase = "Great job! You got it in " + String(count)
-            let guessOnce = " guess!"
-            let guessMany = " guesses!"
+            var guessMessageBase = "You got it in " + String(count)
+            let guessOnce = " guess and earned + " + String(movieValue) + " points."
+            let guessMany = " guesses and earned + " + String(movieValue) + " points."
             if count == 1 {
                 guessMessageBase = guessMessageBase + guessOnce
             } else {
                 guessMessageBase = guessMessageBase + guessMany
             }
-            let guessRightAlert = UIAlertController(title: "You got it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "Play again", style: .Default) { (action) in
+            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
             }
-            let cancelAction = UIAlertAction(title: "Cool", style: .Default) { (action) in
-                print("User doesn't want to play anymore.")
-            }
             guessRightAlert.addAction(OKAction)
-            guessRightAlert.addAction(cancelAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
             userScoreValue = userScoreValue + movieValue
             userScore.text = String(userScoreValue)
         } else {
             print("userGuess is incorrect")
-//            dispatch_async(dispatch_get_main_queue(), { () -> () in
-//                self.guessFeedback.backgroundColor = self.feedbackBackground
-//                self.guessFeedback.textColor = self.badGuess
-//                self.guessFeedback.text = "Nope, try again!"
-//            });
-            let guessWrongAlert = UIAlertController(title: "That's not it", message: "Sorry, that's not the right movie. Guess again.", preferredStyle: UIAlertControllerStyle.Alert)
-            guessWrongAlert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(guessWrongAlert, animated: true, completion: nil)
+            let anim = CAKeyframeAnimation( keyPath:"transform" )
+            anim.values = [
+                NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
+                NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
+            ]
+            anim.autoreverses = true
+            anim.repeatCount = 2
+            anim.duration = 7/100
+            
+            userGuess.layer.addAnimation( anim, forKey:nil )
         }
         
     }
@@ -144,7 +142,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func dahFuh(sender: AnyObject) {
         print("User wants to know how the game works.")
-        let alert = UIAlertController(title: "Dah Fuh?", message: "The emojis tell the plot of a movie. Guess the plot. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -152,8 +150,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func skipMovie(sender: AnyObject) {
         print("User is considering skipping this one.")
-        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you points.", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "Skip", style: .Default) { (action) in
+        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
             self.userScore.text = String(userScoreValue)
