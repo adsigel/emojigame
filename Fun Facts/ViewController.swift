@@ -9,10 +9,10 @@
 //  TODO:
 //  * Fix styling issues for multiple device sizes
 //  * Fix guessRightAlert so users can't win points multiple times for the same movie
-//  * Exclude movies after a user sees them. Wipe excludeArray when all movies have been played.
 //  * Add more movies
 //  * Allow for fuzzy matching (ignore the word 'the')
-//  # 3D touch to see a GIF from the movie
+//  * 3D touch to see a GIF from the movie
+//  * Figure out why Shawshank emojis get cut off
 
 import UIKit
 
@@ -28,7 +28,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userGuess: UITextField!
     @IBOutlet weak var emojiPlot: UILabel!
     @IBOutlet weak var guessFeedback: UILabel!
-    @IBOutlet weak var newMovieButton: UIButton!
     @IBOutlet weak var dahFuh: UIButton!
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
@@ -58,7 +57,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("Movies excluded are in positions" + String(excludeArray))
         guessFeedback.text = ""
         guessFeedback.backgroundColor = UIColor.clearColor()
-        newMovieButton.setTitle("", forState: .Normal)
         movieValue = Int(answerArray[3])!
     }
 

@@ -28,7 +28,11 @@ struct PlotList {
         "✋🎠🔫👼💣👨🔀👨🔫🚤🔫👨🔀👨👦✋",
         "😀🔍🐶🚙🏈🐬⁉️👩🔀👨😖🐬🔍😉",
         "😠💪🚔➡️🎓👨👔👿💥🚙",
-        "🌏🤖🌱😍🚀🌌💑🌎"
+        "🌏🤖🌱😍🚀🌌💑🌎",
+        "🌪🏠👧🌽🦁🤖🛣🐒😈💦👠🏠",
+        "👨🏻👨🏿🍔🔫💼👨🏻👩💃😵💉😳⌚️🚗💥🤐🗡🚗🔫🐺👦👧💰",
+        "🚍👦🏃🏈👨👨🏿🇻🇳🏓🍤🏃👧💀",
+        "👦☎️👨🏿💊🖥🌏🤖🔫🔫🚁🔫🔫"
         ]
     
     let titleArray = [
@@ -49,7 +53,11 @@ struct PlotList {
         "face off",
         "ace ventura",
         "kindergarten cop",
-        "wall-e"
+        "wall-e",
+        "the wizard of oz",
+        "pulp fiction",
+        "forrest gump",
+        "the matrix"
     ]
     
     let hintArray = [
@@ -70,7 +78,11 @@ struct PlotList {
         "Released in 1997, directed by John Woo",
         "'Alrighty then!'",
         "'It's not a tumor!'",
-        "39 minutes pass before the first spoken dialog"
+        "39 minutes pass before the first spoken dialog",
+        "'I don't think we're in Kansas anymore.'",
+        "'And I will strike down upon thee with great vengeance and furious anger...'",
+        "'Life is like a box of chocolates. You never know what you're gonna get.",
+        "'I know kung fu.'"
     ]
     
     let scoreArray = [
@@ -79,8 +91,8 @@ struct PlotList {
         "50",
         "30",
         "15",
+        "75",
         "50",
-        "30",
         "25",
         "35",
         "20",
@@ -91,7 +103,11 @@ struct PlotList {
         "50",
         "15",
         "50",
-        "15"
+        "15",
+        "15",
+        "20",
+        "15",
+        "20"
     ]
 
     var userGuess: String = "nil"
