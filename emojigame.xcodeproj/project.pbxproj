@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66374B5B1D2EFF58007024B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B5A1D2EFF58007024B1 /* AppDelegate.swift */; };
-		66374B601D2EFF58007024B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66374B5E1D2EFF58007024B1 /* Main.storyboard */; };
-		66374B621D2EFF58007024B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66374B611D2EFF58007024B1 /* Assets.xcassets */; };
-		66374B651D2EFF58007024B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66374B631D2EFF58007024B1 /* LaunchScreen.storyboard */; };
 		66374B701D2EFF58007024B1 /* Fun_FactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */; };
 		66374B7B1D2EFF58007024B1 /* Fun_FactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */; };
-		66374B8B1D2F0EB1007024B1 /* Plots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B8A1D2F0EB1007024B1 /* Plots.swift */; };
-		66374B8D1D2F0FAC007024B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B8C1D2F0FAC007024B1 /* ViewController.swift */; };
-		66374B8F1D2FB4DF007024B1 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B8E1D2FB4DF007024B1 /* ColorWheel.swift */; };
+		66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A3F1D3CFEDF008FEA44 /* ViewController.swift */; };
+		66695A471D3CFEDF008FEA44 /* Plots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A401D3CFEDF008FEA44 /* Plots.swift */; };
+		66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A411D3CFEDF008FEA44 /* AppDelegate.swift */; };
+		66695A491D3CFEDF008FEA44 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66695A421D3CFEDF008FEA44 /* Info.plist */; };
+		66695A4A1D3CFEDF008FEA44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66695A431D3CFEDF008FEA44 /* Assets.xcassets */; };
+		66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A451D3CFEDF008FEA44 /* ColorWheel.swift */; };
+		669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */; };
+		669FAC661D3D02ED00C92433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC631D3D02ED00C92433 /* Main.storyboard */; };
 		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
 		66EB93DB1D359A1E0081FF4F /* DigitsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D71D359A1E0081FF4F /* DigitsKit.framework */; };
 		66EB93DC1D359A1E0081FF4F /* DigitsKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66EB93D81D359A1E0081FF4F /* DigitsKitResources.bundle */; };
@@ -41,11 +42,6 @@
 
 /* Begin PBXFileReference section */
 		66374B571D2EFF58007024B1 /* emojigame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = emojigame.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		66374B5A1D2EFF58007024B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66374B5F1D2EFF58007024B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		66374B611D2EFF58007024B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		66374B641D2EFF58007024B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		66374B661D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66374B6B1D2EFF58007024B1 /* emojigame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = emojigame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fun_FactsTests.swift; sourceTree = "<group>"; };
 		66374B711D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,9 +49,14 @@
 		66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fun_FactsUITests.swift; sourceTree = "<group>"; };
 		66374B7C1D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66374B881D2F007D007024B1 /* Scratchpad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratchpad.playground; sourceTree = "<group>"; };
-		66374B8A1D2F0EB1007024B1 /* Plots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plots.swift; sourceTree = "<group>"; };
-		66374B8C1D2F0FAC007024B1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		66374B8E1D2FB4DF007024B1 /* ColorWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
+		66695A3F1D3CFEDF008FEA44 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = emojigame/ViewController.swift; sourceTree = SOURCE_ROOT; };
+		66695A401D3CFEDF008FEA44 /* Plots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plots.swift; path = emojigame/Plots.swift; sourceTree = SOURCE_ROOT; };
+		66695A411D3CFEDF008FEA44 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = emojigame/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		66695A421D3CFEDF008FEA44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = emojigame/Info.plist; sourceTree = SOURCE_ROOT; };
+		66695A431D3CFEDF008FEA44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = emojigame/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		66695A451D3CFEDF008FEA44 /* ColorWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorWheel.swift; path = emojigame/ColorWheel.swift; sourceTree = SOURCE_ROOT; };
+		669FAC621D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		669FAC641D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66EB93D41D329BF90081FF4F /* SwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftPlayground.playground; sourceTree = "<group>"; };
 		66EB93D61D359A1E0081FF4F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		66EB93D71D359A1E0081FF4F /* DigitsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DigitsKit.framework; sourceTree = "<group>"; };
@@ -94,10 +95,12 @@
 		66374B4E1D2EFF58007024B1 = {
 			isa = PBXGroup;
 			children = (
+				669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */,
+				669FAC631D3D02ED00C92433 /* Main.storyboard */,
 				66374B591D2EFF58007024B1 /* emojigame */,
 				66374B891D2F008D007024B1 /* Playgrounds */,
-				66374B6E1D2EFF58007024B1 /* Fun FactsTests */,
-				66374B791D2EFF58007024B1 /* Fun FactsUITests */,
+				66374B6E1D2EFF58007024B1 /* emojigame Tests */,
+				66374B791D2EFF58007024B1 /* emojigame UITests */,
 				66374B581D2EFF58007024B1 /* Products */,
 				66EB93D61D359A1E0081FF4F /* Fabric.framework */,
 				66EB93D71D359A1E0081FF4F /* DigitsKit.framework */,
@@ -119,34 +122,34 @@
 		66374B591D2EFF58007024B1 /* emojigame */ = {
 			isa = PBXGroup;
 			children = (
-				66374B8A1D2F0EB1007024B1 /* Plots.swift */,
-				66374B8E1D2FB4DF007024B1 /* ColorWheel.swift */,
-				66374B5A1D2EFF58007024B1 /* AppDelegate.swift */,
-				66374B8C1D2F0FAC007024B1 /* ViewController.swift */,
-				66374B5E1D2EFF58007024B1 /* Main.storyboard */,
-				66374B611D2EFF58007024B1 /* Assets.xcassets */,
-				66374B631D2EFF58007024B1 /* LaunchScreen.storyboard */,
-				66374B661D2EFF58007024B1 /* Info.plist */,
+				66695A401D3CFEDF008FEA44 /* Plots.swift */,
+				66695A451D3CFEDF008FEA44 /* ColorWheel.swift */,
+				66695A3F1D3CFEDF008FEA44 /* ViewController.swift */,
+				66695A411D3CFEDF008FEA44 /* AppDelegate.swift */,
+				66695A421D3CFEDF008FEA44 /* Info.plist */,
+				66695A431D3CFEDF008FEA44 /* Assets.xcassets */,
 			);
 			name = emojigame;
 			path = "Fun Facts";
 			sourceTree = "<group>";
 		};
-		66374B6E1D2EFF58007024B1 /* Fun FactsTests */ = {
+		66374B6E1D2EFF58007024B1 /* emojigame Tests */ = {
 			isa = PBXGroup;
 			children = (
 				66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */,
 				66374B711D2EFF58007024B1 /* Info.plist */,
 			);
+			name = "emojigame Tests";
 			path = "Fun FactsTests";
 			sourceTree = "<group>";
 		};
-		66374B791D2EFF58007024B1 /* Fun FactsUITests */ = {
+		66374B791D2EFF58007024B1 /* emojigame UITests */ = {
 			isa = PBXGroup;
 			children = (
 				66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */,
 				66374B7C1D2EFF58007024B1 /* Info.plist */,
 			);
+			name = "emojigame UITests";
 			path = "Fun FactsUITests";
 			sourceTree = "<group>";
 		};
@@ -265,10 +268,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */,
+				669FAC661D3D02ED00C92433 /* Main.storyboard in Resources */,
 				66EB93DC1D359A1E0081FF4F /* DigitsKitResources.bundle in Resources */,
-				66374B651D2EFF58007024B1 /* LaunchScreen.storyboard in Resources */,
-				66374B621D2EFF58007024B1 /* Assets.xcassets in Resources */,
-				66374B601D2EFF58007024B1 /* Main.storyboard in Resources */,
+				66695A491D3CFEDF008FEA44 /* Info.plist in Resources */,
+				66695A4A1D3CFEDF008FEA44 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,10 +313,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66374B8D1D2F0FAC007024B1 /* ViewController.swift in Sources */,
-				66374B8B1D2F0EB1007024B1 /* Plots.swift in Sources */,
-				66374B5B1D2EFF58007024B1 /* AppDelegate.swift in Sources */,
-				66374B8F1D2FB4DF007024B1 /* ColorWheel.swift in Sources */,
+				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
+				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
+				66695A471D3CFEDF008FEA44 /* Plots.swift in Sources */,
+				66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,20 +352,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		66374B5E1D2EFF58007024B1 /* Main.storyboard */ = {
+		669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				66374B5F1D2EFF58007024B1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		66374B631D2EFF58007024B1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				66374B641D2EFF58007024B1 /* Base */,
+				669FAC621D3D02ED00C92433 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		669FAC631D3D02ED00C92433 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				669FAC641D3D02ED00C92433 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -460,7 +464,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "Fun Facts/Info.plist";
+				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojigame;
 				PRODUCT_NAME = emojigame;
@@ -478,7 +482,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "Fun Facts/Info.plist";
+				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojigame;
 				PRODUCT_NAME = emojigame;
