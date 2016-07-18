@@ -164,5 +164,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         skipAlert.addAction(cancelAction)
         self.presentViewController(skipAlert, animated: true, completion: nil)
     }
+    @IBAction func shareButton(sender: AnyObject) {
+        let textToShare = "Can you guess what movie this is? " + answerArray[0]
+        
+        if let myWebsite = NSURL(string: "http://adamdsigel.com") {
+            let objectsToShare = [textToShare, myWebsite]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            activityVC.popoverPresentationController?.sourceView = sender as! UIView
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
+    }
 }
 

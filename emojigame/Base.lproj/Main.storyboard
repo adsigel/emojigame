@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -94,6 +95,14 @@
                                 <color key="textColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeM-fC-kaa">
+                                <rect key="frame" x="20" y="428" width="32" height="32"/>
+                                <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
+                                <state key="normal" image="share"/>
+                                <connections>
+                                    <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s6j-V3-r0g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44032102823257446" green="0.91122901439666748" blue="0.71445590257644653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -106,9 +115,11 @@
                             <constraint firstItem="le0-5o-5M5" firstAttribute="top" secondItem="nMv-g7-Cdw" secondAttribute="bottom" constant="35" id="ODm-PL-lqp"/>
                             <constraint firstAttribute="leadingMargin" secondItem="2Dw-XL-jNu" secondAttribute="leading" id="OlF-si-9zq"/>
                             <constraint firstItem="7Ff-9S-isv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q3k-9u-KMw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qeM-fC-kaa" secondAttribute="bottom" constant="20" id="dnr-2r-VRQ"/>
                             <constraint firstItem="hcD-ct-gjq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="eMm-Gj-u3l"/>
                             <constraint firstItem="nMv-g7-Cdw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eex-XB-N6X"/>
                             <constraint firstItem="uLY-0b-caI" firstAttribute="trailing" secondItem="le0-5o-5M5" secondAttribute="trailing" id="fAo-9y-gFq"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="qeM-fC-kaa" secondAttribute="leading" id="kAd-bX-zcH"/>
                             <constraint firstItem="nMv-g7-Cdw" firstAttribute="top" secondItem="hcD-ct-gjq" secondAttribute="bottom" constant="16" id="mfo-xo-YJe"/>
                             <constraint firstItem="W6s-FM-JnA" firstAttribute="top" secondItem="le0-5o-5M5" secondAttribute="bottom" id="oDM-ZL-gNH"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="p6P-yx-hQn"/>
@@ -134,5 +145,8 @@
             <point key="canvasLocation" x="226" y="200"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="share" width="32" height="32"/>
+    </resources>
     <color key="tintColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
