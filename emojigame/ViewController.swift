@@ -100,8 +100,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                self.newMovieButton.setTitle("Go again?", forState: .Normal)
 //                });
             var guessMessageBase = "You got it in " + String(count)
-            let guessOnce = " guess and earned + " + String(movieValue) + " points."
-            let guessMany = " guesses and earned + " + String(movieValue) + " points."
+            let guessOnce = " guess and earned " + String(movieValue) + " points."
+            let guessMany = " guesses and earned  " + String(movieValue) + " points."
             if count == 1 {
                 guessMessageBase = guessMessageBase + guessOnce
             } else {
