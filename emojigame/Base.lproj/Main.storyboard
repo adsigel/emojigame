@@ -103,10 +103,43 @@
                                     <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s6j-V3-r0g"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" sectionHeaderHeight="30" sectionFooterHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="gDB-gW-pCI">
+                                <rect key="frame" x="41" y="49" width="249" height="382"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="TDi-Ni-eYt"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="30" id="ZYh-tk-aRh" customClass="SpecialCell" customModule="emojigame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="30" width="249" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZYh-tk-aRh" id="kT0-8h-YIf">
+                                            <rect key="frame" x="0.0" y="0.0" width="249" height="29"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymK-se-HSY">
+                                                    <rect key="frame" x="18" y="4" width="218" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" red="0.44662624597549438" green="0.93123412132263184" blue="0.67269980907440186" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="YaQ-Ov-v6K"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="K1N-wg-enL"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.44032102823257446" green="0.91122901439666748" blue="0.71445590257644653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="gDB-gW-pCI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1pF-Xe-I7B"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="top" secondItem="SMe-BA-53k" secondAttribute="bottom" id="4bs-Kq-6vV"/>
+                            <constraint firstItem="gDB-gW-pCI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7Vd-zF-Mmj"/>
                             <constraint firstItem="2Dw-XL-jNu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="ERy-2f-Hct"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KBO-5J-TAN"/>
                             <constraint firstItem="W6s-FM-JnA" firstAttribute="leading" secondItem="le0-5o-5M5" secondAttribute="leading" id="MCy-Rv-7zZ"/>
@@ -135,6 +168,7 @@
                         <outlet property="dahFuh" destination="2Dw-XL-jNu" id="sZq-d8-E9q"/>
                         <outlet property="emojiPlot" destination="nMv-g7-Cdw" id="Seh-Mc-F05"/>
                         <outlet property="guessFeedback" destination="7Ff-9S-isv" id="yJx-gL-jwf"/>
+                        <outlet property="movieTable" destination="gDB-gW-pCI" id="QnM-7E-Ymw"/>
                         <outlet property="skipButton" destination="uLY-0b-caI" id="yaj-gi-siK"/>
                         <outlet property="userGuess" destination="le0-5o-5M5" id="sKF-ds-NEm"/>
                         <outlet property="userScore" destination="SMe-BA-53k" id="gxA-Wt-r16"/>

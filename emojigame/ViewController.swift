@@ -15,6 +15,7 @@
 //  * Refactor and pull functions out of core game logic
 
 import UIKit
+import CoreData
 
 let plotList = PlotList()
 let colorWheel = ColorWheel()
@@ -23,7 +24,7 @@ var userScoreValue: Int = 0
 var movieValue: Int = 0
 var excludeArray = [0]
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var userGuess: UITextField!
     @IBOutlet weak var emojiPlot: UILabel!
@@ -31,6 +32,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dahFuh: UIButton!
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var movieTable: UITableView!
+    
+    var valuesFromSQL:NSArray = []
+    var feedItems: NSArray = NSArray()
+    var selectedMovie : MovieModel = MovieModel()
     
     func textFieldShouldReturn(userGuess: UITextField!) -> Bool {
         userGuess.resignFirstResponder()
@@ -49,7 +55,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let homeModel = HomeModel()
+//        homeModel.delegate = self
+//        homeModel.downloadItems()
+        self.movieTable.delegate = self
+        self.movieTable.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+        get()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         emojiPlot.text = answerArray[0]
@@ -64,6 +76,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func get(){
+        let url = NSURL(string: "http://adamdsigel.com/get.php")
+        let data = NSData(contentsOfURL: url!)
+        valuesFromSQL = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSArray
+        movieTable.reloadData()
+    }
+    
+    func tableView(movieTable: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(valuesFromSQL[0])
+        return valuesFromSQL.count;
+    }
+    
+    func tableView(movieTable: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = movieTable.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! SpecialCell
+        let maindata = valuesFromSQL[indexPath.row]
+//        cell.plot.text = maindata["title"] as? String
+        return maindata as! UITableViewCell;
+    }
+
+    
+//    func itemsDownloaded(items: NSArray) {
+//        
+//        feedItems = items
+//        self.movieTable.reloadData()
+//    }
+//    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // Return the number of feed items
+//        return feedItems.count
+//        
+//    }
+//    
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        // Retrieve cell
+//        let cellIdentifier: String = "BasicCell"
+//        let myCell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+//        // Get the location to be shown
+//        let item: MovieModel = feedItems[indexPath.row] as! MovieModel
+//        // Get references to labels of cell
+//        myCell.textLabel!.text = item.title
+//        
+//        return myCell
+//    }
 
     @IBAction func nextRound() {
 //        var randomColor = colorWheel.randomColor()
