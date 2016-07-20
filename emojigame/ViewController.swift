@@ -7,12 +7,13 @@
 //
 
 //  TODO:
-//  * Fix guessRightAlert so users can't win points multiple times for the same movie
 //  * Add more movies
 //  * Allow for fuzzy matching (ignore the word 'the')
 //  * 3D touch to see a GIF from the movie
 //  * Figure out why Shawshank emojis get cut off
 //  * Refactor and pull functions out of core game logic
+//  * Implement MySQL database
+//  * Add levels and badges based on user score
 
 import UIKit
 
