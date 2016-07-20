@@ -96,7 +96,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
-            updateScore()
         } else {
             print("userGuess is incorrect")
             let anim = CAKeyframeAnimation( keyPath:"transform" )
@@ -166,9 +165,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(answerArray[3] as! String)!
     }
     
-    func updateScore() {
-        userScoreValue = userScoreValue + movieValue
-        userScore.text = String(userScoreValue)
-    }
 }
 
