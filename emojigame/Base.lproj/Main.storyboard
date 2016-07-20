@@ -88,13 +88,6 @@
                                     <action selector="skipMovie:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o47-4t-KQV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="guessFeedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ff-9S-isv">
-                                <rect key="frame" x="101" y="281" width="119" height="24"/>
-                                <color key="backgroundColor" red="0.98783977597856731" green="1" blue="0.97703973661655652" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <color key="textColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeM-fC-kaa">
                                 <rect key="frame" x="20" y="428" width="32" height="32"/>
                                 <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
@@ -110,11 +103,9 @@
                             <constraint firstItem="2Dw-XL-jNu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="ERy-2f-Hct"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KBO-5J-TAN"/>
                             <constraint firstItem="W6s-FM-JnA" firstAttribute="leading" secondItem="le0-5o-5M5" secondAttribute="leading" id="MCy-Rv-7zZ"/>
-                            <constraint firstItem="7Ff-9S-isv" firstAttribute="top" secondItem="le0-5o-5M5" secondAttribute="bottom" constant="40" id="Mds-7C-TZD"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="centerX" secondItem="SMe-BA-53k" secondAttribute="centerX" id="NvS-4t-C5A"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="top" secondItem="nMv-g7-Cdw" secondAttribute="bottom" constant="35" id="ODm-PL-lqp"/>
                             <constraint firstAttribute="leadingMargin" secondItem="2Dw-XL-jNu" secondAttribute="leading" id="OlF-si-9zq"/>
-                            <constraint firstItem="7Ff-9S-isv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q3k-9u-KMw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qeM-fC-kaa" secondAttribute="bottom" constant="20" id="dnr-2r-VRQ"/>
                             <constraint firstItem="hcD-ct-gjq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="eMm-Gj-u3l"/>
                             <constraint firstItem="nMv-g7-Cdw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eex-XB-N6X"/>
@@ -134,7 +125,6 @@
                     <connections>
                         <outlet property="dahFuh" destination="2Dw-XL-jNu" id="sZq-d8-E9q"/>
                         <outlet property="emojiPlot" destination="nMv-g7-Cdw" id="Seh-Mc-F05"/>
-                        <outlet property="guessFeedback" destination="7Ff-9S-isv" id="yJx-gL-jwf"/>
                         <outlet property="skipButton" destination="uLY-0b-caI" id="yaj-gi-siK"/>
                         <outlet property="userGuess" destination="le0-5o-5M5" id="sKF-ds-NEm"/>
                         <outlet property="userScore" destination="SMe-BA-53k" id="gxA-Wt-r16"/>

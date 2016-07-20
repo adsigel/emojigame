@@ -28,7 +28,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userGuess: UITextField!
     @IBOutlet weak var emojiPlot: UILabel!
-    @IBOutlet weak var guessFeedback: UILabel!
     @IBOutlet weak var dahFuh: UIButton!
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
@@ -42,7 +41,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let badGuess = UIColor(red: 242/255, green: 119/255, blue: 119/255, alpha: 1.0)
     let goodGuess = UIColor(red: 166/255, green: 242/255, blue: 119/255, alpha: 1.0)
     let feedbackBackground = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 0.4)
-    var answerArray = plotList.randomMovie()
+    var answerArray = []
     // answerArray[0] is the emoji plot
     // answerArray[1] is the secret title
     // answerArray[2] is the hint
@@ -53,12 +52,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
-        emojiPlot.text = answerArray[0]
-        print("The secret movie is " + answerArray[1])
-        print("Movies excluded are in positions" + String(excludeArray))
-        guessFeedback.text = ""
-        guessFeedback.backgroundColor = UIColor.clearColor()
-        movieValue = Int(answerArray[3])!
+        selectMovie()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,14 +66,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        newMovieButton.tintColor = randomColor
         print("User wants another movie.")
         userGuess.text = ""
-        guessFeedback.text = ""
-        guessFeedback.backgroundColor = UIColor.clearColor()
-        answerArray = plotList.randomMovie()
-        emojiPlot.text = answerArray[0]
-        print("The secret movie is " + answerArray[1])
-        print("Movies excluded are in positions" + String(excludeArray))
+        selectMovie()
         count = 0
-        movieValue = Int(answerArray[3])!
     }
 
     func dismissKeyboard() {
@@ -92,14 +80,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         count = count + 1
         print("User has guessed " + guess!)
         print("User has guessed " + String(count) + " times.")
-        if guess == answerArray[1] {
+        if guess! == answerArray[1] as! String {
             print("userGuess is correct")
-//            dispatch_async(dispatch_get_main_queue(), { () -> () in
-//                self.guessFeedback.backgroundColor = self.feedbackBackground
-//                self.guessFeedback.textColor = self.goodGuess
-//                self.guessFeedback.text = "You got it!"
-//                self.newMovieButton.setTitle("Go again?", forState: .Normal)
-//                });
             var guessMessageBase = "You got it in " + String(count)
             let guessOnce = " guess and earned " + String(movieValue) + " points."
             let guessMany = " guesses and earned  " + String(movieValue) + " points."
@@ -114,8 +96,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
-            userScoreValue = userScoreValue + movieValue
-            userScore.text = String(userScoreValue)
+            updateScore()
         } else {
             print("userGuess is incorrect")
             let anim = CAKeyframeAnimation( keyPath:"transform" )
@@ -134,7 +115,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func hintButton(sender: AnyObject) {
         print("User has asked for a hint.")
-        let alert = UIAlertController(title: "Here's a hint", message: answerArray[2], preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Here's a hint", message: answerArray[2] as! String, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -166,7 +147,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(skipAlert, animated: true, completion: nil)
     }
     @IBAction func shareButton(sender: AnyObject) {
-        let textToShare = "Can you guess what movie this is? " + answerArray[0]
+        let textToShare = "Can you guess what movie this is? " + (answerArray[0] as! String)
         
         if let myWebsite = NSURL(string: "http://adamdsigel.com") {
             let objectsToShare = [textToShare, myWebsite]
@@ -175,6 +156,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
             activityVC.popoverPresentationController?.sourceView = sender as! UIView
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
+    }
+    
+    func selectMovie() {
+        answerArray = plotList.randomMovie()
+        emojiPlot.text = answerArray[0] as! String
+        print("The secret movie is " + (answerArray[1] as! String))
+        print("Movies excluded are in positions" + String(excludeArray))
+        movieValue = Int(answerArray[3] as! String)!
+    }
+    
+    func updateScore() {
+        userScoreValue = userScoreValue + movieValue
+        userScore.text = String(userScoreValue)
     }
 }
 
