@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        Fabric.with([Crashlytics.self])
         // Override point for customization after application launch.
         // application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         return true

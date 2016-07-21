@@ -165,5 +165,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(answerArray[3] as! String)!
     }
     
+    func updateScore() {
+        userScoreValue = userScoreValue + movieValue
+        if userScoreValue >= levelOne {
+            let levelUpAlert = UIAlertController(title: "New Level Achieved", message: "You are The Emojinator, sent here from the future to match emojis and movies.", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "Share", style: .Default) { (action) in
+                print("User wants to brag about an achievement.")
+            }
+            let cancelAction = UIAlertAction(title: "Okay", style: .Default) { (action) in
+                print("User has chosen to celebrate in silence.")
+            }
+            levelUpAlert.addAction(OKAction)
+            levelUpAlert.addAction(cancelAction)
+            self.presentViewController(levelUpAlert, animated: true, completion: nil)
+        }
+        userScore.text = String(userScoreValue)
+        
+    }
+    
 }
 
