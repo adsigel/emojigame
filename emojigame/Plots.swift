@@ -37,7 +37,9 @@ struct PlotList {
         "📚👻👵🏻😏🤓😳👩🏻🎻👻👩🏻➡️🐶🌩👻🔫😏👩🏻💏",
         "⛰👨‍👩‍👧🍉💃👶🚫💰👧👦💞👧👦💃🆙",
         "👪👴🔫💀👦🕷🔜💪🕸🙃👩💋👊👺",
-        "👨‍👩‍👧‍👦🐐🐴🎂🎉💔👨➡️👵🏻❤️👧👧👦"
+        "👨‍👩‍👧‍👦🐐🐴🎂🎉💔👨➡️👵🏻❤️👧👧👦",
+        "👨🏿👨👴👦🛁🍺🌀⛷🏂🎹🎉🍻",
+        "👮🏻👮🏿🍝💀🔪💀🛏😖🔪💀💊💀🚔📦🔫💀💀"
         ]
     
     let titleArray = [
@@ -67,7 +69,9 @@ struct PlotList {
         "ghostbusters",
         "dirty dancing",
         "spider man",
-        "mrs. doubtfire"
+        "mrs. doubtfire",
+        "hot tub time machine",
+        "se7en"
     ]
     
     let hintArray = [
@@ -97,7 +101,9 @@ struct PlotList {
         "'Are you the gatekeeper?'",
         "'Nobody puts Baby in a corner.'",
         "'With great power comes great responsibility.'",
-        "'I don't work with the males because I used to be one.'"
+        "'I don't work with the males because I used to be one.'",
+        "Starring Jon Cusack and Craig Robinson",
+        "Starring Brad Pitt and Morgan Freeman"
     ]
     
     let scoreArray = [
@@ -127,7 +133,9 @@ struct PlotList {
         "25",
         "50",
         "25",
-        "50"
+        "50",
+        "75",
+        "75"
     ]
 
     var userGuess: String = "nil"
