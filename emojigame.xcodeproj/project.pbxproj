@@ -19,6 +19,7 @@
 		669FAC661D3D02ED00C92433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC631D3D02ED00C92433 /* Main.storyboard */; };
 		66B545541D3FCD4900B2CDE0 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B545531D3FCD4900B2CDE0 /* Levels.swift */; };
 		66B545561D3FF19500B2CDE0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66B545551D3FF19500B2CDE0 /* Crashlytics.framework */; };
+		66E879751D43FF1800BEA9F0 /* LevelUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E879741D43FF1800BEA9F0 /* LevelUpController.swift */; };
 		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
 		66EB93DB1D359A1E0081FF4F /* DigitsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D71D359A1E0081FF4F /* DigitsKit.framework */; };
 		66EB93DC1D359A1E0081FF4F /* DigitsKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66EB93D81D359A1E0081FF4F /* DigitsKitResources.bundle */; };
@@ -61,6 +62,7 @@
 		669FAC641D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66B545531D3FCD4900B2CDE0 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = SOURCE_ROOT; };
 		66B545551D3FF19500B2CDE0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		66E879741D43FF1800BEA9F0 /* LevelUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelUpController.swift; path = emojigame/LevelUpController.swift; sourceTree = SOURCE_ROOT; };
 		66EB93D41D329BF90081FF4F /* SwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftPlayground.playground; sourceTree = "<group>"; };
 		66EB93D61D359A1E0081FF4F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		66EB93D71D359A1E0081FF4F /* DigitsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DigitsKit.framework; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				66695A401D3CFEDF008FEA44 /* Plots.swift */,
 				66695A451D3CFEDF008FEA44 /* ColorWheel.swift */,
 				66695A3F1D3CFEDF008FEA44 /* ViewController.swift */,
+				66E879741D43FF1800BEA9F0 /* LevelUpController.swift */,
 				66695A411D3CFEDF008FEA44 /* AppDelegate.swift */,
 				66695A421D3CFEDF008FEA44 /* Info.plist */,
 				66695A431D3CFEDF008FEA44 /* Assets.xcassets */,
@@ -323,6 +326,7 @@
 				66B545541D3FCD4900B2CDE0 /* Levels.swift in Sources */,
 				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
+				66E879751D43FF1800BEA9F0 /* LevelUpController.swift in Sources */,
 				66695A471D3CFEDF008FEA44 /* Plots.swift in Sources */,
 				66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */,
 			);

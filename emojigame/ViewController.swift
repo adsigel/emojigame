@@ -92,6 +92,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
+                self.performSegueWithIdentifier("newLevelSegue", sender: nil)
                 self.nextRound()
             }
             guessRightAlert.addAction(OKAction)
@@ -168,6 +169,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func updateScore() {
         userScoreValue = userScoreValue + movieValue
         if userScoreValue >= levelOne {
+            print("User has unlocked a new a level.")
             let levelUpAlert = UIAlertController(title: "New Level Achieved", message: "You are The Emojinator, sent here from the future to match emojis and movies.", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Share", style: .Default) { (action) in
                 print("User wants to brag about an achievement.")
