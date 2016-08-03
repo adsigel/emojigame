@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        FIRApp.configure()
         // Override point for customization after application launch.
         // application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         return true

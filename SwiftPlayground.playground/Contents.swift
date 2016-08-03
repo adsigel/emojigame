@@ -15,4 +15,8 @@ let name = "Adam"
 let greeting = "\("Hi there, " + name + ".")"
 
 let count = 4
-print("\("User has guessed " + count + "times.")")
+
+let dateString = NSDate()
+
+dateString
+

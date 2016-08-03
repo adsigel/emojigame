@@ -16,13 +16,19 @@
 //  * Add levels and badges based on user score
 
 import UIKit
+import Firebase
 
+let ref = FIRDatabase.database().reference()
 let plotList = PlotList()
 let colorWheel = ColorWheel()
 var count = 0
 var userScoreValue: Int = 0
 var movieValue: Int = 0
 var excludeArray = [0]
+var excludeList = [0]
+var movie = [Movies]()
+var user: User!
+var dateString = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -49,10 +55,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         selectMovie()
+        user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
+//        ref.observeEventType(.Value, withBlock: { snapshot in
+//            print(snapshot.value)
+//            }, withCancelBlock: { error in
+//                print(error.description)
+//        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -165,5 +176,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(answerArray[3] as! String)!
     }
     
-}
+//    func selectMovieFIR() {
+//        
+//        ref.observeEventType(.Value, withBlock: { snapshot in
+//        var movieList = [Movies]()
+//        var randomInt : Int
+//        for item in snapshot.children {
+//            repeat {
+//                randomInt = Int(arc4random_uniform(UInt32([Movies]().count)))
+//            } while excludeList.contains(randomInt)
+//        }
+//        }
+//    }
+    
+//    func randomMovie () -> Array<String> {
+//        var randomNumber : Int
+//        repeat {
+//            randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
+//        } while excludeArray.contains(randomNumber)
+//        var secretTitle = titleArray[randomNumber]
+//        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
+//        excludeArray.append(randomNumber)
+//        if excludeArray.count == plotArray.count {
+//            excludeArray = [0]
+//        }
+//        return answerArray
+//    }
+    
+    }
 
