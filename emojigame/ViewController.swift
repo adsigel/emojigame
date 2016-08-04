@@ -19,6 +19,8 @@ import UIKit
 import Firebase
 
 let ref = FIRDatabase.database().reference()
+let movieRef = ref.child("movies")
+let userRef = ref.child("users")
 let plotList = PlotList()
 let colorWheel = ColorWheel()
 var count = 0
@@ -38,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
     
-    func textFieldShouldReturn(userGuess: UITextField!) -> Bool {
+    func textFieldShouldReturn(_ userGuess: UITextField!) -> Bool {
         userGuess.resignFirstResponder()
         checkGuess()
         return true
@@ -55,16 +57,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         selectMovie()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
-        var randomInt = Int(arc4random_uniform(UInt32([Movies]().count)))
-        ref.queryOrderedByChild("title").queryEqualToValue(randomInt)
-            .observeEventType(.ChildAdded, withBlock: {
-                snapshot in
-                // Do something
-                print(snapshot.key)})
+        
+        let myMovies = movieRef.observe(.value) { (snap: FIRDataSnapshot) in
+            print(snap.childSnapshot(forPath: "title").value as? String)
+        }
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("Here is the result of myMovies:")
+        print(myMovies)
     }
 
 
@@ -89,7 +105,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func checkGuess() {
-        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let guess = userGuess.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         count = count + 1
         print("User has guessed " + guess!)
         print("User has guessed " + String(count) + " times.")
@@ -103,70 +119,70 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 guessMessageBase = guessMessageBase + guessMany
             }
-            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
+            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.alert)
+            let OKAction = UIAlertAction(title: "Next movie", style: .default) { (action) in
                 self.nextRound()
             }
             guessRightAlert.addAction(OKAction)
-            self.presentViewController(guessRightAlert, animated: true, completion: nil)
+            self.present(guessRightAlert, animated: true, completion: nil)
         } else {
             print("userGuess is incorrect")
             let anim = CAKeyframeAnimation( keyPath:"transform" )
             anim.values = [
-                NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
-                NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
+                NSValue( caTransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
+                NSValue( caTransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
             ]
             anim.autoreverses = true
             anim.repeatCount = 2
             anim.duration = 7/100
             
-            userGuess.layer.addAnimation( anim, forKey:nil )
+            userGuess.layer.add( anim, forKey:nil )
         }
         
     }
     
-    @IBAction func hintButton(sender: AnyObject) {
+    @IBAction func hintButton(_ sender: AnyObject) {
         print("User has asked for a hint.")
-        let alert = UIAlertController(title: "Here's a hint", message: answerArray[2] as! String, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
+        let alert = UIAlertController(title: "Here's a hint", message: answerArray[2] as! String, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.default, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         movieValue = movieValue - 10
     }
     
-    @IBAction func dahFuh(sender: AnyObject) {
+    @IBAction func dahFuh(_ sender: AnyObject) {
         print("User wants to know how the game works.")
-        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: nil))
+        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
-    @IBAction func skipMovie(sender: AnyObject) {
+    @IBAction func skipMovie(_ sender: AnyObject) {
         print("User is considering skipping this one.")
-        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
+        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.alert)
+        let OKAction = UIAlertAction(title: "I'm sure", style: .default) { (action) in
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
             self.userScore.text = String(userScoreValue)
             self.nextRound()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
             print("User has chosen to press on bravely.")
         }
         skipAlert.addAction(OKAction)
         skipAlert.addAction(cancelAction)
-        self.presentViewController(skipAlert, animated: true, completion: nil)
+        self.present(skipAlert, animated: true, completion: nil)
     }
-    @IBAction func shareButton(sender: AnyObject) {
+    @IBAction func shareButton(_ sender: AnyObject) {
         let textToShare = "Can you guess what movie this is? " + (answerArray[0] as! String)
         
-        if let myWebsite = NSURL(string: "http://adamdsigel.com") {
+        if let myWebsite = URL(string: "http://adamdsigel.com") {
             let objectsToShare = [textToShare, myWebsite]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
             
             activityVC.popoverPresentationController?.sourceView = sender as! UIView
-            self.presentViewController(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
     
