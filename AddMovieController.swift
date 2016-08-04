@@ -20,7 +20,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "hint", addedDate: dateString, addedByUser: user.email, approved: false)
+        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "hint", addedDate: dateString, addedByUser: user.email, approved: false, points: 0)
         let refMovies = ref.child("movies/")
         let moviePlotRef = refMovies.childByAutoId()
         let userData = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
