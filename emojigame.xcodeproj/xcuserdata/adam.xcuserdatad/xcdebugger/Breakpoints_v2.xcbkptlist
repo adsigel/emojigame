@@ -26,11 +26,11 @@
                   moduleName = "emojigame"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "491939200.390194"
+                  timestampString = "492003227.002672"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
                   offsetFromSymbolStart = "42">
                </Location>
                <Location
@@ -41,11 +41,11 @@
                   moduleName = "emojigame"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "491939200.390344"
+                  timestampString = "492003227.00299"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
                   offsetFromSymbolStart = "344">
                </Location>
                <Location
@@ -56,11 +56,11 @@
                   moduleName = "emojigame"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "491939200.390654"
+                  timestampString = "492003227.003279"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
                   offsetFromSymbolStart = "238">
                </Location>
             </Locations>
@@ -79,6 +79,22 @@
             startingLineNumber = "30"
             endingLineNumber = "30"
             landmarkName = "init(uid:email:displayName:score:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddMovieController.swift"
+            timestampString = "492003183.418303"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "userSubmitMovie(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

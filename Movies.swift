@@ -17,11 +17,12 @@ struct Movies {
     let hint: String!
     let addedByUser: String!
     let addedDate: String!
+    let points: Int!
     let ref: FIRDatabaseReference?
     var approved: Bool!
     
     // Initialize from arbitrary data
-    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Bool, key: String = "") {
+    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Bool, points: Int, key: String = "") {
         self.key = key
         self.title = title
         self.plot = plot
@@ -29,6 +30,7 @@ struct Movies {
         self.addedDate = addedDate
         self.addedByUser = addedByUser
         self.approved = approved
+        self.points = points
         self.ref = nil
     }
     
@@ -40,6 +42,7 @@ struct Movies {
         addedDate = snapshot.value!["addedDate"] as! String
         addedByUser = snapshot.value!["addedByUser"] as! String
         approved = snapshot.value!["completed"] as! Bool
+        points = snapshot.value!["points"] as! Int
         ref = snapshot.ref
     }
     
@@ -50,7 +53,8 @@ struct Movies {
             "hint": hint,
             "addedDate": addedDate,
             "addedByUser": addedByUser,
-            "approved": approved
+            "approved": approved,
+            "points": points
         ]
     }
 }

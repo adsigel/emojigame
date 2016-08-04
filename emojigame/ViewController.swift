@@ -59,12 +59,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
         selectMovie()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
-//        ref.observeEventType(.Value, withBlock: { snapshot in
-//            print(snapshot.value)
-//            }, withCancelBlock: { error in
-//                print(error.description)
-//        })
+        var randomInt = Int(arc4random_uniform(UInt32([Movies]().count)))
+        ref.queryOrderedByChild("title").queryEqualToValue(randomInt)
+            .observeEventType(.ChildAdded, withBlock: {
+                snapshot in
+                // Do something
+                print(snapshot.key)})
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
