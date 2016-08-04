@@ -62,9 +62,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         selectMovie()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
         
-        let myMovies = movieRef.observe(.value) { (snap: FIRDataSnapshot) in
-            print(snap.childSnapshot(forPath: "title").value as? String)
-        }
+        movieRef.queryOrderedByKey().observe(.value, with: { (snapshot) in
+            print(snapshot.value)
+            })
         print("")
         print("")
         print("")
@@ -79,8 +79,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("")
         print("")
         print("")
-        print("Here is the result of myMovies:")
-        print(myMovies)
     }
 
 

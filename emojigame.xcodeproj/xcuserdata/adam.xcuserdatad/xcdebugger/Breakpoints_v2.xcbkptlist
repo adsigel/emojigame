@@ -94,7 +94,7 @@
             startingLineNumber = "30"
             endingLineNumber = "30"
             landmarkName = "init(uid:email:displayName:score:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
