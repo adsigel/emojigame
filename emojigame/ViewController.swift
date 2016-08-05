@@ -29,8 +29,11 @@ var movieValue: Int = 0
 var excludeArray = [0]
 var excludeList = [0]
 var movie = [Movies]()
+var movieIDArray = ["farts"]
 var user: User!
-var dateString = ""
+var movieID = ""
+var randomIndex : Int = 0
+var movieToGuess = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -60,25 +63,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         selectMovie()
+        randomKeyfromFIR()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
-        
-        movieRef.queryOrderedByKey().observe(.value, with: { (snapshot) in
-            print(snapshot.value)
-            })
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
     }
 
 
@@ -218,6 +204,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        }
 //        return answerArray
 //    }
+    
+    func randomKeyfromFIR () -> String {
+        var movieCount = 0
+        movieRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            for movie in snapshot.children {
+                let _movies = movie as! FIRDataSnapshot
+                movieCount = Int(_movies.childrenCount)
+            }
+        })
+        // movieRef.queryOrderedByKey().observe(.value, with: { (snapshot) in
+        //     for movie in snapshot.children {
+        //         let _movies = movie as! FIRDataSnapshot
+        //         let movieID = _movies.key
+        //         movieIDArray.append(movieID)
+        //         print("**** here is the key of movies:")
+        //         print(movieIDArray)
+        //     }
+        //     print("**** snapshot.value:")
+        //     print(snapshot.value)
+        //     })
+        print("*** here is the count of movies: \(movieCount)")
+        randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+        print("*** here is the random number: \(randomIndex)")
+        movieToGuess = movieIDArray[randomIndex]
+        print("****** The key for the secret movie is.... " + movieToGuess + " *******")
+        return movieToGuess
+    }
     
     }
 

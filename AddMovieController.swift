@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+var dateString = ""
+
 class AddMovieController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userSubmitTitle: UITextField!
@@ -42,7 +44,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.full
-        var dateString = dateFormatter.string(from: currentDate)
+        dateString = dateFormatter.string(from: currentDate)
     }
 
     
