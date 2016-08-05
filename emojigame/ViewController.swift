@@ -221,6 +221,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("** the length of movieIDArray is: \(arrayLength)")
         movieToGuess = movieIDArray[randomIndex]
         print("** The key for the secret movie is.... " + movieToGuess + " **")
+            
+        // TODO: Re-implement exclusion
+        // TODO: Figure out how to pull out child values based on randomKey
 
         })
         // movieRef.queryOrderedByKey().observe(.value, with: { (snapshot) in
