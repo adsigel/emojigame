@@ -88,6 +88,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    @IBAction func PickNew(_ sender: AnyObject) {
+        randomKeyfromFIR()
+    }
+    
     @IBAction func checkGuess() {
         let guess = userGuess.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         count = count + 1
@@ -178,36 +182,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(answerArray[3] as! String)!
     }
     
-//    func selectMovieFIR() {
-//        
-//        ref.observeEventType(.Value, withBlock: { snapshot in
-//        var movieList = [Movies]()
-//        var randomInt : Int
-//        for item in snapshot.children {
-//            repeat {
-//                randomInt = Int(arc4random_uniform(UInt32([Movies]().count)))
-//            } while excludeList.contains(randomInt)
-//        }
-//        }
-//    }
-    
-//    func randomMovie () -> Array<String> {
-//        var randomNumber : Int
-//        repeat {
-//            randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
-//        } while excludeArray.contains(randomNumber)
-//        var secretTitle = titleArray[randomNumber]
-//        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
-//        excludeArray.append(randomNumber)
-//        if excludeArray.count == plotArray.count {
-//            excludeArray = [0]
-//        }
-//        return answerArray
-//    }
-    
     func randomKeyfromFIR () -> String {
         var movieCount = 0
-        movieRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        movieRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             for movie in snapshot.children {
                 let movies = movie as! FIRDataSnapshot
                 movieCount = Int(movies.childrenCount)
@@ -217,20 +194,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         repeat {
             randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
         } while excludeIndex.contains(randomIndex)
+        movieToGuess = movieIDArray[randomIndex]
+        print("** The key for the secret movie is.... " + movieToGuess + " **")
         excludeIndex.append(randomIndex)
             if excludeIndex.count == movieIDArray.count {
                 excludeIndex = [Int]()
             }
         print("** here is the random number: \(randomIndex)")
-        print("** here is the movieIDArray: \(movieIDArray)")
         let arrayLength = movieIDArray.count
         print("** the length of movieIDArray is: \(arrayLength)")
-        movieToGuess = movieIDArray[randomIndex]
-        print("** The key for the secret movie is.... " + movieToGuess + " **")
         print("** Indexes to exclude are... \(excludeIndex)")
             
-        // TODO: Re-implement exclusion
-        // TODO: Figure out how to pull out child values based on randomKey
+            
+        // TODO: Separate initial Firebase retrieval from random movie key selection
+        // movieArray is growing with each repeat of the loop
+        // TODO: Make sure the initial retrieval actually pulls ALL movies
+        // TODO: Make sure the initial retrieval filters on approved: true
+        // TODO: Lookup child values based on random key
+        // TODO: Display child values in UI
 
         })
         return movieToGuess
