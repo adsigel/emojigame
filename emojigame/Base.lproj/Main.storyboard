@@ -103,27 +103,18 @@
                                     <segue destination="ce0-ec-dMr" kind="push" id="U7K-PK-dUS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lp-3U-A9i">
-                                <frame key="frameInset" minX="128" minY="434" width="64" height="30"/>
-                                <state key="normal" title="Pick New"/>
-                                <connections>
-                                    <action selector="PickNew:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KPU-57-2Sm"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.38560491800308228" green="0.90431076288223267" blue="0.65651702880859375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6ud-eX-lrJ" firstAttribute="centerX" secondItem="SMe-BA-53k" secondAttribute="centerX" id="1uU-yE-cp0"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="top" secondItem="SMe-BA-53k" secondAttribute="bottom" id="4bs-Kq-6vV"/>
                             <constraint firstItem="2Dw-XL-jNu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="ERy-2f-Hct"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0lp-3U-A9i" secondAttribute="bottom" constant="203" id="Ihj-ZI-6oC"/>
                             <constraint firstItem="6ud-eX-lrJ" firstAttribute="centerY" secondItem="qeM-fC-kaa" secondAttribute="centerY" id="J2n-eI-7Fj"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KBO-5J-TAN"/>
                             <constraint firstItem="W6s-FM-JnA" firstAttribute="leading" secondItem="le0-5o-5M5" secondAttribute="leading" id="MCy-Rv-7zZ"/>
                             <constraint firstItem="nuI-09-ZXy" firstAttribute="centerX" secondItem="SMe-BA-53k" secondAttribute="centerX" id="NvS-4t-C5A"/>
                             <constraint firstItem="le0-5o-5M5" firstAttribute="top" secondItem="nMv-g7-Cdw" secondAttribute="bottom" constant="35" id="ODm-PL-lqp"/>
                             <constraint firstAttribute="leadingMargin" secondItem="2Dw-XL-jNu" secondAttribute="leading" id="OlF-si-9zq"/>
-                            <constraint firstItem="0lp-3U-A9i" firstAttribute="leading" secondItem="qeM-fC-kaa" secondAttribute="trailing" constant="51" id="dL8-wh-sBL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qeM-fC-kaa" secondAttribute="bottom" constant="20" id="dnr-2r-VRQ"/>
                             <constraint firstItem="hcD-ct-gjq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="eMm-Gj-u3l"/>
                             <constraint firstItem="nMv-g7-Cdw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eex-XB-N6X"/>

@@ -34,6 +34,7 @@ var user: User!
 var movieID = ""
 var randomIndex : Int = 0
 var movieToGuess = ""
+var movieDict = [String: AnyObject]()
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -64,6 +65,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
         selectMovie()
         randomKeyfromFIR()
+        var testArray = [String]()
+        movieRef.queryOrdered(byChild: "approved").queryEqual(toValue: "true").observe(.value, with: { snapshot in
+            if snapshot.value is NSNull {
+                
+            } else {
+                for child in snapshot.children {
+                    let key = child.value["plot"] as! String
+                    testArray.append(key)
+                }
+                print("** here is the test output: \(testArray)")
+            }
+            //for movie in snapshot.children {
+            //    let movies = movie as! FIRDataSnapshot
+            //    movieCount = Int(movies.childrenCount)
+            //    movieIDArray.append(movies.key)
+            //}
+        })
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
     }
 
@@ -86,10 +104,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
-    }
-    
-    @IBAction func PickNew(_ sender: AnyObject) {
-        randomKeyfromFIR()
     }
     
     @IBAction func checkGuess() {
@@ -153,7 +167,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
             self.userScore.text = String(userScoreValue)
-            self.nextRound()
+            self.randomKeyfromFIR()
+            self.getMovieData()
+
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
             print("User has chosen to press on bravely.")
@@ -182,6 +198,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(answerArray[3] as! String)!
     }
     
+    
+    
+    
+    
     func randomKeyfromFIR () -> String {
         var movieCount = 0
         movieRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
@@ -190,32 +210,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 movieCount = Int(movies.childrenCount)
                 movieIDArray.append(movies.key)
             }
-        print("** here is the count of movies: \(movieCount)")
-        repeat {
-            randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
-        } while excludeIndex.contains(randomIndex)
-        movieToGuess = movieIDArray[randomIndex]
-        print("** The key for the secret movie is.... " + movieToGuess + " **")
-        excludeIndex.append(randomIndex)
+            print("** here is the count of movies: \(movieCount)")
+            repeat {
+                randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+            } while excludeIndex.contains(randomIndex)
+            movieToGuess = movieIDArray[randomIndex]
+            print("** The key for the secret movie is.... " + movieToGuess + " **")
+            excludeIndex.append(randomIndex)
             if excludeIndex.count == movieIDArray.count {
                 excludeIndex = [Int]()
             }
-        print("** here is the random number: \(randomIndex)")
-        let arrayLength = movieIDArray.count
-        print("** the length of movieIDArray is: \(arrayLength)")
-        print("** Indexes to exclude are... \(excludeIndex)")
+            print("** here is the random number: \(randomIndex)")
+            let arrayLength = movieIDArray.count
+            print("** movieIDArray is now: \(movieIDArray)")
+            print("** Indexes to exclude are... \(excludeIndex)")
             
             
-        // TODO: Separate initial Firebase retrieval from random movie key selection
-        // movieArray is growing with each repeat of the loop
-        // TODO: Make sure the initial retrieval actually pulls ALL movies
-        // TODO: Make sure the initial retrieval filters on approved: true
-        // TODO: Lookup child values based on random key
-        // TODO: Display child values in UI
-
+            // TODO: Separate initial Firebase retrieval from random movie key selection
+            // movieArray is growing with each repeat of the loop
+            // TODO: Make sure the initial retrieval actually pulls ALL movies
+            // TODO: Make sure the initial retrieval filters on approved: true
+            
         })
         return movieToGuess
     }
     
+    func getMovieData() -> [String : AnyObject] {
+        // define node where child data will be retrieved based on movieToGuess
+        let movieToGuessRef = movieRef.ref.child(movieToGuess)
+        movieToGuessRef.observe(FIRDataEventType.value, with: { (snapshot) in
+        // retrieve all child data and store in a dictionary
+            movieDict = snapshot.value as! [String : AnyObject]
+            let secretPlot = movieDict["plot"] as! String
+            print("** here is movieStuff: \(movieDict)")
+            print("** here is the secret movie plot: " + secretPlot)
+            self.emojiPlot.text = secretPlot
+            })
+        return movieDict
+    }
     }
 
