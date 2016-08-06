@@ -27,7 +27,7 @@ var count = 0
 var userScoreValue: Int = 0
 var movieValue: Int = 0
 var excludeArray = [0]
-var excludeList = [0]
+var excludeIndex = [Int]()
 var movie = [Movies]()
 var movieIDArray = [String]()
 var user: User!
@@ -214,34 +214,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 movieIDArray.append(movies.key)
             }
         print("** here is the count of movies: \(movieCount)")
-        randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+        repeat {
+            randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+        } while excludeIndex.contains(randomIndex)
+        excludeIndex.append(randomIndex)
+            if excludeIndex.count == movieIDArray.count {
+                excludeIndex = [Int]()
+            }
         print("** here is the random number: \(randomIndex)")
         print("** here is the movieIDArray: \(movieIDArray)")
         let arrayLength = movieIDArray.count
         print("** the length of movieIDArray is: \(arrayLength)")
         movieToGuess = movieIDArray[randomIndex]
         print("** The key for the secret movie is.... " + movieToGuess + " **")
+        print("** Indexes to exclude are... \(excludeIndex)")
             
         // TODO: Re-implement exclusion
         // TODO: Figure out how to pull out child values based on randomKey
 
         })
-        // movieRef.queryOrderedByKey().observe(.value, with: { (snapshot) in
-        //     for movie in snapshot.children {
-        //         let _movies = movie as! FIRDataSnapshot
-        //         let movieID = _movies.key
-        //         movieIDArray.append(movieID)
-        //         print("**** here is the key of movies:")
-        //         print(movieIDArray)
-        //     }
-        //     print("**** snapshot.value:")
-        //     print(snapshot.value)
-        //     })
-        // print("*** here is the count of movies: \(movieCount)")
-        // randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
-        // print("*** here is the random number: \(randomIndex)")
-        // movieToGuess = movieIDArray[randomIndex]
-        // print("*** The key for the secret movie is.... " + movieToGuess + " ***")
         return movieToGuess
     }
     
