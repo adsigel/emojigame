@@ -7,12 +7,10 @@
 //
 
 //  TODO:
-//  * Add more movies
+//  * Figure out how to address fatal error of nil while unwrapping Optional movieDict
 //  * Allow for fuzzy matching (ignore the word 'the')
 //  * 3D touch to see a GIF from the movie
-//  * Figure out why Shawshank emojis get cut off
 //  * Refactor and pull functions out of core game logic
-//  * Implement MySQL database
 //  * Add levels and badges based on user score
 
 import UIKit
@@ -111,7 +109,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         count = count + 1
         print("User has guessed " + guess!)
         print("User has guessed " + String(count) + " times.")
-        if guess! == answerArray[1] as! String {
+        if guess == movieDict["title"] as! String {
             print("userGuess is correct")
             var guessMessageBase = "You got it in " + String(count)
             let guessOnce = " guess and earned " + String(movieValue) + " points."
@@ -199,9 +197,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
-    
-    
     func randomKeyfromFIR () -> String {
         var movieCount = 0
         movieRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
@@ -241,7 +236,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieToGuessRef.observe(FIRDataEventType.value, with: { (snapshot) in
         // retrieve all child data and store in a dictionary
             movieDict = snapshot.value as! [String : AnyObject]
-            let secretPlot = movieDict["plot"] as! String
+            var secretPlot = movieDict["plot"] as! String
             print("** here is movieStuff: \(movieDict)")
             print("** here is the secret movie plot: " + secretPlot)
             self.emojiPlot.text = secretPlot
