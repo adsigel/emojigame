@@ -92,8 +92,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if guess == movieDict["title"] as! String {
             print("userGuess is correct")
             var guessMessageBase = "You got it in " + String(count)
-            let guessOnce = " guess and earned " + String(movieValue) + " points."
-            let guessMany = " guesses and earned  " + String(movieValue) + " points."
+            let guessOnce = " guess and earned \(movieValue) points."
+            let guessMany = " guesses and earned  \(movieValue) points."
             if count == 1 {
                 guessMessageBase = guessMessageBase + guessOnce
             } else {
@@ -102,6 +102,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
+                userScoreValue = userScoreValue + movieValue
+                self.userScore.text = String(userScoreValue)
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
@@ -127,7 +129,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
-        movieValue = movieValue - 10
+        movieValue = Int(movieDict["points"]! as! NSNumber) - 10
     }
     
     @IBAction func dahFuh(_ sender: AnyObject) {
@@ -158,7 +160,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func shareButton(_ sender: AnyObject) {
         let textToShare = "Can you guess what movie this is? " + (movieDict["plot"]! as! String)
         
-        if let myWebsite = NSURL(string: "http://adamdsigel.com") {
+        if let myWebsite = NSURL(string: "http://emojisodes.com") {
             let objectsToShare = [textToShare, myWebsite]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
@@ -210,6 +212,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("** here is movieStuff: \(movieDict)")
             print("** here is the secret movie plot: " + secretPlot)
             self.emojiPlot.text = secretPlot
+            movieValue = movieDict["points"] as! Int
             })
         return movieDict
     }
