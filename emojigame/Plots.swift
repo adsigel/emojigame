@@ -159,7 +159,7 @@ struct PlotList {
 }
 
 func input() -> String {
-    var keyboard = FileHandle.standardInput
+    var keyboard = NSFileHandle.fileHandleWithStandardInput()
     var inputData = keyboard.availableData
-    return NSString(data: inputData, encoding:String.Encoding.utf8.rawValue) as! String
+    return NSString(data: inputData, encoding:NSUTF8StringEncoding) as! String
 }

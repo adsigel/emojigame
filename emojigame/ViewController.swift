@@ -19,10 +19,10 @@ import Firebase
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
 let userRef = ref.child("users")
-let plotList = PlotList()
 let colorWheel = ColorWheel()
 var count = 0
 var userScoreValue: Int = 0
+var userGuess = String()
 var movieValue: Int = 0
 var excludeArray = [0]
 var excludeIndex = [Int]()
@@ -55,18 +55,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let badGuess = UIColor(red: 242/255, green: 119/255, blue: 119/255, alpha: 1.0)
     let goodGuess = UIColor(red: 166/255, green: 242/255, blue: 119/255, alpha: 1.0)
     let feedbackBackground = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 0.4)
-    var answerArray = []
-    // answerArray[0] is the emoji plot
-    // answerArray[1] is the secret title
-    // answerArray[2] is the hint
-    // answerArray[3] is the point value
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        selectMovie()
         randomKeyfromFIR()
+        // self.getMovieData()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
     }
 
@@ -90,7 +85,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func checkGuess() {
-        let guess = userGuess.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         count = count + 1
         print("User has guessed " + guess!)
         print("User has guessed " + String(count) + " times.")
@@ -104,87 +99,77 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 guessMessageBase = guessMessageBase + guessMany
             }
-            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.alert)
-            let OKAction = UIAlertAction(title: "Next movie", style: .default) { (action) in
+            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
             }
             guessRightAlert.addAction(OKAction)
-            self.present(guessRightAlert, animated: true, completion: nil)
+            self.presentViewController(guessRightAlert, animated: true, completion: nil)
         } else {
             print("userGuess is incorrect")
             let anim = CAKeyframeAnimation( keyPath:"transform" )
             anim.values = [
-                NSValue( caTransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
-                NSValue( caTransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
+                NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
+                NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
             ]
             anim.autoreverses = true
             anim.repeatCount = 2
             anim.duration = 7/100
             
-            userGuess.layer.add( anim, forKey:nil )
+            userGuess.layer.addAnimation( anim, forKey:nil )
         }
         
     }
     
     @IBAction func hintButton(_ sender: AnyObject) {
         print("User has asked for a hint.")
-        let alert = UIAlertController(title: "Here's a hint", message: movieDict["hint"]! as! String, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Here's a hint", message: movieDict["hint"]! as! String, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        self.presentViewController(alert, animated: true, completion: nil)
         movieValue = movieValue - 10
     }
     
     @IBAction func dahFuh(_ sender: AnyObject) {
         print("User wants to know how the game works.")
-        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func skipMovie(_ sender: AnyObject) {
         print("User is considering skipping this one.")
-        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "I'm sure", style: .default) { (action) in
+        let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
             self.userScore.text = String(userScoreValue)
             self.randomKeyfromFIR()
             self.getMovieData()
-
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
             print("User has chosen to press on bravely.")
         }
         skipAlert.addAction(OKAction)
         skipAlert.addAction(cancelAction)
-        self.present(skipAlert, animated: true, completion: nil)
+        self.presentViewController(skipAlert, animated: true, completion: nil)
     }
     @IBAction func shareButton(_ sender: AnyObject) {
         let textToShare = "Can you guess what movie this is? " + (movieDict["plot"]! as! String)
         
-        if let myWebsite = URL(string: "http://adamdsigel.com") {
+        if let myWebsite = NSURL(string: "http://adamdsigel.com") {
             let objectsToShare = [textToShare, myWebsite]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             activityVC.popoverPresentationController?.sourceView = sender as! UIView
-            self.present(activityVC, animated: true, completion: nil)
+            self.presentViewController(activityVC, animated: true, completion: nil)
         }
     }
     
-    func selectMovie() {
-        answerArray = plotList.randomMovie()
-        emojiPlot.text = answerArray[0] as! String
-        print("The secret movie is " + (answerArray[1] as! String))
-        print("Movies excluded are in positions" + String(excludeArray))
-        movieValue = Int(answerArray[3] as! String)!
-    }
-    
-    
     func randomKeyfromFIR () -> String {
         var movieCount = 0
-        movieRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+        movieRef.queryOrderedByKey().observeEventType(.Value, withBlock: { (snapshot) in
             for movie in snapshot.children {
                 let movies = movie as! FIRDataSnapshot
                 movieCount = Int(movies.childrenCount)
@@ -218,7 +203,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func getMovieData() -> [String : AnyObject] {
         // define node where child data will be retrieved based on movieToGuess
         let movieToGuessRef = movieRef.ref.child(movieToGuess)
-        movieToGuessRef.observe(FIRDataEventType.value, with: { (snapshot) in
+        movieToGuessRef.observeEventType(.Value, withBlock: { (snapshot) in
         // retrieve all child data and store in a dictionary
             movieDict = snapshot.value as! [String : AnyObject]
             var secretPlot = movieDict["plot"] as! String

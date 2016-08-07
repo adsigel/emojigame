@@ -20,8 +20,8 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
         // Alert View for input
         self.currentDate()
-        let userTitle = userSubmitTitle.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let userPlot = userSubmitPlot.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "hint", addedDate: dateString, addedByUser: user.email, approved: false, points: 0)
         let refMovies = ref.child("movies/")
         let moviePlotRef = refMovies.childByAutoId()
@@ -31,7 +31,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         userRef.setValue(userData.toAnyObjectUser())
         var movieId = moviePlotRef.key
         print("The new movie has been added with uid of: " + movieId)
-        confirmSave()
+        // confirmSave()
     
     }
     
@@ -41,19 +41,19 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
     }
     
     func currentDate() {
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.full
-        dateString = dateFormatter.string(from: currentDate)
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
+        dateString = dateformatter.stringFromDate(NSDate())
     }
 
     func confirmSave() {
         print("** Saving new movie to Firebase...")
-        let confirmAlert = UIAlertController(title: "Movie submitted", message: "Thank you for submitting this movie.", preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let confirmAlert = UIAlertController(title: "Movie submitted", message: "Thank you for submitting this movie.", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             print("** User has acknowledged that movie is added to Firebase.")
         }
         confirmAlert.addAction(OKAction)
-        self.present(confirmAlert, animated: true, completion: nil)
+        self.presentViewController(confirmAlert, animated: true, completion: nil)
     }
 }

@@ -10,7 +10,6 @@
 		66374B701D2EFF58007024B1 /* Fun_FactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */; };
 		66374B7B1D2EFF58007024B1 /* Fun_FactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */; };
 		66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A3F1D3CFEDF008FEA44 /* ViewController.swift */; };
-		66695A471D3CFEDF008FEA44 /* Plots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A401D3CFEDF008FEA44 /* Plots.swift */; };
 		66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A411D3CFEDF008FEA44 /* AppDelegate.swift */; };
 		66695A491D3CFEDF008FEA44 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66695A421D3CFEDF008FEA44 /* Info.plist */; };
 		66695A4A1D3CFEDF008FEA44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66695A431D3CFEDF008FEA44 /* Assets.xcassets */; };
@@ -57,7 +56,6 @@
 		66374B7C1D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66374B881D2F007D007024B1 /* Scratchpad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratchpad.playground; sourceTree = "<group>"; };
 		66695A3F1D3CFEDF008FEA44 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = emojigame/ViewController.swift; sourceTree = SOURCE_ROOT; };
-		66695A401D3CFEDF008FEA44 /* Plots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plots.swift; path = emojigame/Plots.swift; sourceTree = SOURCE_ROOT; };
 		66695A411D3CFEDF008FEA44 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = emojigame/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		66695A421D3CFEDF008FEA44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = emojigame/Info.plist; sourceTree = SOURCE_ROOT; };
 		66695A431D3CFEDF008FEA44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = emojigame/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				66DE19C31D524AC9001E589B /* Models */,
-				66695A401D3CFEDF008FEA44 /* Plots.swift */,
 				66695A451D3CFEDF008FEA44 /* ColorWheel.swift */,
 				66695A3F1D3CFEDF008FEA44 /* ViewController.swift */,
 				66DE19BD1D524317001E589B /* AddMovieController.swift */,
@@ -493,7 +490,6 @@
 				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
 				66DE19C01D5245A2001E589B /* Movies.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
-				66695A471D3CFEDF008FEA44 /* Plots.swift in Sources */,
 				66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */,
 				66DE19C21D524737001E589B /* Users.swift in Sources */,
 			);
