@@ -31,7 +31,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         userRef.setValue(userData.toAnyObjectUser())
         var movieId = moviePlotRef.key
         print("The new movie has been added with uid of: " + movieId)
-        
+        confirmSave()
     
     }
     
@@ -47,5 +47,13 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         dateString = dateFormatter.string(from: currentDate)
     }
 
-    
+    func confirmSave() {
+        print("** Saving new movie to Firebase...")
+        let confirmAlert = UIAlertController(title: "Movie submitted", message: "Thank you for submitting this movie.", preferredStyle: UIAlertControllerStyle.alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            print("** User has acknowledged that movie is added to Firebase.")
+        }
+        confirmAlert.addAction(OKAction)
+        self.present(confirmAlert, animated: true, completion: nil)
+    }
 }

@@ -21,6 +21,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your guess" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="le0-5o-5M5">
                                 <frame key="frameInset" minX="20" minY="211" width="280" height="30"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="3oa-Md-yPU"/>
                                     <constraint firstAttribute="height" constant="30" id="BbE-Hp-uZM"/>
@@ -155,19 +156,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWi-hW-GGg">
-                                <frame key="frameInset" minX="37" minY="163" width="247" height="30"/>
+                                <frame key="frameInset" minX="37" minY="163" width="247" height="34"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="247" id="1C6-c6-ee1"/>
-                                    <constraint firstAttribute="height" constant="30" id="S9D-Ui-nYE"/>
+                                    <constraint firstAttribute="height" constant="34" id="S9D-Ui-nYE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Plot" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Kk0-hb-gEi">
-                                <frame key="frameInset" minX="37" minY="219" width="247" height="30"/>
+                                <frame key="frameInset" minX="37" minY="219" width="247" height="34"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="247" id="7ag-zI-T9g"/>
-                                    <constraint firstAttribute="height" constant="30" id="Va3-yn-p1L"/>
+                                    <constraint firstAttribute="height" constant="34" id="Va3-yn-p1L"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>

@@ -29,10 +29,14 @@ var excludeIndex = [Int]()
 var movie = [Movies]()
 var movieIDArray = [String]()
 var user: User!
-var movieID = ""
+var movieID = String()
 var randomIndex : Int = 0
-var movieToGuess = ""
+var movieToGuess = String()
 var movieDict = [String: AnyObject]()
+var secretTitle = String()
+var secretHint = String()
+var secretPlot = String()
+var secretValue: Int = 0
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -63,23 +67,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
         selectMovie()
         randomKeyfromFIR()
-        var testArray = [String]()
-        movieRef.queryOrdered(byChild: "approved").queryEqual(toValue: "true").observe(.value, with: { snapshot in
-            if snapshot.value is NSNull {
-                
-            } else {
-                for child in snapshot.children {
-                    let key = child.value["plot"] as! String
-                    testArray.append(key)
-                }
-                print("** here is the test output: \(testArray)")
-            }
-            //for movie in snapshot.children {
-            //    let movies = movie as! FIRDataSnapshot
-            //    movieCount = Int(movies.childrenCount)
-            //    movieIDArray.append(movies.key)
-            //}
-        })
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
     }
 
@@ -90,12 +77,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func nextRound() {
-//        var randomColor = colorWheel.randomColor()
-//        view.backgroundColor = randomColor
-//        newMovieButton.tintColor = randomColor
         print("User wants another movie.")
         userGuess.text = ""
-        selectMovie()
+        randomKeyfromFIR()
+        getMovieData()
         count = 0
     }
 
@@ -143,7 +128,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func hintButton(_ sender: AnyObject) {
         print("User has asked for a hint.")
-        let alert = UIAlertController(title: "Here's a hint", message: answerArray[2] as! String, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Here's a hint", message: movieDict["hint"]! as! String, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
@@ -177,7 +162,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.present(skipAlert, animated: true, completion: nil)
     }
     @IBAction func shareButton(_ sender: AnyObject) {
-        let textToShare = "Can you guess what movie this is? " + (answerArray[0] as! String)
+        let textToShare = "Can you guess what movie this is? " + (movieDict["plot"]! as! String)
         
         if let myWebsite = URL(string: "http://adamdsigel.com") {
             let objectsToShare = [textToShare, myWebsite]

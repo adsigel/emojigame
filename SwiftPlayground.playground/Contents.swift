@@ -26,4 +26,9 @@ var randomNumber = Int(arc4random_uniform(UInt32(movieIDArray.count)))
 
 var movieToGuess = movieIDArray[randomNumber]
 
+var movieDict = ["addedDate": "Thursday, August 4, 2016", "addedByUser": "adsigel@gmail.com", "approved": 0, "title": "the shawshank redemption", "hint": "hint", "plot": "👦🏢😐😬😏📝📚🎧🔨🔦💩😅💰👴🔫⛵️🌅", "points": 0]
+
+movieDict["plot"]
+movieDict["hint"]
+movieDict["hint"]!
 
