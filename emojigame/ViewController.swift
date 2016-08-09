@@ -176,7 +176,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
                 let key = movieItem.key!
                 let approved = movieItem.approved
-                if approved == true {
+                print("approved is: \(approved)")
+                if approved == 1 {
                     movieIDArray.append(key)
                     movieCount = Int(movieIDArray.count)
                 }

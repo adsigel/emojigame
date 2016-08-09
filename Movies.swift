@@ -18,10 +18,10 @@ struct Movies {
     let addedByUser: String!
     let addedDate: String!
     let points: Int!
-    var approved: Bool!
+    var approved: Int!
     
     // Initialize from arbitrary data
-    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Bool, points: Int, key: String = "") {
+    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Int, points: Int, key: String = "") {
         self.key = key
         self.title = title
         self.plot = plot
@@ -39,7 +39,7 @@ struct Movies {
         hint = snapshot.value!["hint"] as! String
         addedDate = snapshot.value!["addedDate"] as! String
         addedByUser = snapshot.value!["addedByUser"] as! String
-        approved = snapshot.value!["approved"] as! Bool
+        approved = snapshot.value!["approved"] as! Int
         points = snapshot.value!["points"] as! Int
     }
     
