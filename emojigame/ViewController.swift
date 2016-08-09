@@ -29,9 +29,9 @@ var excludeIndex = [Int]()
 var movie = [Movies]()
 var movieIDArray = [String]()
 var user: User!
+var movieToGuess = String()
 var movieID = String()
 var randomIndex : Int = 0
-var movieToGuess = String()
 var movieDict = [String: AnyObject]()
 var secretTitle = String()
 var secretHint = String()
@@ -60,9 +60,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        randomKeyfromFIR()
-        // self.getMovieData()
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
+        self.randomKeyfromFIR{ (movieToGuess) -> () in
+            self.getMovieData(movieToGuess)
+        }
     }
 
 
@@ -74,8 +75,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func nextRound() {
         print("User wants another movie.")
         userGuess.text = ""
-        randomKeyfromFIR()
-        getMovieData()
+        self.randomKeyfromFIR{ (movieToGuess) -> () in
+            self.getMovieData(movieToGuess)
+        }
         count = 0
     }
 
@@ -147,8 +149,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("User has chosen the coward's way out.")
             userScoreValue = userScoreValue - 25
             self.userScore.text = String(userScoreValue)
-            self.randomKeyfromFIR()
-            self.getMovieData()
+            self.randomKeyfromFIR{ (movieToGuess) -> () in
+                self.getMovieData(movieToGuess)
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
             print("User has chosen to press on bravely.")
@@ -169,7 +172,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func randomKeyfromFIR () -> String {
+    func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
         movieRef.queryOrderedByKey().observeEventType(.Value, withBlock: { (snapshot) in
             for movie in snapshot.children {
@@ -177,44 +180,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 movieCount = Int(movies.childrenCount)
                 movieIDArray.append(movies.key)
             }
-            print("** here is the count of movies: \(movieCount)")
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             } while excludeIndex.contains(randomIndex)
             movieToGuess = movieIDArray[randomIndex]
-            print("** The key for the secret movie is.... " + movieToGuess + " **")
             excludeIndex.append(randomIndex)
             if excludeIndex.count == movieIDArray.count {
                 excludeIndex = [Int]()
             }
-            print("** here is the random number: \(randomIndex)")
             let arrayLength = movieIDArray.count
-            print("** movieIDArray is now: \(movieIDArray)")
-            print("** Indexes to exclude are... \(excludeIndex)")
             
-            
-            // TODO: Separate initial Firebase retrieval from random movie key selection
-            // movieArray is growing with each repeat of the loop
-            // TODO: Make sure the initial retrieval actually pulls ALL movies
-            // TODO: Make sure the initial retrieval filters on approved: true
-            
+            // Put whatever you want to return here.
+            completion(movieToGuess)
+
         })
-        return movieToGuess
     }
+
     
-    func getMovieData() -> [String : AnyObject] {
-        // define node where child data will be retrieved based on movieToGuess
+    func getMovieData(movieToGuess:String) {
         let movieToGuessRef = movieRef.ref.child(movieToGuess)
         movieToGuessRef.observeEventType(.Value, withBlock: { (snapshot) in
-        // retrieve all child data and store in a dictionary
             movieDict = snapshot.value as! [String : AnyObject]
-            var secretPlot = movieDict["plot"] as! String
-            print("** here is movieStuff: \(movieDict)")
-            print("** here is the secret movie plot: " + secretPlot)
-            self.emojiPlot.text = secretPlot
+            var plot = movieDict["plot"] as! String
+            self.emojiPlot.text = plot
             movieValue = movieDict["points"] as! Int
-            })
-        return movieDict
+            
+            // Put whatever you want to return here.
+        })
+        print(movieDict)
     }
-    }
+    
+    
+}
 
