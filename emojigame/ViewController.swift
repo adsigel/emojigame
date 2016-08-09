@@ -7,13 +7,10 @@
 //
 
 //  TODO:
-//  * Figure out how to limit choice to only movies where approved = true
-//  * Split randomIndex logic out of database retrieval so the array stops growing every time
 //  * Allow for fuzzy matching (e.g. ignore the word 'the') https://github.com/firebase/flashlight
 //  ? 3D touch to see a GIF from the movie
 //  * Refactor and move functions into the proper models/classes
 //  * Add levels and badges based on user score
-//  * Figure out why Firebase is only returning 7 movies
 
 import UIKit
 import Firebase
@@ -60,11 +57,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
-        print("Here is excludeIndex: \(excludeIndex)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
         }
-        print("Here comes movieDict!!! \(movieDict)")
     }
 
 
@@ -175,15 +170,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
+        movieIDArray = []
         movieRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
                 let key = movieItem.key!
-                movieIDArray.append(key)
-                movieCount = Int(movieIDArray.count)
-//                movieCount = Int(movies.childrenCount)
-//                movieIDArray.append(movie.key)
-//                print(snapshot.value)
+                let approved = movieItem.approved
+                if approved == true {
+                    movieIDArray.append(key)
+                    movieCount = Int(movieIDArray.count)
+                }
             }
             print("Here is movieIDArray: \(movieIDArray)")
             print("Here is movieCount: \(movieCount)")
@@ -193,12 +189,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             } while excludeIndex.contains(randomIndex)
             movieToGuess = movieIDArray[randomIndex]
-            print("excludeIndex is: \(excludeIndex)")
             print("randomIndex is: \(randomIndex)")
             excludeIndex.append(randomIndex)
             print("excludeIndex is: \(excludeIndex)")
-            if excludeIndex.count == movie.count {
-                excludeIndex = [Int]()
+            if excludeIndex.count == movieCount {
+                excludeIndex = []
             }
                 
             completion(movieToGuess)
