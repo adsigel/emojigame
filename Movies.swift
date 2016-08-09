@@ -18,7 +18,6 @@ struct Movies {
     let addedByUser: String!
     let addedDate: String!
     let points: Int!
-    let ref: FIRDatabaseReference?
     var approved: Bool!
     
     // Initialize from arbitrary data
@@ -31,7 +30,6 @@ struct Movies {
         self.addedByUser = addedByUser
         self.approved = approved
         self.points = points
-        self.ref = nil
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -41,9 +39,8 @@ struct Movies {
         hint = snapshot.value!["hint"] as! String
         addedDate = snapshot.value!["addedDate"] as! String
         addedByUser = snapshot.value!["addedByUser"] as! String
-        approved = snapshot.value!["completed"] as! Bool
+        approved = snapshot.value!["approved"] as! Bool
         points = snapshot.value!["points"] as! Int
-        ref = snapshot.ref
     }
     
     

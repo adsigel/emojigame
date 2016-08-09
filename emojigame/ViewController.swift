@@ -7,11 +7,13 @@
 //
 
 //  TODO:
-//  * Figure out how to address fatal error of nil while unwrapping Optional movieDict
-//  * Allow for fuzzy matching (ignore the word 'the')
-//  * 3D touch to see a GIF from the movie
-//  * Refactor and pull functions out of core game logic
+//  * Figure out how to limit choice to only movies where approved = true
+//  * Split randomIndex logic out of database retrieval so the array stops growing every time
+//  * Allow for fuzzy matching (e.g. ignore the word 'the') https://github.com/firebase/flashlight
+//  ? 3D touch to see a GIF from the movie
+//  * Refactor and move functions into the proper models/classes
 //  * Add levels and badges based on user score
+//  * Figure out why Firebase is only returning 7 movies
 
 import UIKit
 import Firebase
@@ -19,19 +21,16 @@ import Firebase
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
 let userRef = ref.child("users")
-let colorWheel = ColorWheel()
 var count = 0
 var userScoreValue: Int = 0
 var userGuess = String()
 var movieValue: Int = 0
-var excludeArray = [0]
 var excludeIndex = [Int]()
 var movie = [Movies]()
 var movieIDArray = [String]()
 var user: User!
 var movieToGuess = String()
 var movieID = String()
-var randomIndex : Int = 0
 var movieDict = [String: AnyObject]()
 var secretTitle = String()
 var secretHint = String()
@@ -61,9 +60,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
+        print("Here is excludeIndex: \(excludeIndex)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
         }
+        print("Here comes movieDict!!! \(movieDict)")
     }
 
 
@@ -174,26 +175,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
-        movieRef.queryOrderedByKey().observeEventType(.Value, withBlock: { (snapshot) in
-            for movie in snapshot.children {
-                let movies = movie as! FIRDataSnapshot
-                movieCount = Int(movies.childrenCount)
-                movieIDArray.append(movies.key)
+        movieRef.observeEventType(.Value, withBlock: { snapshot in
+            for item in snapshot.children {
+                let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
+                let key = movieItem.key!
+                movieIDArray.append(key)
+                movieCount = Int(movieIDArray.count)
+//                movieCount = Int(movies.childrenCount)
+//                movieIDArray.append(movie.key)
+//                print(snapshot.value)
             }
+            print("Here is movieIDArray: \(movieIDArray)")
+            print("Here is movieCount: \(movieCount)")
+            var randomIndex : Int = 0
+            randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             } while excludeIndex.contains(randomIndex)
             movieToGuess = movieIDArray[randomIndex]
+            print("excludeIndex is: \(excludeIndex)")
+            print("randomIndex is: \(randomIndex)")
             excludeIndex.append(randomIndex)
-            if excludeIndex.count == movieIDArray.count {
+            print("excludeIndex is: \(excludeIndex)")
+            if excludeIndex.count == movie.count {
                 excludeIndex = [Int]()
             }
-            let arrayLength = movieIDArray.count
-            
-            // Put whatever you want to return here.
+                
             completion(movieToGuess)
 
-        })
+            })
     }
 
     
@@ -204,10 +214,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var plot = movieDict["plot"] as! String
             self.emojiPlot.text = plot
             movieValue = movieDict["points"] as! Int
-            
-            // Put whatever you want to return here.
         })
-        print(movieDict)
+        print("Here comes movieDict! \(movieDict)")
     }
     
     

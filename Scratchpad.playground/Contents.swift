@@ -55,30 +55,30 @@ var randomInt = Int(arc4random_uniform(UInt32(colorsArray.count)))
 //    return colorsArray[randomNumber]
 //
 
-let plotArray = [
-    "💣🚌",
-    "💾🚤🔫😶💻🆗",
-    "👮🏻👱🏿🚌🔥💤🐚🐚🐚👮🏻👱🏿🔫☮️",
-    "👱🚿👩🔪👣"
-]
-
-let titleArray = [
-    "speed",
-    "the net",
-    "demolition man",
-    "pyscho"
-]
-
-titleArray[1]
-titleArray.indexOf("the net")
-titleArray.indexOf("pyscho")
-
-var guessMessageBase = "Great job! You got it in " + String(count)
-let guessOnce = " guess!"
-let guessMany = " guesses!"
-if count == 1 {
-    guessMessageBase = guessMessageBase + guessOnce
-} else {
-    guessMessageBase = guessMessageBase + guessMany
+struct movieStruct {
+    let key: String!
+    let title: String!
+    let plot: String!
+    let hint: String!
+    let addedByUser: String!
+    let addedDate: String!
+    let points: Int!
+    let approved: Bool!
+    
 }
 
+var movie1 = movieStruct(
+    key: "-KOKKRYrOIpIHG07nD7b",
+    title: "the net",
+    plot: "💾🚤🔫😶💻🆗",
+    hint: "Just give us the disk and we'll give you your life back.",
+    addedByUser: "adsigel@gmail.com",
+    addedDate: "Thursday, August 4, 2016",
+    points: 50,
+    approved: true
+)
+
+var movie2 = movieStruct(key: "-KOKKbVx3USwh3u9C3Pa", title: "demolition man", plot: "👮🏻👱🏿🚌🔥💤🐚🐚🐚👮🏻👱🏿🔫☮️", hint: "👮🏻👱🏿🚌🔥💤🐚🐚🐚👮🏻👱🏿🔫☮️", addedByUser: "adsigel@gmail.com", addedDate: "Thursday, August 4, 2016", points: 100, approved: true)
+
+
+print(movie1.plot)
