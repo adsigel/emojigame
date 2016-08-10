@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gNo-Z8-Oz6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="d8S-4r-ENm">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
@@ -140,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="819.5" y="199.5"/>
+            <point key="canvasLocation" x="893" y="239"/>
         </scene>
         <!--AddMovie-->
         <scene sceneID="2xT-Xi-7fS">
@@ -182,7 +182,7 @@
                                     <action selector="userSubmitMovie:" destination="ce0-ec-dMr" eventType="touchUpInside" id="gga-MQ-kVs"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill in a movie title (as text) and a plot (as emoji). If it gets added to Emojisodes, you'll get a ton of points!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-3H-exr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill in a movie title (as text) and a plot (as emoji). If it gets added to emojigame, you'll get a ton of points!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-3H-exr">
                                 <rect key="frame" x="37" y="103" width="247" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Csc-kW-U9l"/>
@@ -216,11 +216,84 @@
             </objects>
             <point key="canvasLocation" x="1400" y="244"/>
         </scene>
+        <!--Login-->
+        <scene sceneID="Bch-UP-lQ4">
+            <objects>
+                <viewController id="d8S-4r-ENm" userLabel="Login" customClass="LoginController" customModule="emojigame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aEE-uL-OAB"/>
+                        <viewControllerLayoutGuide type="bottom" id="7P6-EF-yen"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tEL-Vc-9jR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgk-8X-42h">
+                                <rect key="frame" x="126" y="333" width="68" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="tEL-Vc-9jR" eventType="touchUpInside" id="IiG-ae-Y0k"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OVK-LA-Bh7">
+                                <rect key="frame" x="42" y="69" width="236" height="30"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Oa-Xj-qtv">
+                                <rect key="frame" x="42" y="117" width="236" height="30"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6g-Rm-Qtf">
+                                <rect key="frame" x="42" y="162" width="55" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signUpButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="4hN-TN-fK6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-XV-fyC">
+                                <rect key="frame" x="233" y="160" width="43" height="33"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="logInButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="nvl-rC-cE1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91461068391799927" green="0.26889538764953613" blue="0.4044436514377594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="trailing" secondItem="OVK-LA-Bh7" secondAttribute="trailing" id="L4s-dw-NmX"/>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="leading" secondItem="tEL-Vc-9jR" secondAttribute="leadingMargin" constant="26" id="Ngh-T3-Oi9"/>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="centerX" secondItem="jgk-8X-42h" secondAttribute="centerX" id="Tht-e6-Vcf"/>
+                            <constraint firstItem="HyH-XV-fyC" firstAttribute="trailing" secondItem="8Oa-Xj-qtv" secondAttribute="trailing" id="U5D-PM-IXW"/>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="centerX" secondItem="tEL-Vc-9jR" secondAttribute="centerX" id="dg3-be-77y"/>
+                            <constraint firstItem="OVK-LA-Bh7" firstAttribute="top" secondItem="aEE-uL-OAB" secondAttribute="bottom" constant="49" id="giw-uF-k44"/>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="leading" secondItem="OVK-LA-Bh7" secondAttribute="leading" id="iVe-Se-nbC"/>
+                            <constraint firstItem="8Oa-Xj-qtv" firstAttribute="top" secondItem="OVK-LA-Bh7" secondAttribute="bottom" constant="18" id="iry-3N-Jxk"/>
+                            <constraint firstItem="j6g-Rm-Qtf" firstAttribute="leading" secondItem="8Oa-Xj-qtv" secondAttribute="leading" id="pV1-l3-vz0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="OVK-LA-Bh7" id="Yp4-jJ-bHb"/>
+                        <outlet property="passwordTextField" destination="8Oa-Xj-qtv" id="aw5-6l-GbN"/>
+                        <segue destination="gNo-Z8-Oz6" kind="push" id="879-i2-qW4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mLS-l3-FPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-108" y="268"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Ox-rB-CcS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gNo-Z8-Oz6" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="qnM-F8-NSi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rqI-la-7iF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -232,7 +305,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIS-c5-kzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="288" y="200"/>
+            <point key="canvasLocation" x="322" y="270"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import Fabric
+import TwitterKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
@@ -15,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        Fabric.with([Twitter.self])
         // Override point for customization after application launch.
         // application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         return true
