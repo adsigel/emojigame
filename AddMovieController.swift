@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 var dateString = ""
+var uid = ""
 
 class AddMovieController: UIViewController, UITextFieldDelegate {
 
@@ -17,21 +18,33 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userSubmitPlot: UITextField!
     @IBOutlet weak var userSubmitMovieButton: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.getUserData()
+        print("user's ID is \(uid)")
+    }
+    
+    func getUserData() -> String {
+        if let user = FIRAuth.auth()?.currentUser {
+            uid = user.uid
+        } else {
+            // No user is signed in.
+        }
+        return uid
+    }
+    
+    
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
         // Alert View for input
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: user.uid as! String, approved: 0, points: 0)
+        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uid, approved: 0, points: 0)
         let refMovies = ref.child("movies/")
         let moviePlotRef = refMovies.childByAutoId()
-//        let userData = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
-//        let userRef = ref.child("users/" + user.displayName)
         moviePlotRef.setValue(movieData.toAnyObject())
-//        userRef.setValue(userData.toAnyObjectUser())
         var movieId = moviePlotRef.key
-        print("The new movie has been added with uid of: " + movieId)
-        // confirmSave()
+        print("The new movie has been added with an id of: \(movieId)")
     
     }
     
@@ -47,13 +60,4 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         dateString = dateformatter.stringFromDate(NSDate())
     }
 
-    func confirmSave() {
-        print("** Saving new movie to Firebase...")
-        let confirmAlert = UIAlertController(title: "Movie submitted", message: "Thank you for submitting this movie.", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            print("** User has acknowledged that movie is added to Firebase.")
-        }
-        confirmAlert.addAction(OKAction)
-        self.presentViewController(confirmAlert, animated: true, completion: nil)
-    }
 }

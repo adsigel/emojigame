@@ -11,7 +11,7 @@ import Foundation
 import TwitterKit
 import Firebase
 
-class LoginController: UIViewController, UITextFieldDelegate {
+class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -83,12 +83,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     // Handle errors here
                 }
             }
-
+        performSegueWithIdentifier("signIn", sender: sender)
     }
     
     
     @IBAction func logInButton(sender: AnyObject) {
-    
+        performSegueWithIdentifier("logIn", sender: sender)
     
     }
    

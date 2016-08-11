@@ -254,6 +254,7 @@
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="4hN-TN-fK6"/>
+                                    <segue destination="gNo-Z8-Oz6" kind="modal" identifier="signIn" modalTransitionStyle="flipHorizontal" id="aKv-Sz-JUW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-XV-fyC">
@@ -262,6 +263,7 @@
                                 <state key="normal" title="Log In"/>
                                 <connections>
                                     <action selector="logInButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="nvl-rC-cE1"/>
+                                    <segue destination="gNo-Z8-Oz6" kind="modal" identifier="logIn" modalTransitionStyle="flipHorizontal" id="cMo-z9-ZTC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -281,7 +283,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="OVK-LA-Bh7" id="Yp4-jJ-bHb"/>
                         <outlet property="passwordTextField" destination="8Oa-Xj-qtv" id="aw5-6l-GbN"/>
-                        <segue destination="gNo-Z8-Oz6" kind="push" id="879-i2-qW4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLS-l3-FPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -316,5 +317,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="aKv-Sz-JUW"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="calibratedRGB"/>
 </document>
