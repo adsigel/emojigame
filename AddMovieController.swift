@@ -20,17 +20,8 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getUserData()
+        LoginController().currentUser(uid)
         print("user's ID is \(uid)")
-    }
-    
-    func getUserData() -> String {
-        if let user = FIRAuth.auth()?.currentUser {
-            uid = user.uid
-        } else {
-            // No user is signed in.
-        }
-        return uid
     }
     
     

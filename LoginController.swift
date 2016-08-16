@@ -5,65 +5,33 @@
 //  Created by Adam Sigel on 8/10/16.
 //  Copyright © 2016 Adam Sigel. All rights reserved.
 //
+//  TODO
+//  * Use user.uid to get child values (e.g. score) for currentUser
+//  * Email verification
+//  * Confirm sign out
+//  * Confirm new user added to db every time
+//  * Intro screen
 
 import UIKit
 import Foundation
 import TwitterKit
 import Firebase
 
+var userDict = [String:AnyObject]()
+var userID : String = ""
+
 class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+    @IBOutlet weak var welcomeTextLabel: UILabel!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logInButton = TWTRLogInButton { (session, error) in
-            if let unwrappedSession = session {
-                let alert = UIAlertController(title: "Logged In",
-                    message: "User \(unwrappedSession.userName) has logged in with userID \(unwrappedSession.userID)",
-                    preferredStyle: UIAlertControllerStyle.Alert
-                )
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-                } else {
-                NSLog("Login error: %@", error!.localizedDescription);
-            }
-        }
-        
-        // TODO: Change where the log in button is positioned in your view
-        logInButton.center = self.view.center
-        self.view.addSubview(logInButton)
-        Twitter.sharedInstance().logInWithCompletion { session, error in
-            if (session != nil) {
-                let authToken = session!.authToken
-                let authTokenSecret = session!.authTokenSecret
-                let authID = session!.userID
-                let authName = session!.userName
-                self.currentDate()
-                print("authToken is \(authToken)")
-                print("authTokenSecret is \(authTokenSecret)")
-                let credential = FIRTwitterAuthProvider.credentialWithToken(session!.authToken, secret: session!.authTokenSecret)
-                let userData = User(uid: authID as! Int, email: "", displayName: "", twitterName: authName, score: userScoreValue, addedDate: dateString)
-                let userRef = ref.child("users/" + authID)
-                userRef.setValue(userData.toAnyObjectUser())
-                
-            } else {
-                print("error: \(error!.localizedDescription)");
-            }
-        }
+        self.checkForUserInitial()
     }
-//    
-//    @IBAction func signOut(sender: AnyObject) {
-//        let firebaseAuth = FIRAuth.auth()
-//        do {
-//            try firebaseAuth?.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out: %@", signOutError)
-//        }
-//    }
-    
+     
     
     @IBAction func signUpButton(sender: AnyObject) {
         let email = emailTextField.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -71,13 +39,18 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
             FIRAuth.auth()?.createUserWithEmail(email!, password: password!) { (user, error) in
                 if error == nil {
                     // Log user in
-                    let uid = userRef.key
-                    FIRAuth.auth()?.signInWithEmail(email!, password: password!) { (user, error) in
-                        let userData = User(uid: 01 as! Int, email: "", displayName: "", twitterName: "", score: userScoreValue, addedDate: dateString)
-                        let userRef = ref.child("users/")
-                        let userNew = userRef.childByAutoId()
-                        userRef.setValue(userData.toAnyObjectUser())
-                        let uid = userRef.key
+                    uid = user!.uid
+                    print("uid is \(uid)")
+                    var name = ""
+                    if user!.displayName != nil {
+                        name = user!.displayName!
+                    } else {
+                        name = ""
+                    }
+                    let email = user!.email!
+                    userDict = ["uid": uid, "name": name, "email": email]
+                    self.addNewUser()
+                    FIRAuth.auth()?.signInWithEmail(email, password: password!) { (user, error) in
                     }
                 } else {
                     // Handle errors here
@@ -88,18 +61,77 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
     
     
     @IBAction func logInButton(sender: AnyObject) {
-        performSegueWithIdentifier("logIn", sender: sender)
-    
+        currentUser(uid)
+        print("logging in... uid is \(uid)")
+        if uid != "" {
+            print("Logging in as user \(uid)")
+            performSegueWithIdentifier("logIn", sender: sender)
+        } else {
+            print("No current user.")
+            welcomeTextLabel.hidden = false
+            welcomeTextLabel.text = "Please sign in first"
+        }
     }
    
-    
-    
+
     func currentDate() {
         let dateformatter = NSDateFormatter()
         dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         dateString = dateformatter.stringFromDate(NSDate())
     }
+    
+    @IBAction func fetchButton(sender: AnyObject) {
+        self.currentUser(uid)
+    }
+    
+    func currentUser(uid:String) {
+        print("Current user is signed in with uid \(uid)")
+        let currentUserRef = userRef.ref.child(uid)
+        print("currentUserRef is \(currentUserRef)")
+        currentUserRef.observeEventType(.Value, withBlock: { (snapshot) in
+            userDict = snapshot.value as! [String : AnyObject]
+            print("userDict is \(userDict)")
+            })
+    }
 
+    func checkForUserInitial() {
+        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+            if let user = user {
+                // user is signed in
+                print("A user exists.")
+                uid = user.uid
+                print("Fetching user data from user child path \(uid)")
+                self.currentUser(uid)
+//                var name = ""
+//                if user.displayName != nil {
+//                    name = user.displayName!
+//                    print("User displayName is \(name)")
+//                } else {
+//                    name = ""
+//                    print("User displayName is \(name)")
+//                }
+//                let email = user.email!
+//                userDict = ["uid": uid, "name": name, "email": email]
+                print("Here is userDict: \(userDict)")
+                self.welcomeTextLabel.hidden = false
+                self.welcomeTextLabel.text = "Welcome, \(userDict["email"])"
+            } else {
+                //no user is signed in
+                print("No user is signed in.")
+                self.welcomeTextLabel.text = "Please sign up or log in"
+                self.welcomeTextLabel.hidden = false
+            }
+        }
+    }
+    
+    func addNewUser() {
+        self.currentDate()
+        let userData = User(uid: userDict["uid"]! as! String, email: userDict["email"]! as! String, displayName: userDict["name"]! as! String, score: 0, addedDate: dateString)
+        let userRef = ref.child("users/")
+        let newUser = userRef.child(uid)
+        newUser.setValue(userData.toAnyObjectUser())
+        print("New user added with uid of \(uid) and email \(userDict["email"])")
+    }
     
 }

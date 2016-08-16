@@ -11,6 +11,7 @@
 //  ? 3D touch to see a GIF from the movie
 //  * Refactor and move functions into the proper models/classes
 //  * Add levels and badges based on user score
+//  * Save excludeArray to user profile so they don't see the same movies in different sessions
 
 import UIKit
 import Firebase
@@ -20,7 +21,7 @@ let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
 let userRef = ref.child("users")
 var count = 0
-var userScoreValue: Int = 0
+var userScoreValue = userDict["score"] as! Int
 var userGuess = String()
 var movieValue: Int = 0
 var excludeIndex = [Int]()
@@ -57,10 +58,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-//        user = User(uid: 0, email: "adsigel@gmail.com", displayName: "Adam Sigel", score: userScoreValue)
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
         }
+        self.userScore.text = String(userDict["score"]!)
     }
 
 
@@ -90,6 +91,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("User has guessed " + String(count) + " times.")
         if guess == movieDict["title"] as! String {
             print("userGuess is correct")
+            movieDict["points"] as! Int
             var guessMessageBase = "You got it in " + String(count)
             let guessOnce = " guess and earned \(movieValue) points."
             let guessMany = " guesses and earned  \(movieValue) points."
@@ -101,8 +103,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
-                userScoreValue = userScoreValue + movieValue
-                self.userScore.text = String(userScoreValue)
+                var newScore: Int = userDict["score"] as! Int
+                newScore = newScore + movieValue
+                userDict["score"] = newScore
+                self.userScore.text = String(userDict["score"]!)
+                userRef.child(uid).child("score").setValue(newScore)
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
@@ -177,23 +182,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
                 let key = movieItem.key!
                 let approved = movieItem.approved
-                print("approved is: \(approved)")
                 if approved == 1 {
                     movieIDArray.append(key)
                     movieCount = Int(movieIDArray.count)
                 }
             }
-            print("Here is movieIDArray: \(movieIDArray)")
-            print("Here is movieCount: \(movieCount)")
             var randomIndex : Int = 0
             randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             } while excludeIndex.contains(randomIndex)
             movieToGuess = movieIDArray[randomIndex]
-            print("randomIndex is: \(randomIndex)")
             excludeIndex.append(randomIndex)
-            print("excludeIndex is: \(excludeIndex)")
             if excludeIndex.count == movieCount {
                 excludeIndex = []
             }
@@ -212,7 +212,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.emojiPlot.text = plot
             movieValue = movieDict["points"] as! Int
         })
-        print("Here comes movieDict! \(movieDict)")
+    }
+
+    
+    @IBAction func signOut(sender: AnyObject) {
+        do {
+            try! FIRAuth.auth()!.signOut()
+            print("User \(uid) logging out")
+            self.performSegueWithIdentifier("logOut", sender: self)
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
     
