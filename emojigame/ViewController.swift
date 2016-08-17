@@ -11,11 +11,12 @@
 //  ? 3D touch to see a GIF from the movie
 //  * Refactor and move functions into the proper models/classes
 //  * Add levels and badges based on user score
-//  * Save excludeArray to user profile so they don't see the same movies in different sessions
+//  * Save excludeArray to user profile so they don't see the same movies in different sessions - FINISH TESTING
 
 import UIKit
 import Firebase
 import TwitterKit
+import CoreFoundation
 
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
@@ -24,7 +25,7 @@ var count = 0
 var userScoreValue = userDict["score"] as! Int
 var userGuess = String()
 var movieValue: Int = 0
-var excludeIndex = [Int]()
+var excludeIndex = [String]()
 var movie = [Movies]()
 var movieIDArray = [String]()
 var user: User!
@@ -35,6 +36,7 @@ var secretTitle = String()
 var secretHint = String()
 var secretPlot = String()
 var secretValue: Int = 0
+var moviesPlayed = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -107,7 +109,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 newScore = newScore + movieValue
                 userDict["score"] = newScore
                 self.userScore.text = String(userDict["score"]!)
+                // updates user score in db
                 userRef.child(uid).child("score").setValue(newScore)
+                // adds new child to /exclude with movie key
+                userRef.child(uid).child("exclude").child(movieToGuess).setValue(true)
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
@@ -180,24 +185,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
-                let key = movieItem.key!
+                movieID = movieItem.key!
                 let approved = movieItem.approved
                 if approved == 1 {
-                    movieIDArray.append(key)
+                    movieIDArray.append(movieID)
                     movieCount = Int(movieIDArray.count)
                 }
             }
             var randomIndex : Int = 0
+            let moviePlayed = userDict["exclude"] as! [String:AnyObject]
+            var moviePlayedKeys = Array(moviePlayed.keys)
+            print("Here is moviePlayedKeys: \(moviePlayedKeys)")
             randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
-            } while excludeIndex.contains(randomIndex)
+                movieToGuess = movieIDArray[randomIndex]
+                print("movieToGuess is \(movieToGuess)")
+            } while moviePlayedKeys.contains(movieToGuess)
             movieToGuess = movieIDArray[randomIndex]
-            excludeIndex.append(randomIndex)
-            if excludeIndex.count == movieCount {
-                excludeIndex = []
-            }
-                
+            // Check to see if user has played that movie before
+//            excludeIndex.append(movieToGuess)
+//            if excludeIndex.count == movieCount {
+//                excludeIndex = []
+//            }
+            
             completion(movieToGuess)
 
             })

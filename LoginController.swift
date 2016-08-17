@@ -115,7 +115,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
 //                userDict = ["uid": uid, "name": name, "email": email]
                 print("Here is userDict: \(userDict)")
                 self.welcomeTextLabel.hidden = false
-                self.welcomeTextLabel.text = "Welcome, \(userDict["email"])"
+                self.welcomeTextLabel.text = "Welcome, \(userDict["name"])"
             } else {
                 //no user is signed in
                 print("No user is signed in.")
