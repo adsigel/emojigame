@@ -52,10 +52,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    let badGuess = UIColor(red: 242/255, green: 119/255, blue: 119/255, alpha: 1.0)
-    let goodGuess = UIColor(red: 166/255, green: 242/255, blue: 119/255, alpha: 1.0)
-    let feedbackBackground = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 0.4)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
@@ -154,8 +150,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
             print("User has chosen the coward's way out.")
+            var newScore: Int = userDict["score"] as! Int
+            newScore = newScore - 25
             userScoreValue = userScoreValue - 25
-            self.userScore.text = String(userScoreValue)
+            userDict["score"] = newScore
+            self.userScore.text = String(userDict["score"]!)
+            userRef.child(uid).child("score").setValue(newScore)
             self.randomKeyfromFIR{ (movieToGuess) -> () in
                 self.getMovieData(movieToGuess)
             }
@@ -197,17 +197,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var moviePlayedKeys = Array(moviePlayed.keys)
             print("Here is moviePlayedKeys: \(moviePlayedKeys)")
             randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+            // Check to see if user has played that movie before
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
                 movieToGuess = movieIDArray[randomIndex]
                 print("movieToGuess is \(movieToGuess)")
             } while moviePlayedKeys.contains(movieToGuess)
             movieToGuess = movieIDArray[randomIndex]
-            // Check to see if user has played that movie before
-//            excludeIndex.append(movieToGuess)
-//            if excludeIndex.count == movieCount {
-//                excludeIndex = []
-//            }
+            if moviePlayedKeys.count == movieCount {
+                moviePlayedKeys = []
+            }
             
             completion(movieToGuess)
 

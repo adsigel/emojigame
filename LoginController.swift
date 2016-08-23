@@ -56,21 +56,35 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
                     // Handle errors here
                 }
             }
-        performSegueWithIdentifier("signIn", sender: sender)
+        performSegueWithIdentifier("signUp", sender: sender)
     }
     
     
     @IBAction func logInButton(sender: AnyObject) {
-        currentUser(uid)
-        print("logging in... uid is \(uid)")
-        if uid != "" {
-            print("Logging in as user \(uid)")
-            performSegueWithIdentifier("logIn", sender: sender)
-        } else {
-            print("No current user.")
-            welcomeTextLabel.hidden = false
-            welcomeTextLabel.text = "Please sign in first"
-        }
+        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+            if let user = user {
+                // user is signed in
+                print("A user exists.")
+                uid = user.uid
+                print("Fetching user data from user child path \(uid)")
+                self.currentUser(uid)
+                self.performSegueWithIdentifier("logIn", sender: sender)
+            }
+            else {
+                print("No current user.")
+                let anim = CAKeyframeAnimation( keyPath:"transform" )
+                anim.values = [
+                    NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
+                    NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
+                ]
+                anim.autoreverses = true
+                anim.repeatCount = 2
+                anim.duration = 7/100
+                
+                self.passwordTextField.layer.addAnimation( anim, forKey:nil )
+                self.welcomeTextLabel.hidden = false
+                self.welcomeTextLabel.text = "Please sign in first"
+            }}
     }
    
 
@@ -80,10 +94,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         dateString = dateformatter.stringFromDate(NSDate())
     }
-    
-    @IBAction func fetchButton(sender: AnyObject) {
-        self.currentUser(uid)
-    }
+
     
     func currentUser(uid:String) {
         print("Current user is signed in with uid \(uid)")
@@ -130,7 +141,9 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         let userData = User(uid: userDict["uid"]! as! String, email: userDict["email"]! as! String, displayName: userDict["name"]! as! String, score: 0, addedDate: dateString)
         let userRef = ref.child("users/")
         let newUser = userRef.child(uid)
+        // TODO: MAKE SURE NEW CHILD NODE ADDED FOR NEW USER
         newUser.setValue(userData.toAnyObjectUser())
+        newUser.child("exclude").setValue(["key", true])
         print("New user added with uid of \(uid) and email \(userDict["email"])")
     }
     

@@ -156,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893" y="239"/>
+            <point key="canvasLocation" x="985" y="239"/>
         </scene>
         <!--AddMovie-->
         <scene sceneID="2xT-Xi-7fS">
@@ -170,7 +170,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWi-hW-GGg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWi-hW-GGg">
                                 <rect key="frame" x="37" y="163" width="247" height="34"/>
                                 <color key="tintColor" red="0.72336632013320923" green="0.72336632013320923" blue="0.72336632013320923" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -198,7 +198,7 @@
                                     <action selector="userSubmitMovie:" destination="ce0-ec-dMr" eventType="touchUpInside" id="gga-MQ-kVs"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill in a movie title (as text) and a plot (as emoji). If it gets added to emojigame, you'll get a ton of points!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-3H-exr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Fill in a movie title (as text) and a plot (as emoji). If it gets added to emojigame, you'll get a ton of points!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-3H-exr">
                                 <rect key="frame" x="37" y="103" width="247" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Csc-kW-U9l"/>
@@ -230,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r0W-Gs-xMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="244"/>
+            <point key="canvasLocation" x="1425" y="239"/>
         </scene>
         <!--Login-->
         <scene sceneID="Bch-UP-lQ4">
@@ -266,7 +266,7 @@
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="4hN-TN-fK6"/>
-                                    <segue destination="gNo-Z8-Oz6" kind="modal" identifier="signIn" modalTransitionStyle="flipHorizontal" id="aKv-Sz-JUW"/>
+                                    <segue destination="rya-Ae-scZ" kind="modal" identifier="signUp" modalTransitionStyle="coverVertical" id="VnS-ZB-YMj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-XV-fyC">
@@ -295,18 +295,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rns-p6-BSc">
-                                <rect key="frame" x="105" y="225" width="111" height="30"/>
-                                <state key="normal" title="Fetch User Data"/>
-                                <connections>
-                                    <action selector="fetchButton:" destination="d8S-4r-ENm" eventType="touchUpInside" id="Tqw-dA-v05"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.91461068391799927" green="0.26889538764953613" blue="0.4044436514377594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rns-p6-BSc" firstAttribute="centerX" secondItem="tEL-Vc-9jR" secondAttribute="centerX" id="4lz-jN-V4W"/>
-                            <constraint firstItem="rns-p6-BSc" firstAttribute="top" secondItem="8Oa-Xj-qtv" secondAttribute="bottom" constant="78" id="A0u-ni-vXx"/>
                             <constraint firstItem="j6g-Rm-Qtf" firstAttribute="centerY" secondItem="HyH-XV-fyC" secondAttribute="centerY" id="D6V-WH-Bie"/>
                             <constraint firstItem="7P6-EF-yen" firstAttribute="top" secondItem="JeT-aG-vgb" secondAttribute="bottom" constant="38" id="G6s-er-Se7"/>
                             <constraint firstItem="8Oa-Xj-qtv" firstAttribute="trailing" secondItem="OVK-LA-Bh7" secondAttribute="trailing" id="L4s-dw-NmX"/>
@@ -331,6 +322,63 @@
             </objects>
             <point key="canvasLocation" x="92" y="239"/>
         </scene>
+        <!--Create Profile-->
+        <scene sceneID="UTe-Lb-9np">
+            <objects>
+                <viewController id="rya-Ae-scZ" userLabel="Create Profile" customClass="CreateProfileController" customModule="emojigame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hEL-eZ-uSr"/>
+                        <viewControllerLayoutGuide type="bottom" id="H0B-FG-E4w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L6K-ib-4RZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-oT-Cn6">
+                                <rect key="frame" x="35" y="138" width="250" height="30"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Wvc-cu-zMQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What should we call you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPy-FR-sdK">
+                                <rect key="frame" x="75" y="109" width="170" height="21"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <color key="textColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcc-33-IEC">
+                                <rect key="frame" x="122" y="225" width="77" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Finish Up"/>
+                                <connections>
+                                    <action selector="finishUpButton:" destination="rya-Ae-scZ" eventType="touchUpInside" id="NTj-HA-yEA"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="finishUp" modalTransitionStyle="crossDissolve" id="aVC-tF-3GI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.24862810969352722" green="0.61840957403182983" blue="0.93779569864273071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tcc-33-IEC" firstAttribute="centerX" secondItem="L6K-ib-4RZ" secondAttribute="centerX" id="Aq3-iY-faJ"/>
+                            <constraint firstItem="vsO-oT-Cn6" firstAttribute="top" secondItem="hEL-eZ-uSr" secondAttribute="bottom" constant="118" id="Osr-QC-efz"/>
+                            <constraint firstItem="vsO-oT-Cn6" firstAttribute="top" secondItem="dPy-FR-sdK" secondAttribute="bottom" constant="8" id="U7h-D2-YJL"/>
+                            <constraint firstItem="vsO-oT-Cn6" firstAttribute="centerX" secondItem="L6K-ib-4RZ" secondAttribute="centerX" id="cyg-F8-m64"/>
+                            <constraint firstItem="dPy-FR-sdK" firstAttribute="centerX" secondItem="L6K-ib-4RZ" secondAttribute="centerX" id="gkL-IF-hqD"/>
+                            <constraint firstItem="tcc-33-IEC" firstAttribute="top" secondItem="vsO-oT-Cn6" secondAttribute="bottom" constant="57" id="wP3-bS-QcO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lG8-Ji-qQi"/>
+                    <connections>
+                        <outlet property="finishUpButtonText" destination="tcc-33-IEC" id="Xjf-2a-6Ha"/>
+                        <outlet property="userNameTextField" destination="vsO-oT-Cn6" id="cCG-86-7bD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1dJ-0H-7WX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="543" y="239"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Ox-rB-CcS">
             <objects>
@@ -348,7 +396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIS-c5-kzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="495" y="584"/>
+            <point key="canvasLocation" x="543" y="897"/>
         </scene>
     </scenes>
     <resources>
@@ -360,7 +408,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cMo-z9-ZTC"/>
+        <segue reference="aVC-tF-3GI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="calibratedRGB"/>
 </document>
