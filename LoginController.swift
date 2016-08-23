@@ -143,7 +143,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         let newUser = userRef.child(uid)
         // TODO: MAKE SURE NEW CHILD NODE ADDED FOR NEW USER
         newUser.setValue(userData.toAnyObjectUser())
-        newUser.child("exclude").setValue(["key", true])
+        newUser.child("exclude").child("key)").setValue(true)
         print("New user added with uid of \(uid) and email \(userDict["email"])")
     }
     

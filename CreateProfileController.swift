@@ -28,6 +28,8 @@ class CreateProfileController: UIViewController, UITextFieldDelegate, UINavigati
         let currentUserRef = userRef.ref.child(uid)
         print("currentUserRef is \(currentUserRef)")
         currentUserRef.child("displayName").setValue(name)
+        // THE LINE BELOW IS NOT DECLARING CORRECTLY
+        currentUserRef.child("exclude").child("key").setValue(true)
         performSegueWithIdentifier("finishUp", sender: sender)
     }
 
