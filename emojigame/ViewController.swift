@@ -20,7 +20,6 @@ import CoreFoundation
 
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
-let userRef = ref.child("users")
 var count = 0
 var userScoreValue = userDict["score"] as! Int
 var userGuess = String()
@@ -42,7 +41,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userGuess: UITextField!
     @IBOutlet weak var emojiPlot: UILabel!
-    @IBOutlet weak var dahFuh: UIButton!
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
     
@@ -82,6 +80,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    @IBAction func updateProfileButton(sender: AnyObject) {
+        performSegueWithIdentifier("updateProfile", sender: sender)
+    }
+   
     @IBAction func checkGuess() {
         let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         count = count + 1
@@ -106,9 +108,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 userDict["score"] = newScore
                 self.userScore.text = String(userDict["score"]!)
                 // updates user score in db
-                userRef.child(uid).child("score").setValue(newScore)
+                userRef.child(uzer).child("score").setValue(newScore)
                 // adds new child to /exclude with movie key
-                userRef.child(uid).child("exclude").child(movieToGuess).setValue(true)
+                userRef.child(uzer).child("exclude").child(movieToGuess).setValue(true)
             }
             guessRightAlert.addAction(OKAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
@@ -137,14 +139,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         movieValue = Int(movieDict["points"]! as! NSNumber) - 10
     }
     
-    @IBAction func dahFuh(_ sender: AnyObject) {
-        print("User wants to know how the game works.")
-        let alert = UIAlertController(title: "What is this?", message: "The emojis tell the plot of a movie (not the title). Guess the correct movie and win points. You can get hints or skip, but that will hurt your score.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-
     @IBAction func skipMovie(_ sender: AnyObject) {
         print("User is considering skipping this one.")
         let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -155,7 +149,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             userScoreValue = userScoreValue - 25
             userDict["score"] = newScore
             self.userScore.text = String(userDict["score"]!)
-            userRef.child(uid).child("score").setValue(newScore)
+            userRef.child(uzer).child("score").setValue(newScore)
             self.randomKeyfromFIR{ (movieToGuess) -> () in
                 self.getMovieData(movieToGuess)
             }
@@ -168,7 +162,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(skipAlert, animated: true, completion: nil)
     }
     @IBAction func shareButton(_ sender: AnyObject) {
-        let textToShare = "Can you guess what movie this is? " + (movieDict["plot"]! as! String)
+        let textToShare = "I'm playing @emojisodes. Help me guess what movie this is! " + (movieDict["plot"]! as! String)
         
         if let myWebsite = NSURL(string: "http://emojisodes.com") {
             let objectsToShare = [textToShare, myWebsite]
@@ -222,17 +216,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.emojiPlot.text = plot
             movieValue = movieDict["points"] as! Int
         })
-    }
-
-    
-    @IBAction func signOut(sender: AnyObject) {
-        do {
-            try! FIRAuth.auth()!.signOut()
-            print("User \(uid) logging out")
-            self.performSegueWithIdentifier("logOut", sender: self)
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
     
     

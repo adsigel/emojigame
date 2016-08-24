@@ -82,3 +82,8 @@ var movie2 = movieStruct(key: "-KOKKbVx3USwh3u9C3Pa", title: "demolition man", p
 
 
 print(movie1.plot)
+
+var testDict = ["blah": "blah"]
+
+testDict["foo"]
+

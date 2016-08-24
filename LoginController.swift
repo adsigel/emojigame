@@ -18,8 +18,10 @@ import TwitterKit
 import Firebase
 
 var userDict = [String:AnyObject]()
-var userID : String = ""
-var loggedIn = false
+var uzer = ""
+let userRef = ref.child("users")
+var newUser = String()
+
 
 class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
@@ -30,26 +32,37 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        uzer = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        print("sup uzer \(uzer)")
+        let newUserRef = userRef.child(uzer)
+        let dummyDict = ["dummy": "dummy"]
+        newUserRef.setValue(dummyDict)
     }
     
-    func checkForUserInitial() {
-        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
-            if let user = user {
-                // user is signed in
-                print("A user exists.")
-                loggedIn = true
-                print("loggedIn = \(loggedIn)")
-                uid = user.uid
-                print("Fetching user data from user child path \(uid)")
-                self.currentUser(uid)
-                print("Here is userDict: \(userDict)")
-            } else {
-                //no user is signed in
-                loggedIn = false
-                print("loggedIn = \(loggedIn)")
-                
-            }
+    @IBAction func playButton(sender: AnyObject) {
+        let newUserRef = userRef.child(uzer)
+        newUserRef.observeEventType(.Value, withBlock: { (snapshot) in
+            userDict = snapshot.value as! [String : AnyObject]
+            print("userDict is \(userDict)")
+        })
+        if let new = userDict["new_in_town"] {
+            newUser = userDict["new_in_town"] as! String
+        } else {
+            newUser = "nope"
         }
+        self.currentDate()
+        print("Is this a new user? \(newUser)")
+        if newUser == "false" {
+            // user has been here before
+            print("This user has been here before.")
+            performSegueWithIdentifier("logIn", sender: sender)
+        } else {
+            userDict = ["name": "", "email": "", "score": 0, "addedDate": dateString, "exclude": ["key": true], "new_in_town": "true"]
+            print("userDict is \(userDict)")
+            newUserRef.setValue(userDict)
+            performSegueWithIdentifier("firstTime", sender: sender)
+        }
+        
     }
 
     
@@ -60,9 +73,9 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         dateString = dateformatter.stringFromDate(NSDate())
     }
 
-    func currentUser(uid:String) {
-        print("Current user is signed in with uid \(uid)")
-        let currentUserRef = userRef.ref.child(uid)
+    func currentUser(uzer:String) {
+        print("Current user device has id \(uzer)")
+        let currentUserRef = ref.child("users")
         print("currentUserRef is \(currentUserRef)")
         currentUserRef.observeEventType(.Value, withBlock: { (snapshot) in
             userDict = snapshot.value as! [String : AnyObject]
@@ -70,118 +83,4 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         })
     }
     
-    func addNewUser() {
-        self.currentDate()
-        let userData = User(uid: userDict["uid"]! as! String, email: userDict["email"]! as! String, displayName: userDict["name"]! as! String, score: 0, addedDate: dateString)
-        let userRef = ref.child("users/")
-        let newUser = userRef.child(uid)
-        // TODO: MAKE SURE NEW CHILD NODE ADDED FOR NEW USER
-        newUser.setValue(userData.toAnyObjectUser())
-        newUser.child("exclude").child("key").setValue(true)
-        print("New user added with uid of \(uid) and email \(userDict["email"])")
-    }
-    
-    @IBAction func checkUserEmail(sender: AnyObject) {
-        if let user = FIRAuth.auth()?.currentUser {
-            let email = user.email
-        } else {
-            // No user is signed in.
-        }
-    }
-    
-    @IBAction func signUpButton(sender: AnyObject) {
-        let email = emailTextField.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let password = passwordTextField.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            FIRAuth.auth()?.createUserWithEmail(email!, password: password!) { (user, error) in
-                if error == nil {
-                    // Log user in
-                    uid = user!.uid
-                    print("uid is \(uid)")
-                    var name = ""
-                    if user!.displayName != nil {
-                        name = user!.displayName!
-                    } else {
-                        name = ""
-                    }
-                    let email = user!.email!
-                    userDict = ["uid": uid, "name": name, "email": email, "score": 0, "exclude": ["key": true]]
-                    self.addNewUser()
-                    FIRAuth.auth()?.signInWithEmail(email, password: password!) { (user, error) in
-                    }
-                } else {
-                    // Handle errors here
-                }
-            }
-        performSegueWithIdentifier("signUp", sender: sender)
-    }
-    
-    
-    @IBAction func logInButton(sender: AnyObject) {
-        if self.emailTextField.text == "" {
-            print("No email entered.")
-            let anim = CAKeyframeAnimation( keyPath:"transform" )
-            anim.values = [
-                NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
-                NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
-            ]
-            anim.autoreverses = true
-            anim.repeatCount = 2
-            anim.duration = 7/100
-            
-            self.emailTextField.layer.addAnimation( anim, forKey:nil )
-            self.welcomeTextLabel.hidden = false
-            self.welcomeTextLabel.text = "Who dis?"
-        } else
-            if self.passwordTextField.text == "" {
-            print("No password entered.")
-            let anim = CAKeyframeAnimation( keyPath:"transform" )
-            anim.values = [
-                NSValue( CATransform3D:CATransform3DMakeTranslation(-10, 0, 0 ) ),
-                NSValue( CATransform3D:CATransform3DMakeTranslation( 10, 0, 0 ) )
-            ]
-            anim.autoreverses = true
-            anim.repeatCount = 2
-            anim.duration = 7/100
-            
-            self.passwordTextField.layer.addAnimation( anim, forKey:nil )
-            self.welcomeTextLabel.hidden = false
-            self.welcomeTextLabel.text = "Oops, no password!"
-        } else {
-            print("Attempting to sign in...")
-            FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
-                if let user = user {
-                    loggedIn = true
-                    print("loggedIn = \(loggedIn)")
-                    uid = user.uid
-                    print("Fetching user data from user child path \(uid)")
-                    self.currentUser(uid)
-                    self.performSegueWithIdentifier("logIn", sender: sender)
-                } else {
-                    //no user is signed in
-                    loggedIn = false
-                    print("loggedIn = \(loggedIn)")
-                    print("User not logged in.")
-                    let invalidUserAlert = UIAlertController(title: "Something's gone wrong", message: "Please try again. If you don't remember your password, we can reset it for you.", preferredStyle: UIAlertControllerStyle.Alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                        
-                    }
-                    let PasswordAction = UIAlertAction(title: "Reset password", style: .Cancel) { (action)
-                        in
-                        let email = self.emailTextField.text
-                        FIRAuth.auth()?.sendPasswordResetWithEmail(email!) { error in
-                            if let error = error {
-                                // An error happened.
-                            } else {
-                                // Password reset email sent.
-                                print("Password reset email sent.")
-                            }
-                        }
-                    }
-                    invalidUserAlert.addAction(OKAction)
-                    invalidUserAlert.addAction(PasswordAction)
-                    self.presentViewController(invalidUserAlert, animated: true, completion: nil)
-                    }
-            }
-        }
-    }
 }

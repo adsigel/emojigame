@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662604B81D6DDFB1001E0424 /* FirstTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662604B71D6DDFB1001E0424 /* FirstTimeController.swift */; };
+		662604BA1D6DDFBB001E0424 /* FirstTime2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */; };
 		66374B701D2EFF58007024B1 /* Fun_FactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */; };
 		66374B7B1D2EFF58007024B1 /* Fun_FactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */; };
 		66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A3F1D3CFEDF008FEA44 /* ViewController.swift */; };
@@ -26,9 +28,9 @@
 		66DE19C21D524737001E589B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19C11D524737001E589B /* Users.swift */; };
 		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
 		66EB93DD1D359A1E0081FF4F /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D91D359A1E0081FF4F /* TwitterCore.framework */; };
-		66F8FD5C1D5B5C1D0027E031 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66F8FD5B1D5B5C1D0027E031 /* TwitterKitResources.bundle */; };
 		66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */; };
 		66F8FD621D6BDF5D0027E031 /* CreateProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD611D6BDF5D0027E031 /* CreateProfileController.swift */; };
+		66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD651D6CE20A0027E031 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		0545858000F50DA2D4F4AAB7 /* Pods-emojigame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-emojigame/Pods-emojigame.debug.xcconfig"; sourceTree = "<group>"; };
 		3E9FBCD6FEC0F72F303693A4 /* Pods-emojigame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigame.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigame/Pods-emojigame.release.xcconfig"; sourceTree = "<group>"; };
 		5D72561C58CDB841A9742E77 /* Pods-emojigameUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameUITests/Pods-emojigameUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		662604B71D6DDFB1001E0424 /* FirstTimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstTimeController.swift; path = emojigame/FirstTimeController.swift; sourceTree = SOURCE_ROOT; };
+		662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstTime2Controller.swift; path = emojigame/FirstTime2Controller.swift; sourceTree = SOURCE_ROOT; };
 		66374B571D2EFF58007024B1 /* emojigame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = emojigame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66374B6B1D2EFF58007024B1 /* emojigame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = emojigame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fun_FactsTests.swift; sourceTree = "<group>"; };
@@ -76,9 +80,9 @@
 		66EB93D41D329BF90081FF4F /* SwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftPlayground.playground; sourceTree = "<group>"; };
 		66EB93D61D359A1E0081FF4F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		66EB93D91D359A1E0081FF4F /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
-		66F8FD5B1D5B5C1D0027E031 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Pods/TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = SOURCE_ROOT; };
 		66F8FD611D6BDF5D0027E031 /* CreateProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileController.swift; sourceTree = SOURCE_ROOT; };
+		66F8FD651D6CE20A0027E031 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileController.swift; path = emojigame/ProfileController.swift; sourceTree = SOURCE_ROOT; };
 		73CB3D8F9695F571160EA3D7 /* Pods-emojigameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameUITests/Pods-emojigameUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8896F5A016D5532EC4DA73A4 /* Pods-emojigameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameTests/Pods-emojigameTests.release.xcconfig"; sourceTree = "<group>"; };
 		E877D07DED494E75DE7756D4 /* Pods-emojigameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameTests/Pods-emojigameTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,7 +127,6 @@
 				66374B6E1D2EFF58007024B1 /* emojigame Tests */,
 				66374B791D2EFF58007024B1 /* emojigame UITests */,
 				66374B581D2EFF58007024B1 /* Products */,
-				66F8FD5B1D5B5C1D0027E031 /* TwitterKitResources.bundle */,
 				66EB93D61D359A1E0081FF4F /* Fabric.framework */,
 				66EB93D91D359A1E0081FF4F /* TwitterCore.framework */,
 				DFAD4520B08515FDCBEEE858 /* Pods */,
@@ -154,6 +157,9 @@
 				66695A421D3CFEDF008FEA44 /* Info.plist */,
 				66DE19B91D523D71001E589B /* GoogleService-Info.plist */,
 				66695A431D3CFEDF008FEA44 /* Assets.xcassets */,
+				66F8FD651D6CE20A0027E031 /* ProfileController.swift */,
+				662604B71D6DDFB1001E0424 /* FirstTimeController.swift */,
+				662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */,
 			);
 			name = emojigame;
 			path = "Fun Facts";
@@ -334,7 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66F8FD5C1D5B5C1D0027E031 /* TwitterKitResources.bundle in Resources */,
 				669656461D5B59F8002B516C /* Podfile.lock in Resources */,
 				669656471D5B59F8002B516C /* Podfile in Resources */,
 				669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */,
@@ -505,10 +510,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				66DE19BE1D524317001E589B /* AddMovieController.swift in Sources */,
+				662604BA1D6DDFBB001E0424 /* FirstTime2Controller.swift in Sources */,
+				662604B81D6DDFB1001E0424 /* FirstTimeController.swift in Sources */,
 				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
 				66DE19C01D5245A2001E589B /* Movies.swift in Sources */,
 				66F8FD621D6BDF5D0027E031 /* CreateProfileController.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
+				66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */,
 				66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */,
 				66DE19C21D524737001E589B /* Users.swift in Sources */,
 				66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */,

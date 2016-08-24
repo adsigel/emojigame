@@ -20,8 +20,6 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoginController().currentUser(uid)
-        print("user's ID is \(uid)")
     }
     
     
@@ -30,13 +28,13 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uid, approved: 0, points: 0)
+        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
         let refMovies = ref.child("movies/")
         let moviePlotRef = refMovies.childByAutoId()
         moviePlotRef.setValue(movieData.toAnyObject())
         var movieId = moviePlotRef.key
         print("The new movie has been added with an id of: \(movieId)")
-    
+        performSegueWithIdentifier("finishAddingMovie", sender: sender)
     }
     
     func dismissKeyboard() {
