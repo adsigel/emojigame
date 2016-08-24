@@ -83,7 +83,17 @@ var movie2 = movieStruct(key: "-KOKKbVx3USwh3u9C3Pa", title: "demolition man", p
 
 print(movie1.plot)
 
-var testDict = ["blah": "blah"]
+var testDict = ["score": 0]
 
-testDict["foo"]
+testDict["score"]
+
+var newScore = testDict["score"]! as! Int
+
+newScore
+
+newScore = newScore + 1
+
+testDict["score"] = newScore
+
+testDict["score"]! + 1
 

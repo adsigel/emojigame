@@ -14,12 +14,14 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var correctLabel: UILabel!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Loading CreateProfile page.")
         print("userDict is \(userDict)")
+        self.correctLabel.text = String(userDict["correct"]!)
     }
     
     

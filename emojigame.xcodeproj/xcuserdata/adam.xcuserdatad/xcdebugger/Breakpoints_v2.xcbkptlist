@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMovieController.swift"
-            timestampString = "493676608.099977"
+            timestampString = "493762181.133893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "userSubmitMovie(_:)"
             landmarkType = "5">
          </BreakpointContent>

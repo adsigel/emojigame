@@ -22,6 +22,9 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
+    @IBAction func goBackButton(sender: AnyObject) {
+        performSegueWithIdentifier("finishAddingMovie", sender: sender)
+    }
     
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
         // Alert View for input

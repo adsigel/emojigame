@@ -20,7 +20,6 @@ import CoreFoundation
 
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
-var count = 0
 var userScoreValue = userDict["score"] as! Int
 var userGuess = String()
 var movieValue: Int = 0
@@ -58,6 +57,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.getMovieData(movieToGuess)
         }
         self.userScore.text = String(userDict["score"]!)
+        
     }
 
 
@@ -72,7 +72,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
         }
-        count = 0
     }
 
     func dismissKeyboard() {
@@ -86,29 +85,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
    
     @IBAction func checkGuess() {
         let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        count = count + 1
         print("User has guessed " + guess!)
-        print("User has guessed " + String(count) + " times.")
         if guess == movieDict["title"] as! String {
             print("userGuess is correct")
+//            var newCount = userDict["correct"]! as! Int
+//            print("newCount is \(newCount)")
+//            newCount = newCount + 1
+//            print("newCount is \(newCount)")
+//            userDict["count"] = newCount
+//            print("newCount in userDict is \(userDict["newCount"])")
             movieDict["points"] as! Int
-            var guessMessageBase = "You got it in " + String(count)
-            let guessOnce = " guess and earned \(movieValue) points."
-            let guessMany = " guesses and earned  \(movieValue) points."
-            if count == 1 {
-                guessMessageBase = guessMessageBase + guessOnce
-            } else {
-                guessMessageBase = guessMessageBase + guessMany
-            }
-            let guessRightAlert = UIAlertController(title: "That's it!", message: guessMessageBase, preferredStyle: UIAlertControllerStyle.Alert)
+            let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
                 var newScore: Int = userDict["score"] as! Int
                 newScore = newScore + movieValue
                 userDict["score"] = newScore
+//                var newCount : Int = userDict["count"] as! Int
+//                newCount = newCount + 1
+//                userDict["count"] = newCount
                 self.userScore.text = String(userDict["score"]!)
-                // updates user score in db
+                // updates user score and count in db
                 userRef.child(uzer).child("score").setValue(newScore)
+                userRef.child(uzer).child("correct").setValue((userDict["correct"]! as! Int) + 1)
                 // adds new child to /exclude with movie key
                 userRef.child(uzer).child("exclude").child(movieToGuess).setValue(true)
             }

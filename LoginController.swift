@@ -50,6 +50,11 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         } else {
             newUser = "nope"
         }
+//        if let correct = userDict["correct"] {
+//            correctCount = userDict["correct"]! as! Int
+//        } else {
+//            correctCount = 0
+//        }
         self.currentDate()
         print("Is this a new user? \(newUser)")
         if newUser == "false" {
@@ -57,7 +62,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
             print("This user has been here before.")
             performSegueWithIdentifier("logIn", sender: sender)
         } else {
-            userDict = ["name": "", "email": "", "score": 0, "addedDate": dateString, "exclude": ["key": true], "new_in_town": "true"]
+            userDict = ["name": "", "email": "", "score": 0, "correct": 0, "addedDate": dateString, "exclude": ["key": true], "new_in_town": "true"]
             print("userDict is \(userDict)")
             newUserRef.setValue(userDict)
             performSegueWithIdentifier("firstTime", sender: sender)
