@@ -16,6 +16,7 @@ import UIKit
 import Foundation
 import TwitterKit
 import Firebase
+import GameKit
 
 var userDict = [String:AnyObject]()
 var uzer = ""
@@ -23,7 +24,7 @@ let userRef = ref.child("users")
 var newUser = String()
 
 
-class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
+class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, GKGameCenterControllerDelegate {
     
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -86,6 +87,12 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
             userDict = snapshot.value as! [String : AnyObject]
             print("userDict is \(userDict)")
         })
+    }
+    
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!)
+    {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
 }

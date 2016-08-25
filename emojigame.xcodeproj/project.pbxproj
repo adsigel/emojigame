@@ -29,7 +29,6 @@
 		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
 		66EB93DD1D359A1E0081FF4F /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D91D359A1E0081FF4F /* TwitterCore.framework */; };
 		66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */; };
-		66F8FD621D6BDF5D0027E031 /* CreateProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD611D6BDF5D0027E031 /* CreateProfileController.swift */; };
 		66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD651D6CE20A0027E031 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +80,6 @@
 		66EB93D61D359A1E0081FF4F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		66EB93D91D359A1E0081FF4F /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = SOURCE_ROOT; };
-		66F8FD611D6BDF5D0027E031 /* CreateProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileController.swift; sourceTree = SOURCE_ROOT; };
 		66F8FD651D6CE20A0027E031 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileController.swift; path = emojigame/ProfileController.swift; sourceTree = SOURCE_ROOT; };
 		73CB3D8F9695F571160EA3D7 /* Pods-emojigameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameUITests/Pods-emojigameUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8896F5A016D5532EC4DA73A4 /* Pods-emojigameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameTests/Pods-emojigameTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,15 +146,14 @@
 			isa = PBXGroup;
 			children = (
 				66DE19C31D524AC9001E589B /* Models */,
+				66695A431D3CFEDF008FEA44 /* Assets.xcassets */,
 				66695A451D3CFEDF008FEA44 /* ColorWheel.swift */,
 				66695A3F1D3CFEDF008FEA44 /* ViewController.swift */,
 				66DE19BD1D524317001E589B /* AddMovieController.swift */,
 				66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */,
-				66F8FD611D6BDF5D0027E031 /* CreateProfileController.swift */,
 				66695A411D3CFEDF008FEA44 /* AppDelegate.swift */,
 				66695A421D3CFEDF008FEA44 /* Info.plist */,
 				66DE19B91D523D71001E589B /* GoogleService-Info.plist */,
-				66695A431D3CFEDF008FEA44 /* Assets.xcassets */,
 				66F8FD651D6CE20A0027E031 /* ProfileController.swift */,
 				662604B71D6DDFB1001E0424 /* FirstTimeController.swift */,
 				662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */,
@@ -300,7 +297,7 @@
 				TargetAttributes = {
 					66374B561D2EFF58007024B1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = JZE764JDSB;
+						DevelopmentTeam = 3KF5MT5476;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -519,7 +516,6 @@
 				662604B81D6DDFB1001E0424 /* FirstTimeController.swift in Sources */,
 				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
 				66DE19C01D5245A2001E589B /* Movies.swift in Sources */,
-				66F8FD621D6BDF5D0027E031 /* CreateProfileController.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
 				66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */,
 				66695A4C1D3CFEDF008FEA44 /* ColorWheel.swift in Sources */,
@@ -677,7 +673,7 @@
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojisodes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojisodes1;
 				PRODUCT_NAME = emojigame;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -701,7 +697,8 @@
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojisodes;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adamdsigel.emojisodes1;
 				PRODUCT_NAME = emojigame;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;

@@ -15,27 +15,63 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎬🤔" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDf-6Q-liD">
-                                <rect key="frame" x="220" y="252" width="160" height="96"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="keE-MO-DJp">
+                                <rect key="frame" x="-168" y="-32" width="750" height="800"/>
+                                <color key="backgroundColor" red="0.16078431369999999" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="800" id="la1-Ju-9hj"/>
+                                    <constraint firstAttribute="width" constant="750" id="qdY-A1-oTV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Emojisodes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K6-We-xkt">
+                                <rect key="frame" x="100" y="168" width="215" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="HWD-O4-4tc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="The 🎬 guessing game " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS1-ef-6T4">
+                                <rect key="frame" x="83" y="256" width="249" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="I5T-FZ-bkk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.56854335793806321" green="1" blue="0.51591667929802187" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.16169489326205017" blue="0.57176916221818197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="0.5"/>
                         <constraints>
-                            <constraint firstItem="pDf-6Q-liD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="OwJ-xP-ahG"/>
-                            <constraint firstItem="pDf-6Q-liD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aaq-35-tiM"/>
+                            <constraint firstItem="1K6-We-xkt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AEo-pa-tRp"/>
+                            <constraint firstItem="1K6-We-xkt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Gg4-p5-rcg"/>
+                            <constraint firstItem="SS1-ef-6T4" firstAttribute="top" secondItem="1K6-We-xkt" secondAttribute="bottom" constant="8" id="K3C-BC-c2t"/>
+                            <constraint firstItem="SS1-ef-6T4" firstAttribute="centerY" secondItem="keE-MO-DJp" secondAttribute="centerY" id="TJ7-61-CWK"/>
+                            <constraint firstItem="keE-MO-DJp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Xp4-9h-1Gl"/>
+                            <constraint firstItem="SS1-ef-6T4" firstAttribute="centerX" secondItem="keE-MO-DJp" secondAttribute="centerX" id="dG1-9P-Lwg"/>
+                            <constraint firstItem="1K6-We-xkt" firstAttribute="top" secondItem="keE-MO-DJp" secondAttribute="bottom" constant="-600" id="qyp-sT-NjA"/>
+                            <constraint firstItem="keE-MO-DJp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wlW-KZ-qer"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="AEo-pa-tRp"/>
+                                <exclude reference="TJ7-61-CWK"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="85" y="485"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image" width="3381" height="3519"/>
+    </resources>
 </document>

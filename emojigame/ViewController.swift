@@ -101,9 +101,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 var newScore: Int = userDict["score"] as! Int
                 newScore = newScore + movieValue
                 userDict["score"] = newScore
-//                var newCount : Int = userDict["count"] as! Int
-//                newCount = newCount + 1
-//                userDict["count"] = newCount
                 self.userScore.text = String(userDict["score"]!)
                 // updates user score and count in db
                 userRef.child(uzer).child("score").setValue(newScore)
@@ -111,7 +108,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 // adds new child to /exclude with movie key
                 userRef.child(uzer).child("exclude").child(movieToGuess).setValue(true)
             }
+            let ShareAction = UIAlertAction(title: "Share", style: .Default) { (action) in
+//                let textToShare = "I'm playing @emojisodes and I just figured out what movie this is! " + (movieDict["plot"]! as! String)
+//                
+//                if let myWebsite = NSURL(string: "http://emojisodes.com") {
+//                    let objectsToShare = [textToShare, myWebsite]
+//                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//                    
+//                    activityVC.popoverPresentationController?.sourceView = AnyObject.self as! UIView
+//                    self.presentViewController(activityVC, animated: true, completion: nil)
+//                }
+                let composer = TWTRComposer()
+                let plot = movieDict["plot"]! as! String
+                composer.setText("I'm playing @emojisodes and I just figured out what movie this is! \(plot)")
+                
+                // Called from a UIViewController
+                composer.showFromViewController(self) { result in
+                    if (result == TWTRComposerResult.Cancelled) {
+                        print("Tweet composition cancelled")
+                    }
+                    else {
+                        print("Sending tweet!")
+                    }
+                }
+            }
+
             guessRightAlert.addAction(OKAction)
+            guessRightAlert.addAction(ShareAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
         } else {
             print("userGuess is incorrect")
@@ -162,14 +185,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func shareButton(_ sender: AnyObject) {
         let textToShare = "I'm playing @emojisodes. Help me guess what movie this is! " + (movieDict["plot"]! as! String)
+        let objectsToShare = [textToShare]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        if let myWebsite = NSURL(string: "http://emojisodes.com") {
-            let objectsToShare = [textToShare, myWebsite]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
-            activityVC.popoverPresentationController?.sourceView = sender as! UIView
-            self.presentViewController(activityVC, animated: true, completion: nil)
-        }
+        activityVC.popoverPresentationController?.sourceView = sender as! UIView
+        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
     func randomKeyfromFIR (completion:String -> ()) {
