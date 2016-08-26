@@ -43,6 +43,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var newButtonLabel: UIButton!
     
     func textFieldShouldReturn(_ userGuess: UITextField!) -> Bool {
         userGuess.resignFirstResponder()
@@ -70,6 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func nextRound() {
+        self.newButtonLabel.hidden = true
         print("User wants another movie.")
         userGuess.text = ""
         self.randomKeyfromFIR{ (movieToGuess) -> () in
@@ -115,6 +117,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 composer.showFromViewController(self) { result in
                     if (result == TWTRComposerResult.Cancelled) {
                         print("Tweet composition cancelled")
+                        self.newButtonLabel.hidden = false
                     }
                     else {
                         print("Sending tweet!")
@@ -181,6 +184,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
         self.presentViewController(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func newRoundButton(sender: AnyObject) {
+        self.nextRound()
     }
     
     func welcomeBack() {
