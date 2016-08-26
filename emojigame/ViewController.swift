@@ -103,7 +103,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 userRef.child(uzer).child("score").setValue(newScore)
                 userRef.child(uzer).child("correct").setValue((userDict["correct"]! as! Int) + 1)
                 // adds new child to /exclude with movie key
-                userRef.child(uzer).child("exclude").child(movieToGuess).setValue(true)
+                userRef.child(uzer).child("exclude").child(movieToGuess).setValue("correct")
+                print("adding \(movieToGuess) to user's exclude list")
             }
             let ShareAction = UIAlertAction(title: "Share", style: .Default) { (action) in
                 let composer = TWTRComposer()
@@ -159,6 +160,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             userScoreValue = userScoreValue - 25
             userDict["score"] = newScore
             self.userScore.text = String(userDict["score"]!)
+            userRef.child(uzer).child("exclude").child(movieToGuess).setValue("skipped")
+            print("adding \(movieToGuess) to user's exclude list")
             userRef.child(uzer).child("score").setValue(newScore)
             self.randomKeyfromFIR{ (movieToGuess) -> () in
                 self.getMovieData(movieToGuess)
@@ -205,6 +208,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
         movieIDArray = []
+        userRef.child(uzer).observeEventType(.Value, withBlock: { (snapshot) in
+            userDict = snapshot.value! as! [String : AnyObject]
+            print("in randomKeyfromFIR userDict is... \(userDict)")
+        })
         movieRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
@@ -217,16 +224,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             var randomIndex : Int = 0
             let moviePlayed = userDict["exclude"] as! [String:AnyObject]
+            print("Here is moviePlayed: \(moviePlayed)")
             var moviePlayedKeys = Array(moviePlayed.keys)
             print("Here is moviePlayedKeys: \(moviePlayedKeys)")
-            randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
             // Check to see if user has played that movie before
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+                print("randomIndex is \(randomIndex)")
                 movieToGuess = movieIDArray[randomIndex]
-                print("movieToGuess is \(movieToGuess)")
+                print("checking to see if key \(movieToGuess) has already been played...")
             } while moviePlayedKeys.contains(movieToGuess)
+            // endless loop when the game runs out of movies. app does not crash but is not playable.
             movieToGuess = movieIDArray[randomIndex]
+            print("movie to guess is \(movieToGuess)")
             if moviePlayedKeys.count == movieCount {
                 moviePlayedKeys = []
             }

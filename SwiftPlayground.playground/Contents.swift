@@ -2,33 +2,33 @@
 
 import UIKit
 
-var str = "Hello, playground"
 
-var country = "United States"
-var state = "Massachusetts"
+var allMovies = ["a", "b", "c", "d", "e", "f", "g"]
+var playedMovies = ["a", "b", "c"]
+var count = allMovies.count
+var selected = ""
 
-// String Interpolation
+    repeat {
+        var random = Int(arc4random_uniform(UInt32(allMovies.count)))
+        selected = allMovies[random]
+    } while playedMovies.contains(selected)
+    selected = allMovies[random]
+    print(selected)
 
-let interpolatedAddress = "\(state + " " + country)"
+//
+//moviePlayedKeys.contains("movie1")
+//randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+ // Check to see if user has played that movie before
+//repeat {
+//    randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
+//    movieToGuess = moviePlayedKey[randomIndex]
+//    print("movieToGuess is \(movieToGuess)")
+//} while !contains(moviePlayed, movieToGuess)
 
-let name = "Adam"
-let greeting = "\("Hi there, " + name + ".")"
 
-let count = 4
-
-let dateString = NSDate()
-
-dateString
-
-let movieIDArray = ["-KOKKRYrOIpIHG07nD7b", "-KOKKbVx3USwh3u9C3Pa", "-KOKKv9N7J1VzkhGNBoZ", "-KOKKzDwsUan1RE6xS5Z", "-KOKT906d3EZWEB8YS4p", "-KOKh-mYuHbjtjpql7AI", "-KOKhLGpxOpNJV47Wl_Q", "-KOM4N4B5QyDorBlsmf4", "-KOM9bRcvfafiNsmAI1y", "-KOPVq4DmzLhwqmP_J8K"]
-
-var randomNumber = Int(arc4random_uniform(UInt32(movieIDArray.count)))
-
-var movieToGuess = movieIDArray[randomNumber]
-
-var movieDict = ["addedDate": "Thursday, August 4, 2016", "addedByUser": "adsigel@gmail.com", "approved": 0, "title": "the shawshank redemption", "hint": "hint", "plot": "👦🏢😐😬😏📝📚🎧🔨🔦💩😅💰👴🔫⛵️🌅", "points": 0]
-
-movieDict["plot"]
-movieDict["hint"]
-movieDict["hint"]!
+//movieToGuess = movieIDArray[randomIndex]
+//if moviePlayedKeys.count == movieCount {
+//    moviePlayedKeys = []
+//}
+//
 

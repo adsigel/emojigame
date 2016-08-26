@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="keE-MO-DJp">
+                            <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" highlightedImage="Jaws" translatesAutoresizingMaskIntoConstraints="NO" id="keE-MO-DJp">
                                 <rect key="frame" x="-168" y="-32" width="750" height="800"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -73,5 +73,6 @@
     </scenes>
     <resources>
         <image name="Image" width="3381" height="3519"/>
+        <image name="Jaws" width="3381" height="3519"/>
     </resources>
 </document>

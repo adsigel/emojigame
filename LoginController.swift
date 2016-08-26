@@ -33,7 +33,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateLocalPlayer()
+//        authenticateLocalPlayer()
         uzer = UIDevice.currentDevice().identifierForVendor!.UUIDString
         print("sup uzer \(uzer)")
         let dummyDict = ["dummy": "dummy"]
@@ -70,7 +70,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
             print("userDict is \(userDict)")
             newUserRef.setValue(userDict)
             delay(1.0) {
-                self.performSegueWithIdentifier("logIn", sender: sender)
+                self.performSegueWithIdentifier("firstTime", sender: sender)
             }
         }
         

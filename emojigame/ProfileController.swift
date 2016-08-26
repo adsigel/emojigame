@@ -18,6 +18,8 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var correctLabel: UILabel!
+    @IBOutlet weak var submittedLabel: UILabel!
+    
 
 
     
@@ -30,6 +32,7 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
         self.correctLabel.text = String(userDict["correct"]!)
         self.nameField.text = String(userDict["name"]!)
         self.emailField.text = String(userDict["email"]!)
+        getSubmittedCount()
         authenticateLocalPlayer()
     }
     
@@ -61,6 +64,15 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     @IBAction func showLeaderboard(sender: AnyObject) {
         saveHighscore(gcScore)
         showLeader()
+    }
+    
+    func getSubmittedCount() {
+        userRef.child(uzer).child("submitted").observeEventType(.Value, withBlock: { (snapshot: FIRDataSnapshot!) in
+            var count = 0
+            count += Int(snapshot.childrenCount)
+            print("count of child nodes is \(count)")
+            self.submittedLabel.text = String(count)
+        })
     }
     
     func authenticateLocalPlayer(){

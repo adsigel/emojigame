@@ -27,7 +27,6 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
-        // Alert View for input
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -36,6 +35,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         let moviePlotRef = refMovies.childByAutoId()
         moviePlotRef.setValue(movieData.toAnyObject())
         var movieId = moviePlotRef.key
+        userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
         print("The new movie has been added with an id of: \(movieId)")
         performSegueWithIdentifier("finishAddingMovie", sender: sender)
     }
