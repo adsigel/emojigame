@@ -67,7 +67,7 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     }
     
     func getSubmittedCount() {
-        userRef.child(uzer).child("submitted").observeEventType(.Value, withBlock: { (snapshot: FIRDataSnapshot!) in
+        userRef.child(uzer).child("submitted").observeSingleEventOfType(.Value, withBlock: { (snapshot: FIRDataSnapshot!) in
             var count = 0
             count += Int(snapshot.childrenCount)
             print("count of child nodes is \(count)")

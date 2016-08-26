@@ -58,7 +58,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         if newUser == "false" {
             // user has been here before
             print("This user has been here before.")
-            newUserRef.observeEventType(.Value, withBlock: { (snapshot) in
+            newUserRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 userDict = snapshot.value! as! [String : AnyObject]
                 print("userDict is \(userDict)")
             })

@@ -208,11 +208,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
         movieIDArray = []
-        userRef.child(uzer).observeEventType(.Value, withBlock: { (snapshot) in
+        userRef.child(uzer).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             userDict = snapshot.value! as! [String : AnyObject]
             print("in randomKeyfromFIR userDict is... \(userDict)")
         })
-        movieRef.observeEventType(.Value, withBlock: { snapshot in
+        movieRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let movieItem = Movies(snapshot: item as! FIRDataSnapshot)
                 movieID = movieItem.key!
@@ -222,11 +222,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     movieCount = Int(movieIDArray.count)
                 }
             }
+            print("The number of approved movies is \(movieCount)")
             var randomIndex : Int = 0
             let moviePlayed = userDict["exclude"] as! [String:AnyObject]
             print("Here is moviePlayed: \(moviePlayed)")
             var moviePlayedKeys = Array(moviePlayed.keys)
             print("Here is moviePlayedKeys: \(moviePlayedKeys)")
+            if moviePlayedKeys.count == movieCount {
+                let allDone = UIAlertController(title: "A Winner Is You", message: "You've gone through all the movies. Go contribute a new one and help Emojisodes grow!", preferredStyle: UIAlertControllerStyle.Alert)
+                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                    print("User acknowledges their champion status.")
+                    let url = NSURL(string: "https://twitter.com/emojisodes")!
+                    UIApplication.sharedApplication().openURL(url)
+                    }
+                allDone.addAction(OKAction)
+                self.presentViewController(allDone, animated: true, completion: nil)
+            }
             // Check to see if user has played that movie before
             repeat {
                 randomIndex = Int(arc4random_uniform(UInt32(movieCount)))
@@ -234,13 +245,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 movieToGuess = movieIDArray[randomIndex]
                 print("checking to see if key \(movieToGuess) has already been played...")
             } while moviePlayedKeys.contains(movieToGuess)
-            // endless loop when the game runs out of movies. app does not crash but is not playable.
-            movieToGuess = movieIDArray[randomIndex]
             print("movie to guess is \(movieToGuess)")
-            if moviePlayedKeys.count == movieCount {
-                moviePlayedKeys = []
-            }
-            
             completion(movieToGuess)
 
             })
@@ -249,7 +254,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func getMovieData(movieToGuess:String) {
         let movieToGuessRef = movieRef.ref.child(movieToGuess)
-        movieToGuessRef.observeEventType(.Value, withBlock: { (snapshot) in
+        movieToGuessRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             movieDict = snapshot.value as! [String : AnyObject]
             var plot = movieDict["plot"] as! String
             self.emojiPlot.text = plot
