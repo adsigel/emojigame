@@ -42,6 +42,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emojiPlot: UILabel!
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var welcomeLabel: UILabel!
     
     func textFieldShouldReturn(_ userGuess: UITextField!) -> Bool {
         userGuess.resignFirstResponder()
@@ -51,8 +52,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        welcomeBack()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        print("viewDidLoad initial read of userDict is \(userDict)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
         }
@@ -88,12 +91,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("User has guessed " + guess!)
         if guess == movieDict["title"] as! String {
             print("userGuess is correct")
-//            var newCount = userDict["correct"]! as! Int
-//            print("newCount is \(newCount)")
-//            newCount = newCount + 1
-//            print("newCount is \(newCount)")
-//            userDict["count"] = newCount
-//            print("newCount in userDict is \(userDict["newCount"])")
             movieDict["points"] as! Int
             let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
@@ -109,15 +106,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 userRef.child(uzer).child("exclude").child(movieToGuess).setValue(true)
             }
             let ShareAction = UIAlertAction(title: "Share", style: .Default) { (action) in
-//                let textToShare = "I'm playing @emojisodes and I just figured out what movie this is! " + (movieDict["plot"]! as! String)
-//                
-//                if let myWebsite = NSURL(string: "http://emojisodes.com") {
-//                    let objectsToShare = [textToShare, myWebsite]
-//                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//                    
-//                    activityVC.popoverPresentationController?.sourceView = AnyObject.self as! UIView
-//                    self.presentViewController(activityVC, animated: true, completion: nil)
-//                }
                 let composer = TWTRComposer()
                 let plot = movieDict["plot"]! as! String
                 composer.setText("I'm playing @emojisodes and I just figured out what movie this is! \(plot)")
@@ -191,6 +179,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
+    
+    func welcomeBack() {
+        let name = userDict["name"]! as! String
+        if name != "" {
+            welcomeLabel.text = "Welcome back, \(name)!"
+            welcomeLabel.hidden = false
+            delay(3.0) {
+                self.welcomeLabel.hidden = true
+                print("User has been welcomed back.")
+            }
+        }
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+
     
     func randomKeyfromFIR (completion:String -> ()) {
         var movieCount = 0
