@@ -35,6 +35,7 @@ var secretHint = String()
 var secretPlot = String()
 var secretValue: Int = 0
 var moviesPlayed = ""
+var guessDateString = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -89,8 +90,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
    
     @IBAction func checkGuess() {
+        guessDate()
         var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         print("User has guessed " + guess!)
+        movieRef.child(movieToGuess).child("guesses").child(guessDateString).setValue(guess)
         var title = movieDict["title"] as! String
         if title.hasPrefix("the ") == true {
             title = (title as NSString).stringByReplacingOccurrencesOfString("the ", withString: "")
@@ -272,6 +275,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             movieValue = movieDict["points"] as! Int
         })
     }
+    
+    func guessDate() {
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
+        guessDateString = dateformatter.stringFromDate(NSDate())
+    }
+
     
     
 }
