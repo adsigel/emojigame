@@ -30,14 +30,22 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
-        let refMovies = ref.child("movies/")
-        let moviePlotRef = refMovies.childByAutoId()
-        moviePlotRef.setValue(movieData.toAnyObject())
-        var movieId = moviePlotRef.key
-        userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
-        print("The new movie has been added with an id of: \(movieId)")
-        performSegueWithIdentifier("finishAddingMovie", sender: sender)
+        if userTitle != "" && userPlot != "" {
+            let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
+            let refMovies = ref.child("movies/")
+            let moviePlotRef = refMovies.childByAutoId()
+            moviePlotRef.setValue(movieData.toAnyObject())
+            var movieId = moviePlotRef.key
+            userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
+            print("The new movie has been added with an id of: \(movieId)")
+            performSegueWithIdentifier("finishAddingMovie", sender: sender)
+        } else {
+            let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie title and a plot for us to review.", preferredStyle: UIAlertControllerStyle.Alert)
+            badSubmitAlert.addAction(UIAlertAction(title: "Gotcha", style: UIAlertActionStyle.Default, handler: nil))
+            
+            self.presentViewController(badSubmitAlert, animated: true, completion: nil)
+
+        }
     }
     
     func dismissKeyboard() {
