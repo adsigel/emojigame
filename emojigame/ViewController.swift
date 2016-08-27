@@ -89,9 +89,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
    
     @IBAction func checkGuess() {
-        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         print("User has guessed " + guess!)
-        if guess == movieDict["title"] as! String {
+        var title = movieDict["title"] as! String
+        if title.hasPrefix("the ") == true {
+            title = (title as NSString).stringByReplacingOccurrencesOfString("the ", withString: "")
+        }
+        if title.score(guess!, fuzziness: 0.9) > 0.8 {
             print("userGuess is correct")
             movieDict["points"] as! Int
             let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)

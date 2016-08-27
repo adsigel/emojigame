@@ -15,6 +15,9 @@
 		66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A411D3CFEDF008FEA44 /* AppDelegate.swift */; };
 		66695A491D3CFEDF008FEA44 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66695A421D3CFEDF008FEA44 /* Info.plist */; };
 		66695A4A1D3CFEDF008FEA44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66695A431D3CFEDF008FEA44 /* Assets.xcassets */; };
+		6695A0591D71A44400DE855F /* StringScore_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6695A0581D71A44300DE855F /* StringScore_Swift.framework */; };
+		6695A05B1D71A47400DE855F /* StringScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6695A05A1D71A47400DE855F /* StringScore.swift */; };
+		6695A05E1D71A5A300DE855F /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D91D359A1E0081FF4F /* TwitterCore.framework */; };
 		669656461D5B59F8002B516C /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 669656441D5B59F8002B516C /* Podfile.lock */; };
 		669656471D5B59F8002B516C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 669656451D5B59F8002B516C /* Podfile */; };
 		669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */; };
@@ -26,7 +29,6 @@
 		66DE19C01D5245A2001E589B /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19BF1D5245A2001E589B /* Movies.swift */; };
 		66DE19C21D524737001E589B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19C11D524737001E589B /* Users.swift */; };
 		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
-		66EB93DD1D359A1E0081FF4F /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D91D359A1E0081FF4F /* TwitterCore.framework */; };
 		66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */; };
 		66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD651D6CE20A0027E031 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
@@ -66,8 +68,11 @@
 		66695A411D3CFEDF008FEA44 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = emojigame/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		66695A421D3CFEDF008FEA44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = emojigame/Info.plist; sourceTree = SOURCE_ROOT; };
 		66695A431D3CFEDF008FEA44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = emojigame/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		6695A0581D71A44300DE855F /* StringScore_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StringScore_Swift.framework; path = "../../Library/Developer/Xcode/DerivedData/emojigame-cikbvrkoewxfuxbffbuvgkvzvhuw/Build/Products/Debug-iphonesimulator/StringScore_Swift/StringScore_Swift.framework"; sourceTree = "<group>"; };
+		6695A05A1D71A47400DE855F /* StringScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScore.swift; sourceTree = SOURCE_ROOT; };
+		6695A05C1D71A58100DE855F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		669656441D5B59F8002B516C /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
-		669656451D5B59F8002B516C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		669656451D5B59F8002B516C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		669FAC621D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		669FAC641D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66DE19B91D523D71001E589B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -89,8 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6695A0591D71A44400DE855F /* StringScore_Swift.framework in Frameworks */,
 				66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */,
-				66EB93DD1D359A1E0081FF4F /* TwitterCore.framework in Frameworks */,
+				6695A05E1D71A5A300DE855F /* TwitterCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +160,7 @@
 				66F8FD651D6CE20A0027E031 /* ProfileController.swift */,
 				662604B71D6DDFB1001E0424 /* FirstTimeController.swift */,
 				662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */,
+				6695A05A1D71A47400DE855F /* StringScore.swift */,
 			);
 			name = emojigame;
 			path = "Fun Facts";
@@ -200,6 +207,8 @@
 		9125B2BA5E2246347F499BB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6695A05C1D71A58100DE855F /* Twitter.framework */,
+				6695A0581D71A44300DE855F /* StringScore_Swift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -516,6 +525,7 @@
 				662604B81D6DDFB1001E0424 /* FirstTimeController.swift in Sources */,
 				66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */,
 				66DE19C01D5245A2001E589B /* Movies.swift in Sources */,
+				6695A05B1D71A47400DE855F /* StringScore.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
 				66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */,
 				66DE19C21D524737001E589B /* Users.swift in Sources */,
@@ -597,6 +607,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -642,6 +653,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
