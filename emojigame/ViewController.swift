@@ -35,7 +35,7 @@ var secretHint = String()
 var secretPlot = String()
 var secretValue: Int = 0
 var moviesPlayed = ""
-var guessDateString = ""
+var now = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -90,10 +90,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
    
     @IBAction func checkGuess() {
-        guessDate()
+        nowStamp()
         var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         print("User has guessed " + guess!)
-        movieRef.child(movieToGuess).child("guesses").child(guessDateString).setValue(guess)
+        movieRef.child(movieToGuess).child("guesses").child(now).setValue(guess)
         var title = movieDict["title"] as! String
         if title.hasPrefix("the ") == true {
             title = (title as NSString).stringByReplacingOccurrencesOfString("the ", withString: "")
@@ -164,6 +164,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("User is considering skipping this one.")
         let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this one, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
+            self.nowStamp()
             print("User has chosen the coward's way out.")
             var newScore: Int = userDict["score"] as! Int
             newScore = newScore - 25
@@ -173,6 +174,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             userRef.child(uzer).child("exclude").child(movieToGuess).setValue("skipped")
             print("adding \(movieToGuess) to user's exclude list")
             userRef.child(uzer).child("score").setValue(newScore)
+            movieRef.child(movieToGuess).child("skips").child(now).setValue(uzer)
             self.randomKeyfromFIR{ (movieToGuess) -> () in
                 self.getMovieData(movieToGuess)
             }
@@ -276,11 +278,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    func guessDate() {
+    func nowStamp() {
         let dateformatter = NSDateFormatter()
         dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
-        guessDateString = dateformatter.stringFromDate(NSDate())
+        now = dateformatter.stringFromDate(NSDate())
     }
 
     
