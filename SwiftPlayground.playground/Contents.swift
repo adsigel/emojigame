@@ -12,3 +12,6 @@ if title != "" && plot != "" {
     print("Something is missing.")
 }
 
+var movieValue = 105
+
+movieValue = Int(movieValue/2)

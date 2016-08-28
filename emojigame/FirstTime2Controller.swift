@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import Mixpanel
 
 class FirstTime2Controller: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
@@ -48,6 +49,7 @@ class FirstTime2Controller: UIViewController, UITextFieldDelegate, UINavigationC
             let guessRightAlert = UIAlertController(title: "You got it!", message: "You're ready to play Emojisodes now!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "I'm Ready", style: .Default) { (action) in
                 userRef.child(uzer).child("new_in_town").setValue("false")
+                Mixpanel.mainInstance().track(event: "Onboarding completed")
                 self.goToNext(UIButton)
             }
             guessRightAlert.addAction(OKAction)

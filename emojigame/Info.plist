@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>8</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -32,36 +32,19 @@
 				<key>KitInfo</key>
 				<dict>
 					<key>consumerKey</key>
-					<string>ImRo663u1bWB0KpSd9CsmvHCn</string>
+					<string>ou9gK9zkjoReFtmAPDkmgY8Cm</string>
 					<key>consumerSecret</key>
-					<string>st2PTNzFTLORImmKyxG1yaGVaSKVmFWD8QblTfJZLIgMgL2aFA</string>
-				</dict>
-				<key>KitName</key>
-				<string>Digits</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>NsAuBKvObpPUE4edeNs2c4Gpx</string>
-					<key>consumerSecret</key>
-					<string>RWE22ijg9FaLhZzC4RRNzWg8VlROkjvTLouvwaoe2PtwNkwN2o</string>
+					<string>GaWwE0mgdZvFfIeh0YZRvwN1YQXk2cOcjHWW7pg79OZQ7DmAI7</string>
 				</dict>
 				<key>KitName</key>
 				<string>Twitter</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
 			</dict>
 		</array>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

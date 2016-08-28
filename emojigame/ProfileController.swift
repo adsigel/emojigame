@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import Firebase
 import GameKit
+import Mixpanel
 
 var gcScore : Int = 0
 
@@ -33,7 +34,6 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
         self.nameField.text = String(userDict["name"]!)
         self.emailField.text = String(userDict["email"]!)
         getSubmittedCount()
-        authenticateLocalPlayer()
     }
     
     
@@ -54,11 +54,13 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     @IBAction func followTwitter(sender: AnyObject) {
         let url = NSURL(string: "https://twitter.com/emojisodes")!
         UIApplication.sharedApplication().openURL(url)
+        Mixpanel.mainInstance().track(event: "View Twitter profile")
     }
     
     @IBAction func sendPraise(sender: AnyObject) {
         let url = NSURL(string: "https://itunes.apple.com/us/app/emojisodes/id1147295394?ls=1&mt=8")!
         UIApplication.sharedApplication().openURL(url)
+        Mixpanel.mainInstance().track(event: "Link to App Store")
     }
     
     @IBAction func showLeaderboard(sender: AnyObject) {
@@ -73,23 +75,6 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
             print("count of child nodes is \(count)")
             self.submittedLabel.text = String(count)
         })
-    }
-    
-    func authenticateLocalPlayer(){
-        
-        var localPlayer = GKLocalPlayer.localPlayer()
-        
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            
-            if (viewController != nil) {
-                self.presentViewController(viewController!, animated: true, completion: nil)
-            }
-                
-            else {
-                print((GKLocalPlayer.localPlayer().authenticated))
-            }
-        }
-
     }
     
     func saveHighscore(gcScore:Int) {

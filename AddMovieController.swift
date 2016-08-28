@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import Mixpanel
 
 var dateString = ""
 var uid = ""
@@ -37,6 +38,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
             moviePlotRef.setValue(movieData.toAnyObject())
             var movieId = moviePlotRef.key
             userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
+            Mixpanel.mainInstance().track(event: "Movie Submitted")
             print("The new movie has been added with an id of: \(movieId)")
             performSegueWithIdentifier("finishAddingMovie", sender: sender)
         } else {
@@ -46,6 +48,21 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
             self.presentViewController(badSubmitAlert, animated: true, completion: nil)
 
         }
+    }
+    
+    @IBAction func addMovieHelp(sender: AnyObject) {
+        let helpAlert = UIAlertController(title: "Enabling the Emoji Keyboard", message: "You must have the emoji keyboard enabled to submit a plot. Do you need help with that?", preferredStyle: UIAlertControllerStyle.Alert)
+        let good = UIAlertAction(title: "I'm good", style: .Default) { (action) in
+            print("User claims to know how emoji work.")
+        }
+        let help = UIAlertAction(title: "Help me", style: .Default) { (action) in
+            let url = NSURL(string: "http://emojisodes.com/help")!
+            UIApplication.sharedApplication().openURL(url)
+
+        }
+        helpAlert.addAction(good)
+        helpAlert.addAction(help)        
+        self.presentViewController(helpAlert, animated: true, completion: nil)
     }
     
     func dismissKeyboard() {

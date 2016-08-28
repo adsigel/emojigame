@@ -8,9 +8,13 @@
 
 import Foundation
 import UIKit
+import Mixpanel
 
 class FirstTimeController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
+    override func viewDidLoad() {
+        Mixpanel.mainInstance().time(event: "Onboarding")
+    }
     
     
     @IBAction func checkMarkButton(sender: AnyObject) {

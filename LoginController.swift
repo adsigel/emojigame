@@ -14,7 +14,6 @@
 
 import UIKit
 import Foundation
-import TwitterKit
 import Firebase
 import GameKit
 
@@ -22,33 +21,20 @@ var userDict = [String:AnyObject]()
 var uzer = ""
 let userRef = ref.child("users")
 var newUser = String()
-
+var gcAuth : Bool = false
+var alias = ""
 
 class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, GKGameCenterControllerDelegate {
     
-    @IBOutlet weak var signOutButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var welcomeTextLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
+
    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        authenticateLocalPlayer()
-        uzer = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        self.authenticateLocalPlayer{ (uzer) -> () in
+            self.addToFirebase(uzer)
+        }
         print("sup uzer \(uzer)")
-        let dummyDict = ["dummy": "dummy"]
-        let newUserRef = userRef.child(uzer)
-        newUserRef.observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
-            print(snapshot.value!)
-            if snapshot.value is NSNull {
-                print("This snapshot is null. This is a new UDID.")
-                newUser = "true"
-                newUserRef.setValue(dummyDict)
-            } else {
-                print("There is a snapshot. A user with this UDID has been here before.")
-                newUser = "false"
-            }
-        })
     }
     
     @IBAction func playButton(sender: AnyObject) {
@@ -66,12 +52,10 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
                 self.performSegueWithIdentifier("logIn", sender: sender)
             }
         } else {
-            userDict = ["name": "", "email": "", "score": 0, "correct": 0, "addedDate": dateString, "exclude": ["key": true], "new_in_town": "true"]
+            userDict = ["name": alias, "email": "", "score": 0, "correct": 0, "addedDate": dateString, "exclude": ["key": true], "new_in_town": "true"]
             print("userDict is \(userDict)")
             newUserRef.setValue(userDict)
-            delay(1.0) {
-                self.performSegueWithIdentifier("firstTime", sender: sender)
-            }
+            self.performSegueWithIdentifier("firstTime", sender: sender)
         }
         
     }
@@ -90,16 +74,50 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
         
     }
     
-    func authenticateLocalPlayer(){
+    func authenticateLocalPlayer(completion:String -> ()) {
         var localPlayer = GKLocalPlayer.localPlayer()
-        print("localPlayer is: \(localPlayer)")
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if (viewController != nil) {
                 self.presentViewController(viewController!, animated: true, completion: nil)
+                print("User is not signed into Game Center")
+                gcAuth = false
+                print("gcAuth is \(gcAuth)")
+                uzer = UIDevice.currentDevice().identifierForVendor!.UUIDString
+                alias = ""
+                print("uzer is \(uzer)")
             } else {
                 print((GKLocalPlayer.localPlayer().authenticated))
+                gcAuth = true
+                print("gcAuth is \(gcAuth)")
+                print("localPlayer is: \(localPlayer)")
+                if let playerUnwrapped = localPlayer.playerID {
+                    uzer = localPlayer.playerID!
+                } else {
+                    uzer = UIDevice.currentDevice().identifierForVendor!.UUIDString
+                }
+                if let aliasUnwrapped = localPlayer.alias {
+                    alias = localPlayer.alias!
+                }
+                print("uzer is \(uzer)")
             }
+            completion(uzer)
         }
+    }
+    
+    func addToFirebase(uzer:String) {
+//        let dummyDict = ["dummy": "dummy"]
+        let newUserRef = userRef.child(uzer)
+        newUserRef.observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            print(snapshot.value!)
+            if snapshot.hasChildren() {
+                print("There is data here. This user has been here before.")
+                newUser = "false"
+            } else {
+                print("No chidren at this snapshot location. This is a new user.")
+                newUser = "true"
+            }
+            self.playButton.hidden = false
+        })
     }
     
     func delay(delay:Double, closure:()->()) {

@@ -72,7 +72,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="3381" height="3519"/>
+        <image name="Image" width="128" height="128"/>
         <image name="Jaws" width="3381" height="3519"/>
     </resources>
 </document>

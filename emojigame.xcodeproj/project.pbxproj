@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		662604B81D6DDFB1001E0424 /* FirstTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662604B71D6DDFB1001E0424 /* FirstTimeController.swift */; };
 		662604BA1D6DDFBB001E0424 /* FirstTime2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */; };
-		66374B701D2EFF58007024B1 /* Fun_FactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */; };
-		66374B7B1D2EFF58007024B1 /* Fun_FactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */; };
+		666765671D7267C4001A3872 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666765661D7267C4001A3872 /* GameKit.framework */; };
 		66695A461D3CFEDF008FEA44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A3F1D3CFEDF008FEA44 /* ViewController.swift */; };
 		66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66695A411D3CFEDF008FEA44 /* AppDelegate.swift */; };
 		66695A491D3CFEDF008FEA44 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66695A421D3CFEDF008FEA44 /* Info.plist */; };
 		66695A4A1D3CFEDF008FEA44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66695A431D3CFEDF008FEA44 /* Assets.xcassets */; };
 		6695A0591D71A44400DE855F /* StringScore_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6695A0581D71A44300DE855F /* StringScore_Swift.framework */; };
 		6695A05B1D71A47400DE855F /* StringScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6695A05A1D71A47400DE855F /* StringScore.swift */; };
-		6695A05E1D71A5A300DE855F /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D91D359A1E0081FF4F /* TwitterCore.framework */; };
+		6695A0601D72240800DE855F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6695A05F1D72240800DE855F /* Twitter.framework */; };
+		6695A0621D72240C00DE855F /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6695A0611D72240C00DE855F /* Mixpanel.framework */; };
 		669656461D5B59F8002B516C /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 669656441D5B59F8002B516C /* Podfile.lock */; };
 		669656471D5B59F8002B516C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 669656451D5B59F8002B516C /* Podfile */; };
 		669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */; };
@@ -28,7 +28,6 @@
 		66DE19BE1D524317001E589B /* AddMovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19BD1D524317001E589B /* AddMovieController.swift */; };
 		66DE19C01D5245A2001E589B /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19BF1D5245A2001E589B /* Movies.swift */; };
 		66DE19C21D524737001E589B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DE19C11D524737001E589B /* Users.swift */; };
-		66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EB93D61D359A1E0081FF4F /* Fabric.framework */; };
 		66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */; };
 		66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F8FD651D6CE20A0027E031 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
@@ -58,19 +57,18 @@
 		662604B91D6DDFBB001E0424 /* FirstTime2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstTime2Controller.swift; path = emojigame/FirstTime2Controller.swift; sourceTree = SOURCE_ROOT; };
 		66374B571D2EFF58007024B1 /* emojigame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = emojigame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66374B6B1D2EFF58007024B1 /* emojigame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = emojigame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fun_FactsTests.swift; sourceTree = "<group>"; };
-		66374B711D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66374B761D2EFF58007024B1 /* emojigame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = emojigame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fun_FactsUITests.swift; sourceTree = "<group>"; };
-		66374B7C1D2EFF58007024B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66374B881D2F007D007024B1 /* Scratchpad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratchpad.playground; sourceTree = "<group>"; };
+		666765661D7267C4001A3872 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		666765681D7267C9001A3872 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		66695A3F1D3CFEDF008FEA44 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = emojigame/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		66695A411D3CFEDF008FEA44 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = emojigame/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		66695A421D3CFEDF008FEA44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = emojigame/Info.plist; sourceTree = SOURCE_ROOT; };
 		66695A431D3CFEDF008FEA44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = emojigame/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		6695A0581D71A44300DE855F /* StringScore_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StringScore_Swift.framework; path = "../../Library/Developer/Xcode/DerivedData/emojigame-cikbvrkoewxfuxbffbuvgkvzvhuw/Build/Products/Debug-iphonesimulator/StringScore_Swift/StringScore_Swift.framework"; sourceTree = "<group>"; };
 		6695A05A1D71A47400DE855F /* StringScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScore.swift; sourceTree = SOURCE_ROOT; };
-		6695A05C1D71A58100DE855F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		6695A05F1D72240800DE855F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		6695A0611D72240C00DE855F /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = "../../Library/Developer/Xcode/DerivedData/emojigame-cikbvrkoewxfuxbffbuvgkvzvhuw/Build/Products/Debug-iphoneos/Mixpanel-swift/Mixpanel.framework"; sourceTree = "<group>"; };
 		669656441D5B59F8002B516C /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		669656451D5B59F8002B516C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		669FAC621D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,8 +78,6 @@
 		66DE19BF1D5245A2001E589B /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = SOURCE_ROOT; };
 		66DE19C11D524737001E589B /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = SOURCE_ROOT; };
 		66EB93D41D329BF90081FF4F /* SwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftPlayground.playground; sourceTree = "<group>"; };
-		66EB93D61D359A1E0081FF4F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		66EB93D91D359A1E0081FF4F /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		66F8FD5D1D5B5CCD0027E031 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = SOURCE_ROOT; };
 		66F8FD651D6CE20A0027E031 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileController.swift; path = emojigame/ProfileController.swift; sourceTree = SOURCE_ROOT; };
 		73CB3D8F9695F571160EA3D7 /* Pods-emojigameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emojigameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-emojigameUITests/Pods-emojigameUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,9 +90,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				666765671D7267C4001A3872 /* GameKit.framework in Frameworks */,
+				6695A0621D72240C00DE855F /* Mixpanel.framework in Frameworks */,
 				6695A0591D71A44400DE855F /* StringScore_Swift.framework in Frameworks */,
-				66EB93DA1D359A1E0081FF4F /* Fabric.framework in Frameworks */,
-				6695A05E1D71A5A300DE855F /* TwitterCore.framework in Frameworks */,
+				6695A0601D72240800DE855F /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,8 +126,6 @@
 				66374B6E1D2EFF58007024B1 /* emojigame Tests */,
 				66374B791D2EFF58007024B1 /* emojigame UITests */,
 				66374B581D2EFF58007024B1 /* Products */,
-				66EB93D61D359A1E0081FF4F /* Fabric.framework */,
-				66EB93D91D359A1E0081FF4F /* TwitterCore.framework */,
 				DFAD4520B08515FDCBEEE858 /* Pods */,
 				9125B2BA5E2246347F499BB2 /* Frameworks */,
 			);
@@ -169,8 +164,6 @@
 		66374B6E1D2EFF58007024B1 /* emojigame Tests */ = {
 			isa = PBXGroup;
 			children = (
-				66374B6F1D2EFF58007024B1 /* Fun_FactsTests.swift */,
-				66374B711D2EFF58007024B1 /* Info.plist */,
 			);
 			name = "emojigame Tests";
 			path = "Fun FactsTests";
@@ -179,8 +172,6 @@
 		66374B791D2EFF58007024B1 /* emojigame UITests */ = {
 			isa = PBXGroup;
 			children = (
-				66374B7A1D2EFF58007024B1 /* Fun_FactsUITests.swift */,
-				66374B7C1D2EFF58007024B1 /* Info.plist */,
 			);
 			name = "emojigame UITests";
 			path = "Fun FactsUITests";
@@ -207,7 +198,10 @@
 		9125B2BA5E2246347F499BB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6695A05C1D71A58100DE855F /* Twitter.framework */,
+				666765681D7267C9001A3872 /* SystemConfiguration.framework */,
+				666765661D7267C4001A3872 /* GameKit.framework */,
+				6695A0611D72240C00DE855F /* Mixpanel.framework */,
+				6695A05F1D72240800DE855F /* Twitter.framework */,
 				6695A0581D71A44300DE855F /* StringScore_Swift.framework */,
 			);
 			name = Frameworks;
@@ -233,13 +227,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66374B7F1D2EFF58007024B1 /* Build configuration list for PBXNativeTarget "emojigame" */;
 			buildPhases = (
-				88A6071A826FECE790D5C57B /* [CP] Check Pods Manifest.lock */,
+				0D6F797A79132F024C85C471 /* [CP] Check Pods Manifest.lock */,
 				66374B531D2EFF58007024B1 /* Sources */,
 				66374B541D2EFF58007024B1 /* Frameworks */,
 				66374B551D2EFF58007024B1 /* Resources */,
 				66EB93D51D3599D00081FF4F /* ShellScript */,
-				B537512134E5DA8E5343BCB2 /* [CP] Embed Pods Frameworks */,
-				D889A5A1A7FCD4BE18322C47 /* [CP] Copy Pods Resources */,
+				03BF160BF2B9C5B471FE3EA8 /* [CP] Embed Pods Frameworks */,
+				5D40B820B6BAB537326DC9E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -380,6 +374,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03BF160BF2B9C5B471FE3EA8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigame/Pods-emojigame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0D6F797A79132F024C85C471 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		2F3E68202A4B48550EF0EA17 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -395,6 +419,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		5D40B820B6BAB537326DC9E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigame/Pods-emojigame-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		66EB93D51D3599D00081FF4F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -406,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run c1f9a6229f47deedcbe6bb5bf9082d440c61c9ad 9334ef346039a0d12decf657700b3d9ef1843ca5f8f7ecc566d04ab63518f9e3";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" c1f9a6229f47deedcbe6bb5bf9082d440c61c9ad 9334ef346039a0d12decf657700b3d9ef1843ca5f8f7ecc566d04ab63518f9e3";
 		};
 		6CFD84DC8B87AA727F0092E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -421,21 +460,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigameTests/Pods-emojigameTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		88A6071A826FECE790D5C57B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		ADBB5F57E6BC1204D6FF7392 /* [CP] Check Pods Manifest.lock */ = {
@@ -453,21 +477,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B537512134E5DA8E5343BCB2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigame/Pods-emojigame-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B53FAF6DF82E35F03F91F621 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,21 +490,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigameUITests/Pods-emojigameUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D889A5A1A7FCD4BE18322C47 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-emojigame/Pods-emojigame-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DF423CB2963872BF745782D0 /* [CP] Embed Pods Frameworks */ = {
@@ -537,7 +531,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66374B701D2EFF58007024B1 /* Fun_FactsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,7 +538,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66374B7B1D2EFF58007024B1 /* Fun_FactsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +673,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -705,6 +698,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

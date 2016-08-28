@@ -10,9 +10,7 @@ import UIKit
 import Firebase
 import Fabric
 import TwitterKit
-import Crashlytics
-
-
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
@@ -20,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
-        Fabric.with([Crashlytics.self])
+        Fabric.with([Twitter.self])
+        Mixpanel.initialize(token: "f4205d45e3e67e6157bb86a32886b984")
         // Override point for customization after application launch.
         // application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         return true
