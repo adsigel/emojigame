@@ -31,6 +31,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        playButton.hidden = true
         self.authenticateLocalPlayer{ (uzer) -> () in
             self.addToFirebase(uzer)
         }

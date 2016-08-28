@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,49 +19,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" highlightedImage="Jaws" translatesAutoresizingMaskIntoConstraints="NO" id="keE-MO-DJp">
-                                <rect key="frame" x="-168" y="-32" width="750" height="800"/>
-                                <color key="backgroundColor" red="0.16078431369999999" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emojisodes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMh-iS-zqe">
+                                <rect key="frame" x="83" y="71" width="250" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="800" id="la1-Ju-9hj"/>
-                                    <constraint firstAttribute="width" constant="750" id="qdY-A1-oTV"/>
+                                    <constraint firstAttribute="width" constant="250" id="H9W-pM-ry6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The 🎬 guessing game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3Z-5j-XAh">
+                                <rect key="frame" x="105" y="130" width="205" height="28"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background Tile" translatesAutoresizingMaskIntoConstraints="NO" id="5Ly-YL-ElL">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5Ly-YL-ElL" secondAttribute="height" multiplier="9:16" id="zpD-2Y-t1O"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Emojisodes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K6-We-xkt">
-                                <rect key="frame" x="100" y="168" width="215" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="HWD-O4-4tc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="The 🎬 guessing game " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS1-ef-6T4">
-                                <rect key="frame" x="83" y="256" width="249" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="I5T-FZ-bkk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.16169489326205017" blue="0.57176916221818197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="0.5"/>
                         <constraints>
-                            <constraint firstItem="1K6-We-xkt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AEo-pa-tRp"/>
-                            <constraint firstItem="1K6-We-xkt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Gg4-p5-rcg"/>
-                            <constraint firstItem="SS1-ef-6T4" firstAttribute="top" secondItem="1K6-We-xkt" secondAttribute="bottom" constant="8" id="K3C-BC-c2t"/>
-                            <constraint firstItem="SS1-ef-6T4" firstAttribute="centerY" secondItem="keE-MO-DJp" secondAttribute="centerY" id="TJ7-61-CWK"/>
-                            <constraint firstItem="keE-MO-DJp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Xp4-9h-1Gl"/>
-                            <constraint firstItem="SS1-ef-6T4" firstAttribute="centerX" secondItem="keE-MO-DJp" secondAttribute="centerX" id="dG1-9P-Lwg"/>
-                            <constraint firstItem="1K6-We-xkt" firstAttribute="top" secondItem="keE-MO-DJp" secondAttribute="bottom" constant="-600" id="qyp-sT-NjA"/>
-                            <constraint firstItem="keE-MO-DJp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wlW-KZ-qer"/>
+                            <constraint firstItem="5Ly-YL-ElL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8WF-jf-f2B"/>
+                            <constraint firstItem="5Ly-YL-ElL" firstAttribute="top" secondItem="vMh-iS-zqe" secondAttribute="bottom" constant="-133" id="9A6-V2-qT3"/>
+                            <constraint firstItem="V3Z-5j-XAh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZxX-0D-fHY"/>
+                            <constraint firstItem="vMh-iS-zqe" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="51" id="kmt-p5-urd"/>
+                            <constraint firstItem="5Ly-YL-ElL" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="rDE-T7-Edl"/>
+                            <constraint firstItem="V3Z-5j-XAh" firstAttribute="top" secondItem="vMh-iS-zqe" secondAttribute="bottom" constant="4" id="shL-ed-zuR"/>
+                            <constraint firstItem="5Ly-YL-ElL" firstAttribute="width" secondItem="5Ly-YL-ElL" secondAttribute="height" multiplier="9:16" id="tNU-Cg-FuB"/>
+                            <constraint firstItem="vMh-iS-zqe" firstAttribute="centerX" secondItem="V3Z-5j-XAh" secondAttribute="centerX" id="xpL-70-hTc"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="AEo-pa-tRp"/>
-                                <exclude reference="TJ7-61-CWK"/>
+                                <exclude reference="9A6-V2-qT3"/>
                             </mask>
                         </variation>
                     </view>
@@ -72,7 +66,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="128" height="128"/>
-        <image name="Jaws" width="3381" height="3519"/>
+        <image name="Background Tile" width="414" height="736"/>
     </resources>
 </document>

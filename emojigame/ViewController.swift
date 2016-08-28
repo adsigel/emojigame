@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var newButtonLabel: UIButton!
+    @IBOutlet weak var restoreButton: UIButton!
     
     func textFieldShouldReturn(userGuess: UITextField) -> Bool {
         userGuess.resignFirstResponder()
@@ -55,6 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        showRestore()
         print("viewDidLoad initial read of userDict is \(userDict)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
@@ -268,7 +270,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         now = dateformatter.stringFromDate(NSDate())
     }
+    
+    func showRestore() {
+        let id = uzer
+        if uzer.rangeOfString(":") != nil {
+            print("User has been identified by Game Center playerID. Hiding the restore button.")
+            restoreButton.hidden = true
+        }
+    }
 
+    @IBAction func copyAccount(sender: AnyObject) {
+        let udid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        let oldRef = ref.child("users").child(udid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let oldNode = snapshot.value
+            print(oldNode)
+            print("oldNode would be copied to: \(ref.child("users").child(uzer))")
+            let copyAlert = UIAlertController(title: "You sure?", message: "Just checking...", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
+                let newRef = ref.child("users").child(uzer).setValue(oldNode)            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
+                print("Nope nope nope")
+            }
+            copyAlert.addAction(OKAction)
+            copyAlert.addAction(cancelAction)
+            self.presentViewController(copyAlert, animated: true, completion: nil)
+            
+        })
+    }
     
     
 }
