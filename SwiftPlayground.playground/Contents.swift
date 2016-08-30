@@ -2,17 +2,16 @@
 
 import UIKit
 
-var str = "Hello, playground"
 
-var country = "United States"
-var state = "Massachusetts"
+//var title = "d"
+var plot = ""
 
-// String Interpolation
+//if title != "" && plot != "" {
+//    print("This is okay.")
+//} else {
+//    print("Something is missing.")
+//}
 
-let interpolatedAddress = "\(state + " " + country)"
+var movieValue = 105
 
-let name = "Adam"
-let greeting = "\("Hi there, " + name + ".")"
-
-let count = 4
-print("\("User has guessed " + count + "times.")")
+movieValue = Int(movieValue/2)

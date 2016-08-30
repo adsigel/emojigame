@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct PlotList {
     
@@ -146,7 +147,7 @@ struct PlotList {
             randomNumber = Int(arc4random_uniform(UInt32(plotArray.count)))
         } while excludeArray.contains(randomNumber)
         var secretTitle = titleArray[randomNumber]
-        var answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
+        let answerArray = [plotArray[randomNumber], titleArray[randomNumber], hintArray[randomNumber], scoreArray[randomNumber]]
         excludeArray.append(randomNumber)
         if excludeArray.count == plotArray.count {
             excludeArray = [0]

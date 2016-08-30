@@ -6,79 +6,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "emojigame/ViewController.swift"
-            timestampString = "490709035.617995"
+            filePath = "AddMovieController.swift"
+            timestampString = "493762181.133893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "ViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "emojigame.ViewController.skipButton.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIButton&gt;"
-                  moduleName = "emojigame"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "490565585.479477"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "emojigame.ViewController.skipButton.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIButton&gt;"
-                  moduleName = "emojigame"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "490565585.47971"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "emojigame.ViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; emojigame.ViewController"
-                  moduleName = "emojigame"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "490565585.479862"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "368">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "emojigame.ViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;emojigame.ViewController&gt;"
-                  moduleName = "emojigame"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adam/Documents/Emoji%20Stories%202/emojigame/ViewController.swift"
-                  timestampString = "490565585.480015"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "308">
-               </Location>
-            </Locations>
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "userSubmitMovie(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

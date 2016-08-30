@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Emojisodes</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>10</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -30,12 +32,12 @@
 				<key>KitInfo</key>
 				<dict>
 					<key>consumerKey</key>
-					<string>ImRo663u1bWB0KpSd9CsmvHCn</string>
+					<string>ou9gK9zkjoReFtmAPDkmgY8Cm</string>
 					<key>consumerSecret</key>
-					<string>st2PTNzFTLORImmKyxG1yaGVaSKVmFWD8QblTfJZLIgMgL2aFA</string>
+					<string>GaWwE0mgdZvFfIeh0YZRvwN1YQXk2cOcjHWW7pg79OZQ7DmAI7</string>
 				</dict>
 				<key>KitName</key>
-				<string>Digits</string>
+				<string>Twitter</string>
 			</dict>
 		</array>
 	</dict>
@@ -48,12 +50,11 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>gamekit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
