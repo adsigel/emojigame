@@ -56,7 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        showRestore()
+//        showRestore()
         print("viewDidLoad initial read of userDict is \(userDict)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
@@ -269,14 +269,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         now = dateformatter.stringFromDate(NSDate())
-    }
-    
-    func showRestore() {
-        let id = uzer
-        if uzer.rangeOfString(":") != nil {
-            print("User has been identified by Game Center playerID. Hiding the restore button.")
-            restoreButton.hidden = true
-        }
     }
 
     @IBAction func copyAccount(sender: AnyObject) {

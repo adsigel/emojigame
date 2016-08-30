@@ -13,14 +13,19 @@ import Mixpanel
 var dateString = ""
 var uid = ""
 
-class AddMovieController: UIViewController, UITextFieldDelegate {
+class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControllerDelegate {
 
     @IBOutlet weak var userSubmitTitle: UITextField!
     @IBOutlet weak var userSubmitPlot: UITextField!
     @IBOutlet weak var userSubmitMovieButton: UIButton!
+    @IBOutlet var posterImageView : UIImageView!
+    
+    // Lazy Stored Property
+    lazy var apiController: OMDBAPIController = OMDBAPIController(delegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        apiController.delegate = self
     }
     
     @IBAction func goBackButton(sender: AnyObject) {
@@ -75,6 +80,46 @@ class AddMovieController: UIViewController, UITextFieldDelegate {
         dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         dateString = dateformatter.stringFromDate(NSDate())
+    }
+    
+    func didFinishOMDBSearch(result: Dictionary<String, String>) {
+        
+        if let foundTitle = result["Title"] {
+            print("Title is \(foundTitle)")
+        }
+        
+        if let foundTomato = result["tomatoMeter"] {
+            print(foundTomato + "%")
+        }
+        
+        if let foundReleased = result["Released"] {
+            print("Released on \(foundReleased)")
+        } else {
+            print("Could not find release date")
+        }
+        
+        if let foundRating = result["Rated"] {
+            print("Rated \(foundRating)")
+        } else {
+            print("Could not find rating")
+        }
+        
+        if let foundPoster = result["Poster"] {
+            if foundPoster == "N/A" {
+                imageFromPath("http://www.teachthought.com/wp-content/uploads/2013/10/designinspirationdotnet.jpg")
+            } else {
+                imageFromPath(foundPoster)
+            }
+            
+        }
+    }
+    
+    func imageFromPath(path: String) {
+        let posterURL = NSURL(string: path)
+        let posterImageData = NSData(contentsOfURL: posterURL!)
+        posterImageView.layer.cornerRadius = 100.0
+        posterImageView.clipsToBounds = true
+        posterImageView.image = UIImage(data: posterImageData!)
     }
 
 }

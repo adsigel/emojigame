@@ -20,6 +20,7 @@
 		6695A0621D72240C00DE855F /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6695A0611D72240C00DE855F /* Mixpanel.framework */; };
 		669656461D5B59F8002B516C /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 669656441D5B59F8002B516C /* Podfile.lock */; };
 		669656471D5B59F8002B516C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 669656451D5B59F8002B516C /* Podfile */; };
+		669C89AB1D73E2EE0086E23A /* OMDBAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C89AA1D73E2EE0086E23A /* OMDBAPIController.swift */; };
 		669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */; };
 		669FAC661D3D02ED00C92433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC631D3D02ED00C92433 /* Main.storyboard */; };
 		66DE19BA1D523D71001E589B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66DE19B91D523D71001E589B /* GoogleService-Info.plist */; };
@@ -71,6 +72,7 @@
 		6695A0611D72240C00DE855F /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = "../../Library/Developer/Xcode/DerivedData/emojigame-cikbvrkoewxfuxbffbuvgkvzvhuw/Build/Products/Debug-iphoneos/Mixpanel-swift/Mixpanel.framework"; sourceTree = "<group>"; };
 		669656441D5B59F8002B516C /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		669656451D5B59F8002B516C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		669C89AA1D73E2EE0086E23A /* OMDBAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OMDBAPIController.swift; path = ../OMDBAPIController.swift; sourceTree = "<group>"; };
 		669FAC621D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		669FAC641D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66DE19B91D523D71001E589B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -119,6 +121,7 @@
 			children = (
 				669656441D5B59F8002B516C /* Podfile.lock */,
 				669656451D5B59F8002B516C /* Podfile */,
+				669C89AA1D73E2EE0086E23A /* OMDBAPIController.swift */,
 				669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */,
 				669FAC631D3D02ED00C92433 /* Main.storyboard */,
 				66374B591D2EFF58007024B1 /* emojigame */,
@@ -521,6 +524,7 @@
 				66DE19C01D5245A2001E589B /* Movies.swift in Sources */,
 				6695A05B1D71A47400DE855F /* StringScore.swift in Sources */,
 				66695A481D3CFEDF008FEA44 /* AppDelegate.swift in Sources */,
+				669C89AB1D73E2EE0086E23A /* OMDBAPIController.swift in Sources */,
 				66F8FD661D6CE20A0027E031 /* ProfileController.swift in Sources */,
 				66DE19C21D524737001E589B /* Users.swift in Sources */,
 				66F8FD5E1D5B5CCD0027E031 /* LoginController.swift in Sources */,

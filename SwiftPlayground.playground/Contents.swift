@@ -3,14 +3,14 @@
 import UIKit
 
 
-var title = "d"
+//var title = "d"
 var plot = ""
 
-if title != "" && plot != "" {
-    print("This is okay.")
-} else {
-    print("Something is missing.")
-}
+//if title != "" && plot != "" {
+//    print("This is okay.")
+//} else {
+//    print("Something is missing.")
+//}
 
 var movieValue = 105
 

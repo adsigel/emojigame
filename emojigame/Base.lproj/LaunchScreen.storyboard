@@ -34,7 +34,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background Tile" translatesAutoresizingMaskIntoConstraints="NO" id="5Ly-YL-ElL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background Tile" translatesAutoresizingMaskIntoConstraints="NO" id="5Ly-YL-ElL">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Ly-YL-ElL" secondAttribute="height" multiplier="9:16" id="zpD-2Y-t1O"/>
