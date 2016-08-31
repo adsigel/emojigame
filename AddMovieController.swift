@@ -12,30 +12,38 @@ import Mixpanel
 
 var dateString = ""
 var uid = ""
+var omdbResult = [String: String]()
 
 class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControllerDelegate {
 
     @IBOutlet weak var userSubmitTitle: UITextField!
     @IBOutlet weak var userSubmitPlot: UITextField!
     @IBOutlet weak var userSubmitMovieButton: UIButton!
-    @IBOutlet var posterImageView : UIImageView!
-    
+
     // Lazy Stored Property
     lazy var apiController: OMDBAPIController = OMDBAPIController(delegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         apiController.delegate = self
+        userSubmitTitle.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
     }
     
     @IBAction func goBackButton(sender: AnyObject) {
         performSegueWithIdentifier("finishAddingMovie", sender: sender)
     }
     
+    func textFieldDidEndEditing(userSubmitPlot: UITextField) {
+        apiController.searchOMDB(userSubmitPlot.text!)
+    }
+    
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let characterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
+        let rangeOfCharacter = userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed, options: .CaseInsensitiveSearch)
+        
         if userTitle != "" && userPlot != "" {
             let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
             let refMovies = ref.child("movies/")
@@ -104,22 +112,6 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
             print("Could not find rating")
         }
         
-        if let foundPoster = result["Poster"] {
-            if foundPoster == "N/A" {
-                imageFromPath("http://www.teachthought.com/wp-content/uploads/2013/10/designinspirationdotnet.jpg")
-            } else {
-                imageFromPath(foundPoster)
-            }
-            
-        }
     }
     
-    func imageFromPath(path: String) {
-        let posterURL = NSURL(string: path)
-        let posterImageData = NSData(contentsOfURL: posterURL!)
-        posterImageView.layer.cornerRadius = 100.0
-        posterImageView.clipsToBounds = true
-        posterImageView.image = UIImage(data: posterImageData!)
-    }
-
 }
