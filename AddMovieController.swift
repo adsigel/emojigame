@@ -13,13 +13,20 @@ import Mixpanel
 var dateString = ""
 var uid = ""
 var omdbResult = [String: String]()
+var foundTitle = ""
+var foundAwards = ""
+var foundBox = ""
+var foundDirector = ""
+var foundGenre = ""
+var foundPlot = ""
+var foundYear = ""
 
 class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControllerDelegate {
 
     @IBOutlet weak var userSubmitTitle: UITextField!
     @IBOutlet weak var userSubmitPlot: UITextField!
     @IBOutlet weak var userSubmitMovieButton: UIButton!
-
+    
     // Lazy Stored Property
     lazy var apiController: OMDBAPIController = OMDBAPIController(delegate: self)
 
@@ -96,20 +103,20 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
             print("Title is \(foundTitle)")
         }
         
-        if let foundTomato = result["tomatoMeter"] {
-            print(foundTomato + "%")
+        if let foundActors = result["Actors"] {
+            print("Starring \(foundActors)")
         }
         
-        if let foundReleased = result["Released"] {
-            print("Released on \(foundReleased)")
+        if let foundYear = result["Year"] {
+            print("Released in \(foundYear)")
         } else {
             print("Could not find release date")
         }
         
-        if let foundRating = result["Rated"] {
-            print("Rated \(foundRating)")
+        if let foundGenre = result["Genre"] {
+            print("Categorized as \(foundGenre)")
         } else {
-            print("Could not find rating")
+            print("Could not find genres")
         }
         
     }
