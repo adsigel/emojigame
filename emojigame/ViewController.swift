@@ -93,10 +93,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func checkGuess() {
         nowStamp()
         Mixpanel.mainInstance().track(event: "Take a guess")
-        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         print("User has guessed " + guess!)
         movieRef.child(movieToGuess).child("guesses").child(now).setValue(guess)
         var title = movieDict["title"] as! String
+        if title.hasPrefix("the ") {
+            title = title.stringByReplacingOccurrencesOfString("the ", withString: "")
+        }
+        if guess!.hasPrefix("the ") {
+            guess = guess!.stringByReplacingOccurrencesOfString("the ", withString: "")
+        }
         if title.score(guess!, fuzziness: 0.9) > 0.8 {
             print("userGuess is correct")
             Mixpanel.mainInstance().track(event: "Correct guess")

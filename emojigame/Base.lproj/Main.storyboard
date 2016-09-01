@@ -20,14 +20,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="It's a 🎬 guessing game with 😀👍." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3r-aL-5JT">
-                                <rect key="frame" x="16" y="134" width="288" height="55"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's a 🎬 guessing game with 😀👍." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3r-aL-5JT">
+                                <rect key="frame" x="16" y="134" width="288" height="61"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Let's do one together so you can see how it works, okay?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqh-p6-NbC">
-                                <rect key="frame" x="40" y="269" width="240" height="47"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's do one together so you can see how it works, okay?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqh-p6-NbC">
+                                <rect key="frame" x="40" y="355" width="240" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="oIA-c2-fhw"/>
                                 </constraints>
@@ -41,8 +41,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxu-wl-BAp">
-                                <rect key="frame" x="140" y="326" width="40" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxu-wl-BAp">
+                                <rect key="frame" x="140" y="412" width="40" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="✅"/>
                                 <connections>
@@ -55,11 +55,11 @@
                             <constraint firstAttribute="leadingMargin" secondItem="pjm-SA-i8C" secondAttribute="leading" id="03k-dp-yJx"/>
                             <constraint firstAttribute="leadingMargin" secondItem="k3r-aL-5JT" secondAttribute="leading" id="5Oc-4e-76f"/>
                             <constraint firstItem="Tqh-p6-NbC" firstAttribute="centerX" secondItem="IQc-yO-wPs" secondAttribute="centerX" id="6AM-RN-xEu"/>
-                            <constraint firstItem="Tqh-p6-NbC" firstAttribute="top" secondItem="k3r-aL-5JT" secondAttribute="bottom" constant="80" id="I5o-RW-Ykp"/>
+                            <constraint firstItem="Tqh-p6-NbC" firstAttribute="top" secondItem="k3r-aL-5JT" secondAttribute="bottom" constant="160" id="I5o-RW-Ykp"/>
                             <constraint firstItem="pjm-SA-i8C" firstAttribute="top" secondItem="71J-oR-dZI" secondAttribute="bottom" constant="31" id="IdS-QQ-cnk"/>
+                            <constraint firstItem="Kxu-wl-BAp" firstAttribute="top" secondItem="Tqh-p6-NbC" secondAttribute="bottom" constant="10" id="Ix7-7K-pS7"/>
                             <constraint firstItem="k3r-aL-5JT" firstAttribute="top" secondItem="pjm-SA-i8C" secondAttribute="bottom" constant="52" id="LJt-aW-f3N"/>
                             <constraint firstItem="k3r-aL-5JT" firstAttribute="centerX" secondItem="IQc-yO-wPs" secondAttribute="centerX" id="Swt-IB-WN2"/>
-                            <constraint firstItem="Kxu-wl-BAp" firstAttribute="top" secondItem="Tqh-p6-NbC" secondAttribute="bottom" constant="10" id="dGr-Ln-Dj3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="k3r-aL-5JT" secondAttribute="trailing" id="mH3-rx-i1A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pjm-SA-i8C" secondAttribute="trailing" id="oV6-sN-acb"/>
                             <constraint firstItem="pjm-SA-i8C" firstAttribute="centerX" secondItem="IQc-yO-wPs" secondAttribute="centerX" id="p0n-dz-YqM"/>
