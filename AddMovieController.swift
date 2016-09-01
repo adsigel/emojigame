@@ -12,7 +12,8 @@ import Mixpanel
 
 var dateString = ""
 var uid = ""
-var omdbResult = [String: String]()
+var result = [String: String]()
+var foundActors = ""
 var foundTitle = ""
 var foundAwards = ""
 var foundBox = ""
@@ -23,6 +24,7 @@ var foundYear = ""
 
 class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControllerDelegate {
 
+    @IBOutlet weak var titleError: UILabel!
     @IBOutlet weak var userSubmitTitle: UITextField!
     @IBOutlet weak var userSubmitPlot: UITextField!
     @IBOutlet weak var userSubmitMovieButton: UIButton!
@@ -52,13 +54,23 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
         let rangeOfCharacter = userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed, options: .CaseInsensitiveSearch)
         
         if userTitle != "" && userPlot != "" {
+            apiController.searchOMDB(userSubmitPlot.text!)
             let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
             let refMovies = ref.child("movies/")
             let moviePlotRef = refMovies.childByAutoId()
             moviePlotRef.setValue(movieData.toAnyObject())
+            moviePlotRef.child("actors").setValue(foundActors)
+            moviePlotRef.child("OMDBplot").setValue(foundPlot)
+            moviePlotRef.child("director").setValue(foundDirector)
+            moviePlotRef.child("genre").setValue(foundGenre)
+            moviePlotRef.child("boxoffice").setValue(foundBox)
+            moviePlotRef.child("year").setValue(foundYear)
             var movieId = moviePlotRef.key
             userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
             Mixpanel.mainInstance().track(event: "Movie Submitted")
+            var newScore: Int = userDict["score"] as! Int
+            newScore = newScore + 500
+            userDict["score"] = newScore
             print("The new movie has been added with an id of: \(movieId)")
             performSegueWithIdentifier("finishAddingMovie", sender: sender)
         } else {
@@ -99,18 +111,29 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
     
     func didFinishOMDBSearch(result: Dictionary<String, String>) {
         
-        if let foundTitle = result["Title"] {
-            print("Title is \(foundTitle)")
+        if let year = result["Year"], let title = result["Title"] {
+            let omdbAlert = UIAlertController(title: "Confirm Your Movie", message: "Are you referring to the movie \(title) released in \(year)?", preferredStyle: UIAlertControllerStyle.Alert)
+            let yes = UIAlertAction(title: "Yes", style: .Default) { (action) in
+                print("User has confirmed the movie metadata.")
+                foundYear = result["Year"]!
+                foundDirector = result["Director"]!
+                foundGenre = result["Genre"]!
+                foundBox = result["BoxOffice"]!
+                foundPlot = result["Plot"]!
+                foundActors = result["Actors"]!
+            }
+            let no = UIAlertAction(title: "No", style: .Default) { (action) in
+                self.titleError.hidden = false
+            }
+            omdbAlert.addAction(yes)
+            omdbAlert.addAction(no)
+            self.presentViewController(omdbAlert, animated: true, completion: nil)
+        } else {
+            print("Could not find release date")
         }
         
         if let foundActors = result["Actors"] {
             print("Starring \(foundActors)")
-        }
-        
-        if let foundYear = result["Year"] {
-            print("Released in \(foundYear)")
-        } else {
-            print("Could not find release date")
         }
         
         if let foundGenre = result["Genre"] {

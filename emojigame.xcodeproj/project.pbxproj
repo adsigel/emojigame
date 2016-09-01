@@ -23,6 +23,7 @@
 		669C89AB1D73E2EE0086E23A /* OMDBAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C89AA1D73E2EE0086E23A /* OMDBAPIController.swift */; };
 		669FAC651D3D02ED00C92433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC611D3D02ED00C92433 /* LaunchScreen.storyboard */; };
 		669FAC661D3D02ED00C92433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669FAC631D3D02ED00C92433 /* Main.storyboard */; };
+		66D08E581D77887C0091EEA6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D08E571D77887C0091EEA6 /* Crashlytics.framework */; };
 		66DE19BA1D523D71001E589B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66DE19B91D523D71001E589B /* GoogleService-Info.plist */; };
 		66DE19BB1D523D71001E589B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66DE19B91D523D71001E589B /* GoogleService-Info.plist */; };
 		66DE19BC1D523D71001E589B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66DE19B91D523D71001E589B /* GoogleService-Info.plist */; };
@@ -75,6 +76,7 @@
 		669C89AA1D73E2EE0086E23A /* OMDBAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OMDBAPIController.swift; path = ../OMDBAPIController.swift; sourceTree = "<group>"; };
 		669FAC621D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		669FAC641D3D02ED00C92433 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = emojigame/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66D08E571D77887C0091EEA6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Pods/Crashlytics.framework; sourceTree = "<group>"; };
 		66DE19B91D523D71001E589B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		66DE19BD1D524317001E589B /* AddMovieController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMovieController.swift; sourceTree = SOURCE_ROOT; };
 		66DE19BF1D5245A2001E589B /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = SOURCE_ROOT; };
@@ -93,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				666765671D7267C4001A3872 /* GameKit.framework in Frameworks */,
+				66D08E581D77887C0091EEA6 /* Crashlytics.framework in Frameworks */,
 				6695A0621D72240C00DE855F /* Mixpanel.framework in Frameworks */,
 				6695A0591D71A44400DE855F /* StringScore_Swift.framework in Frameworks */,
 				6695A0601D72240800DE855F /* Twitter.framework in Frameworks */,
@@ -201,6 +204,7 @@
 		9125B2BA5E2246347F499BB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66D08E571D77887C0091EEA6 /* Crashlytics.framework */,
 				666765681D7267C9001A3872 /* SystemConfiguration.framework */,
 				666765661D7267C4001A3872 /* GameKit.framework */,
 				6695A0611D72240C00DE855F /* Mixpanel.framework */,
@@ -448,7 +452,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" c1f9a6229f47deedcbe6bb5bf9082d440c61c9ad 9334ef346039a0d12decf657700b3d9ef1843ca5f8f7ecc566d04ab63518f9e3";
+			shellScript = "\"${PODS_ROOT}/Fabric.framework/run\" c1f9a6229f47deedcbe6bb5bf9082d440c61c9ad 9334ef346039a0d12decf657700b3d9ef1843ca5f8f7ecc566d04ab63518f9e3";
 		};
 		6CFD84DC8B87AA727F0092E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -678,6 +682,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -703,6 +708,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = emojigame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
