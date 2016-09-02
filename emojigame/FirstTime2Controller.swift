@@ -19,6 +19,7 @@ class FirstTime2Controller: UIViewController, UITextFieldDelegate, UINavigationC
     @IBOutlet weak var helpActors: UILabel!
     @IBOutlet weak var helpPlot: UILabel!
     
+    
     func textFieldShouldReturn(_ guessTextField: UITextField!) -> Bool {
         guessTextField.resignFirstResponder()
         checkGuess()

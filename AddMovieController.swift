@@ -51,7 +51,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let characterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
-        if userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed.invertedSet) != nil {
+        if userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed) != nil {
             // plot has actual letters, not cool
             let lettersInPlot = UIAlertController(title: "No Letters Allowed", message: "You can't use letters in your movie plot. Emoji only please. 🙏", preferredStyle: UIAlertControllerStyle.Alert)
             let okay = UIAlertAction(title: "My bad", style: .Default) { (action) in
@@ -60,33 +60,33 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
             }
             lettersInPlot.addAction(okay)
             self.presentViewController(lettersInPlot, animated: true, completion: nil)
-        }
-        if userTitle != "" && userPlot != "" {
-            apiController.searchOMDB(userSubmitPlot.text!)
-            let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
-            let refMovies = ref.child("movies/")
-            let moviePlotRef = refMovies.childByAutoId()
-            moviePlotRef.setValue(movieData.toAnyObject())
-            moviePlotRef.child("actors").setValue(foundActors)
-            moviePlotRef.child("OMDBplot").setValue(foundPlot)
-            moviePlotRef.child("director").setValue(foundDirector)
-            moviePlotRef.child("genre").setValue(foundGenre)
-            moviePlotRef.child("boxoffice").setValue(foundBox)
-            moviePlotRef.child("year").setValue(foundYear)
-            var movieId = moviePlotRef.key
-            userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
-            Mixpanel.mainInstance().track(event: "Movie Submitted")
-            var newScore: Int = userDict["score"] as! Int
-            newScore = newScore + 500
-            userDict["score"] = newScore
-            print("The new movie has been added with an id of: \(movieId)")
-            performSegueWithIdentifier("finishAddingMovie", sender: sender)
         } else {
-            let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie title and a plot for us to review.", preferredStyle: UIAlertControllerStyle.Alert)
-            badSubmitAlert.addAction(UIAlertAction(title: "Gotcha", style: UIAlertActionStyle.Default, handler: nil))
-            
-            self.presentViewController(badSubmitAlert, animated: true, completion: nil)
-
+            if userTitle != "" && userPlot != "" {
+                apiController.searchOMDB(userSubmitPlot.text!)
+                let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
+                let refMovies = ref.child("movies/")
+                let moviePlotRef = refMovies.childByAutoId()
+                moviePlotRef.setValue(movieData.toAnyObject())
+                moviePlotRef.child("actors").setValue(foundActors)
+                moviePlotRef.child("OMDBplot").setValue(foundPlot)
+                moviePlotRef.child("director").setValue(foundDirector)
+                moviePlotRef.child("genre").setValue(foundGenre)
+                moviePlotRef.child("boxoffice").setValue(foundBox)
+                moviePlotRef.child("year").setValue(foundYear)
+                var movieId = moviePlotRef.key
+                userRef.child(uzer).child("submitted/").child(movieId).setValue(dateString)
+                Mixpanel.mainInstance().track(event: "Movie Submitted")
+                var newScore: Int = userDict["score"] as! Int
+                newScore = newScore + 500
+                userDict["score"] = newScore
+                print("The new movie has been added with an id of: \(movieId)")
+                performSegueWithIdentifier("finishAddingMovie", sender: sender)
+            } else {
+                let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie title and a plot for us to review.", preferredStyle: UIAlertControllerStyle.Alert)
+                badSubmitAlert.addAction(UIAlertAction(title: "Gotcha", style: UIAlertActionStyle.Default, handler: nil))
+                
+                self.presentViewController(badSubmitAlert, animated: true, completion: nil)
+            }
         }
     }
     

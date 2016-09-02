@@ -31,6 +31,7 @@ var movieID = String()
 var movieDict = [String: AnyObject]()
 var moviesPlayed = ""
 var now = ""
+var guessCount: Int = 0
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -94,6 +95,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         nowStamp()
         Mixpanel.mainInstance().track(event: "Take a guess")
         var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        guessCount = guessCount + 1
         print("User has guessed " + guess!)
         movieRef.child(movieToGuess).child("guesses").child(now).setValue(guess)
         var title = movieDict["title"] as! String
@@ -106,6 +108,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if title.score(guess!, fuzziness: 0.9) > 0.8 {
             print("userGuess is correct")
             Mixpanel.mainInstance().track(event: "Correct guess")
+            if guessCount > 4 {
+                userRef.child(uzer).child("persistence").setValue(true)
+            }
             movieDict["points"] as! Int
             let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in

@@ -20,7 +20,9 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var correctLabel: UILabel!
     @IBOutlet weak var submittedLabel: UILabel!
-    
+    @IBOutlet weak var trophyPersistence: UIButton!
+    @IBOutlet weak var trophyFirst: UIButton!
+    @IBOutlet weak var trophyCrayon: UIButton!
 
 
     
@@ -34,6 +36,7 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
         self.nameField.text = String(userDict["name"]!)
         self.emailField.text = String(userDict["email"]!)
         getSubmittedCount()
+        getTrophies()
     }
     
     
@@ -67,6 +70,78 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
         saveHighscore(gcScore)
         showLeader()
     }
+    
+    func getTrophies() {
+        if userDict["persistence"] != nil {
+            let persistence = userDict["persistence"] as! Bool
+            if persistence == true {
+                self.trophyPersistence.setTitle("🏋", forState: UIControlState.Normal)
+            }
+        }
+        let exclude = userDict["exclude"] as! NSDictionary
+        let excludeString = exclude.description
+        if excludeString.rangeOfString("correct") != nil {
+            self.trophyFirst.setTitle("🚼", forState: UIControlState.Normal)
+        }
+        if userDict["submitted"] != nil {
+            self.trophyCrayon.setTitle("🖍", forState: UIControlState.Normal)
+        }
+    }
+    
+    @IBAction func persistence(sender: AnyObject) {
+        if self.trophyPersistence.titleLabel!.text == "🏋" {
+            let trophy = UIAlertController(title: "Persistence", message: "You got a movie right after more than 5 guesses!", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Awesome", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        } else {
+            let trophy = UIAlertController(title: "🔒", message: "???", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Harumph", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func firstSolve(sender: AnyObject) {
+        if self.trophyFirst.titleLabel!.text == "🚼" {
+            let trophy = UIAlertController(title: "Learning to Crawl", message: "You solved your first movie!", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Awesome", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        } else {
+            let trophy = UIAlertController(title: "🔒", message: "???", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Harumph", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func crayon(sender: AnyObject) {
+        if self.trophyCrayon.titleLabel!.text == "🖍" {
+            let trophy = UIAlertController(title: "Author, Author", message: "You submitted your first movie to Emojisodes!", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Awesome", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        } else {
+            let trophy = UIAlertController(title: "🔒", message: "???", preferredStyle: UIAlertControllerStyle.Alert)
+            trophy.addAction(UIAlertAction(title: "Harumph", style: UIAlertActionStyle.Cancel, handler: {
+                (action: UIAlertAction!) in
+                trophy.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(trophy, animated: true, completion: nil)
+        }
+    }
+    
     
     func getSubmittedCount() {
         userRef.child(uzer).child("submitted").observeSingleEventOfType(.Value, withBlock: { (snapshot: FIRDataSnapshot!) in
