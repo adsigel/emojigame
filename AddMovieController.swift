@@ -51,8 +51,16 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let characterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
-        let rangeOfCharacter = userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed, options: .CaseInsensitiveSearch)
-        
+        if userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed.invertedSet) != nil {
+            // plot has actual letters, not cool
+            let lettersInPlot = UIAlertController(title: "No Letters Allowed", message: "You can't use letters in your movie plot. Emoji only please. 🙏", preferredStyle: UIAlertControllerStyle.Alert)
+            let okay = UIAlertAction(title: "My bad", style: .Default) { (action) in
+                self.userSubmitPlot.becomeFirstResponder()
+                self.userSubmitPlot.selectedTextRange = self.userSubmitPlot.textRangeFromPosition(self.userSubmitPlot.beginningOfDocument, toPosition: self.userSubmitPlot.endOfDocument)
+            }
+            lettersInPlot.addAction(okay)
+            self.presentViewController(lettersInPlot, animated: true, completion: nil)
+        }
         if userTitle != "" && userPlot != "" {
             apiController.searchOMDB(userSubmitPlot.text!)
             let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
@@ -129,7 +137,14 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
             omdbAlert.addAction(no)
             self.presentViewController(omdbAlert, animated: true, completion: nil)
         } else {
-            print("Could not find release date")
+            print("Could not find movie")
+            let badResult = UIAlertController(title: "No Movie Found", message: "Sorry, we couldn't find any movies with that title. Try another movie.", preferredStyle: UIAlertControllerStyle.Alert)
+            let okay = UIAlertAction(title: "Okay", style: .Default) { (action) in
+                self.userSubmitTitle.becomeFirstResponder()
+                self.userSubmitTitle.selectedTextRange = self.userSubmitTitle.textRangeFromPosition(self.userSubmitTitle.beginningOfDocument, toPosition: self.userSubmitTitle.endOfDocument)
+            }
+            badResult.addAction(okay)
+            self.presentViewController(badResult, animated: true, completion: nil)
         }
         
         if let foundActors = result["Actors"] {
