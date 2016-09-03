@@ -15,6 +15,10 @@ var plot = ""
 
 var movieValue = 105
 
+var myDict = ["movie1": "plot1", "movie2": "plot2", "movie3": "plot3"]
+
+myDict.count
+
 var guess = "the matrix"
 var title = "the matrix"
 

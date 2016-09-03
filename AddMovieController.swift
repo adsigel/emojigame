@@ -79,8 +79,14 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
                 var newScore: Int = userDict["score"] as! Int
                 newScore = newScore + 500
                 userDict["score"] = newScore
+                userRef.child(uzer).child("score").setValue(newScore)
                 print("The new movie has been added with an id of: \(movieId)")
-                performSegueWithIdentifier("finishAddingMovie", sender: sender)
+                let submitOkay = UIAlertController(title: "Success!", message: "We'll review your movie and notify you when it's approved.", preferredStyle: UIAlertControllerStyle.Alert)
+                let okay = UIAlertAction(title: "Thanks", style: .Default) { (action) in
+                    self.performSegueWithIdentifier("finishAddingMovie", sender: sender)
+                }
+                submitOkay.addAction(okay)
+                self.presentViewController(submitOkay, animated: true, completion: nil)
             } else {
                 let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie title and a plot for us to review.", preferredStyle: UIAlertControllerStyle.Alert)
                 badSubmitAlert.addAction(UIAlertAction(title: "Gotcha", style: UIAlertActionStyle.Default, handler: nil))

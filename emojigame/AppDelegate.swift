@@ -21,9 +21,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITextFieldDelegate {
         FIRApp.configure()
         Fabric.with([Twitter.self, Crashlytics.self])
         Mixpanel.initialize(token: "f4205d45e3e67e6157bb86a32886b984")
+        registerForPushNotifications(application)
+        let mixpanel = Mixpanel.mainInstance()
+        
         // Override point for customization after application launch.
         // application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         return true
+    }
+    
+    func registerForPushNotifications(application: UIApplication) {
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        if notificationSettings.types != .None {
+            application.registerForRemoteNotifications()
+        }
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        var tokenString = ""
+        
+        for i in 0..<deviceToken.length {
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        }
+        
+        print("Device Token:", tokenString)
+        let mixpanel = Mixpanel.mainInstance()
+        mixpanel.people.addPushDeviceToken(deviceToken)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to register:", error)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

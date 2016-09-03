@@ -16,6 +16,7 @@ import UIKit
 import Foundation
 import Firebase
 import GameKit
+import Mixpanel
 
 var userDict = [String:AnyObject]()
 var uzer = ""
@@ -40,6 +41,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
     
     @IBAction func playButton(sender: AnyObject) {
         let newUserRef = userRef.child(uzer)
+        Mixpanel.mainInstance().identify(distinctId: uzer)
         self.currentDate()
         print("Is this a new user? \(newUser)")
         if newUser == "false" {
