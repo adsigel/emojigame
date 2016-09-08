@@ -16,6 +16,7 @@ import UIKit
 import Foundation
 import Firebase
 import GameKit
+import Mixpanel
 
 var userDict = [String:AnyObject]()
 var uzer = ""
@@ -40,6 +41,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
     
     @IBAction func playButton(sender: AnyObject) {
         let newUserRef = userRef.child(uzer)
+        Mixpanel.mainInstance().identify(distinctId: uzer)
         self.currentDate()
         print("Is this a new user? \(newUser)")
         if newUser == "false" {
@@ -49,6 +51,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
                 userDict = snapshot.value! as! [String : AnyObject]
                 print("userDict is \(userDict)")
             })
+            lastLogin()
             delay(1.0) {
                 self.performSegueWithIdentifier("logIn", sender: sender)
             }
@@ -128,6 +131,14 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+    }
+    
+    func lastLogin() {
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
+        let lastLoginStamp = dateformatter.stringFromDate(NSDate())
+        userRef.child(uzer).child("last-login").setValue(lastLoginStamp)
     }
 
     

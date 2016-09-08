@@ -20,7 +20,6 @@ import Mixpanel
 
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
-var userScoreValue = userDict["score"] as! Int
 var userGuess = String()
 var movieValue: Int = 0
 var excludeIndex = [String]()
@@ -30,12 +29,11 @@ var user: User!
 var movieToGuess = String()
 var movieID = String()
 var movieDict = [String: AnyObject]()
-var secretTitle = String()
-var secretHint = String()
-var secretPlot = String()
-var secretValue: Int = 0
 var moviesPlayed = ""
 var now = ""
+var guessCount: Int = 0
+var streak = 0
+var skip = 0
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -44,7 +42,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userScore: UILabel!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var newButtonLabel: UIButton!
-    @IBOutlet weak var restoreButton: UIButton!
+    @IBOutlet weak var hintReleased: UILabel!
+    @IBOutlet weak var hintDirector: UILabel!
+    @IBOutlet weak var hintActors: UILabel!
+    @IBOutlet weak var hintPlot: UILabel!
     
     func textFieldShouldReturn(userGuess: UITextField) -> Bool {
         userGuess.resignFirstResponder()
@@ -56,7 +57,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-//        showRestore()
         print("viewDidLoad initial read of userDict is \(userDict)")
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
@@ -74,9 +74,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func nextRound() {
         self.newButtonLabel.hidden = true
         print("User wants another movie.")
+        guessCount = 0
         userGuess.text = ""
+        self.hintReleased.hidden = true
+        self.hintDirector.hidden = true
+        self.hintActors.hidden = true
+        self.hintPlot.hidden = true
+        self.submitPrompt()
         self.randomKeyfromFIR{ (movieToGuess) -> () in
             self.getMovieData(movieToGuess)
+        }
+    }
+    
+    func submitPrompt() {
+        if userDict["exclude"] != nil {
+            let rounds = userDict["exclude"] as! NSDictionary
+            let length = rounds.count
+            if length % 9 == 0 {
+                let submitPrompt = UIAlertController(title: "Try Adding a Movie", message: "You've done a lot of guessing. Why not try adding a movie for other people to guess?", preferredStyle: UIAlertControllerStyle.Alert)
+                let OKAction = UIAlertAction(title: "Okay", style: .Default) { (action) in
+                    print("User has chosen the benvolent path.")
+                    self.performSegueWithIdentifier("AddMovie", sender: nil)
+                }
+                let cancelAction = UIAlertAction(title: "No Thanks", style: .Default) { (action) in
+                    print("User has chosen the selfish path.")
+                }
+                submitPrompt.addAction(OKAction)
+                submitPrompt.addAction(cancelAction)
+                self.presentViewController(submitPrompt, animated: true, completion: nil)
+            }
         }
     }
 
@@ -92,13 +118,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func checkGuess() {
         nowStamp()
         Mixpanel.mainInstance().track(event: "Take a guess")
-        let guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var guess = userGuess.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        guessCount = guessCount + 1
         print("User has guessed " + guess!)
-        movieRef.child(movieToGuess).child("guesses").child(now).setValue(guess)
+        movieRef.child(movieToGuess).child("guesses").child(uzer).setValue(guess)
         var title = movieDict["title"] as! String
+        if title.hasPrefix("the ") {
+            title = title.stringByReplacingOccurrencesOfString("the ", withString: "")
+        }
+        if guess!.hasPrefix("the ") {
+            guess = guess!.stringByReplacingOccurrencesOfString("the ", withString: "")
+        }
         if title.score(guess!, fuzziness: 0.9) > 0.8 {
             print("userGuess is correct")
+            // reset skip count
+            skip = 0
+            // track streak
+            streak = streak + 1
+            if streak >= 5 {
+                userRef.child(uzer).child("streak").setValue(5)
+            }
+            // end track streak
             Mixpanel.mainInstance().track(event: "Correct guess")
+            if guessCount > 4 {
+                userRef.child(uzer).child("persistence").setValue(true)
+            }
+//            let guesses = movieRef.child(movieToGuess).child("guesses") as! NSDictionary
+//            if guesses.count == 1 {
+//                userRef.child(uzer).child("first_to_be_right").setValue(true)
+//            }
             movieDict["points"] as! Int
             let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
@@ -152,29 +200,73 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func hintButton(sender: AnyObject) {
         print("User has asked for a hint.")
-        let alert = UIAlertController(title: "Here's a hint", message: movieDict["hint"]! as! String, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Thanks", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        movieValue = Int(movieValue/2)
+        Mixpanel.mainInstance().track(event: "Get a hint")
+        hintIf: if self.hintReleased.hidden == true {
+            let hint = movieDict["year"] as! String
+            self.hintReleased.text = "Released: \(hint)"
+            self.hintReleased.hidden = false
+            var newScore: Int = userDict["score"] as! Int
+            newScore = newScore - 10
+            userDict["score"] = newScore
+            self.userScore.text = String(userDict["score"]!)
+            streak = 0
+            break hintIf
+        } else {
+            if self.hintDirector.hidden == true {
+                let hint = movieDict["director"] as! String
+                self.hintDirector.text = "Directed by: \(hint)"
+                self.hintDirector.hidden = false
+                var newScore: Int = userDict["score"] as! Int
+                newScore = newScore - 10
+                userDict["score"] = newScore
+                self.userScore.text = String(userDict["score"]!)
+                streak = 0
+                break hintIf
+            } else {
+                if self.hintActors.hidden == true {
+                    let hint = movieDict["actors"] as! String
+                    self.hintActors.text = "Starring: \(hint)"
+                    self.hintActors.hidden = false
+                    var newScore: Int = userDict["score"] as! Int
+                    newScore = newScore - 10
+                    userDict["score"] = newScore
+                    self.userScore.text = String(userDict["score"]!)
+                    streak = 0
+                    break hintIf
+                } else {
+                    if self.hintPlot.hidden == true {
+                        let hint = movieDict["OMDBplot"] as! String
+                        self.hintPlot.text = "Plot: \(hint)"
+                        self.hintPlot.hidden = false
+                        var newScore: Int = userDict["score"] as! Int
+                        newScore = newScore - 10
+                        userDict["score"] = newScore
+                        self.userScore.text = String(userDict["score"]!)
+                        streak = 0
+                        break hintIf
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func skipMovie(sender: AnyObject) {
         let skipAlert = UIAlertController(title: "Skip this movie?", message: "You can skip this for now, but it'll cost you 25 points. Are you sure you want to skip?", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
             self.nowStamp()
+            streak = 0
+            skip = skip + 1
+            if skip >= 3 {
+                userRef.child(uzer).child("skip").setValue(3)
+            }
             print("User has chosen the coward's way out.")
             self.userGuess.text = ""
             var newScore: Int = userDict["score"] as! Int
             newScore = newScore - 25
-            userScoreValue = userScoreValue - 25
             userDict["score"] = newScore
             self.userScore.text = String(userDict["score"]!)
             userRef.child(uzer).child("score").setValue(newScore)
-            movieRef.child(movieToGuess).child("skips").child(now).setValue(uzer)
-            self.randomKeyfromFIR{ (movieToGuess) -> () in
-                self.getMovieData(movieToGuess)
-            }
+            self.nextRound()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
             print("User has chosen to press on bravely.")
@@ -187,10 +279,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let textToShare = "I'm playing @emojisodes. Help me guess what movie this is! " + (movieDict["plot"]! as! String)
         let objectsToShare = [textToShare]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
         self.presentViewController(activityVC, animated: true, completion: nil)
-        Mixpanel.mainInstance().track(event: "Shared movie")
+        activityVC.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
+            //technically only checks if user presses Cancel at share sheet level, not tweet level
+            print("Shared video activity: \(activityType)")
+            Mixpanel.mainInstance().track(event: "Shared movie")
+            userRef.child(uzer).child("shared").setValue(true)
+        }
     }
     
     @IBAction func newRoundButton(sender: AnyObject) {
@@ -252,7 +348,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             })
     }
-
     
     func getMovieData(movieToGuess:String) {
         let movieToGuessRef = movieRef.ref.child(movieToGuess)
@@ -270,26 +365,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         dateformatter.timeStyle = NSDateFormatterStyle.LongStyle
         now = dateformatter.stringFromDate(NSDate())
     }
-
-    @IBAction func copyAccount(sender: AnyObject) {
-        let udid = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        let oldRef = ref.child("users").child(udid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            let oldNode = snapshot.value
-            print(oldNode)
-            print("oldNode would be copied to: \(ref.child("users").child(uzer))")
-            let copyAlert = UIAlertController(title: "You sure?", message: "Just checking...", preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "I'm sure", style: .Default) { (action) in
-                let newRef = ref.child("users").child(uzer).setValue(oldNode)            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
-                print("Nope nope nope")
-            }
-            copyAlert.addAction(OKAction)
-            copyAlert.addAction(cancelAction)
-            self.presentViewController(copyAlert, animated: true, completion: nil)
-            
-        })
-    }
-    
     
 }
 

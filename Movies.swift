@@ -19,9 +19,12 @@ struct Movies {
     let addedDate: String!
     let points: Int!
     var approved: Int!
+//    var actors: String!
     
     // Initialize from arbitrary data
-    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Int, points: Int, key: String = "") {
+    init(title: String, plot: String, hint: String, addedDate: String, addedByUser: String, approved: Int, points: Int, key: String = ""
+//        , actors: String
+        ) {
         self.key = key
         self.title = title
         self.plot = plot
@@ -30,6 +33,7 @@ struct Movies {
         self.addedByUser = addedByUser
         self.approved = approved
         self.points = points
+//        self.actors = actors
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -41,6 +45,7 @@ struct Movies {
         addedByUser = snapshot.value!["addedByUser"] as! String
         approved = snapshot.value!["approved"] as! Int
         points = snapshot.value!["points"] as! Int
+//        actors = snapshot.value!["actors"] as! String
     }
     
     
@@ -52,7 +57,8 @@ struct Movies {
             "addedDate": addedDate,
             "addedByUser": addedByUser,
             "approved": approved,
-            "points": points
+            "points": points,
+//            "actors": actors
         ]
     }
     

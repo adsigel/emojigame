@@ -14,8 +14,11 @@ import Mixpanel
 class FirstTime2Controller: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var guessTextField: UITextField!
+    @IBOutlet weak var helpYear: UILabel!
+    @IBOutlet weak var helpDirector: UILabel!
+    @IBOutlet weak var helpActors: UILabel!
+    @IBOutlet weak var helpPlot: UILabel!
     
-    @IBOutlet weak var helpText: UILabel!
     
     func textFieldShouldReturn(_ guessTextField: UITextField!) -> Bool {
         guessTextField.resignFirstResponder()
@@ -39,7 +42,30 @@ class FirstTime2Controller: UIViewController, UITextFieldDelegate, UINavigationC
     }
     
     @IBAction func userHelpButton(sender: AnyObject) {
-        helpText.hidden = false
+        hintIf: if self.helpYear.hidden == true {
+            self.helpYear.text = "Released: 1997"
+            self.helpYear.hidden = false
+            break hintIf
+        } else {
+            if self.helpDirector.hidden == true {
+                self.helpDirector.text = "Directed by: James Cameron"
+                self.helpDirector.hidden = false
+                break hintIf
+            } else {
+                if self.helpActors.hidden == true {
+                    self.helpActors.text = "Starring: Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates"
+                    self.helpActors.hidden = false
+                    break hintIf
+                } else {
+                    if self.helpPlot.hidden == true {
+                        self.helpPlot.text = "Plot: A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic."
+                        self.helpPlot.hidden = false
+                        break hintIf
+                    }
+                }
+            }
+        }
+
     }
     
     
