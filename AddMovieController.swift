@@ -34,6 +34,8 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         apiController.delegate = self
         userSubmitTitle.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
     }
@@ -63,7 +65,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
         } else {
             if userTitle != "" && userPlot != "" {
                 apiController.searchOMDB(userSubmitPlot.text!)
-                let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 0, points: 0)
+                let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 1, points: 100)
                 let refMovies = ref.child("movies/")
                 let moviePlotRef = refMovies.childByAutoId()
                 moviePlotRef.setValue(movieData.toAnyObject())
@@ -81,11 +83,17 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
                 userDict["score"] = newScore
                 userRef.child(uzer).child("score").setValue(newScore)
                 print("The new movie has been added with an id of: \(movieId)")
-                let submitOkay = UIAlertController(title: "Success!", message: "We'll review your movie and notify you when it's approved.", preferredStyle: UIAlertControllerStyle.Alert)
-                let okay = UIAlertAction(title: "Thanks", style: .Default) { (action) in
+                let submitOkay = UIAlertController(title: "Success", message: "Your movie has been added to Emojisodes!", preferredStyle: UIAlertControllerStyle.Alert)
+                let nextRound = UIAlertAction(title: "Next Round", style: .Default) { (action) in
                     self.performSegueWithIdentifier("finishAddingMovie", sender: sender)
                 }
-                submitOkay.addAction(okay)
+                let addAnother = UIAlertAction(title: "Add Another", style: .Default) { (action) in
+                    self.userSubmitPlot.text = ""
+                    self.userSubmitTitle.text = ""
+                    self.userSubmitTitle.becomeFirstResponder()
+                }
+                submitOkay.addAction(nextRound)
+                submitOkay.addAction(addAnother)
                 self.presentViewController(submitOkay, animated: true, completion: nil)
             } else {
                 let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie title and a plot for us to review.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -110,6 +118,39 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
         helpAlert.addAction(help)        
         self.presentViewController(helpAlert, animated: true, completion: nil)
     }
+    
+    @IBAction func shareWithFriends(sender: AnyObject) {
+        let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let characterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
+        if userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed) != nil {
+            // plot has actual letters, not cool
+            let lettersInPlot = UIAlertController(title: "No Letters Allowed", message: "You can't use letters in your movie plot. Emoji only please. 🙏", preferredStyle: UIAlertControllerStyle.Alert)
+            let okay = UIAlertAction(title: "My bad", style: .Default) { (action) in
+                self.userSubmitPlot.becomeFirstResponder()
+                self.userSubmitPlot.selectedTextRange = self.userSubmitPlot.textRangeFromPosition(self.userSubmitPlot.beginningOfDocument, toPosition: self.userSubmitPlot.endOfDocument)
+            }
+            lettersInPlot.addAction(okay)
+            self.presentViewController(lettersInPlot, animated: true, completion: nil)
+        } else if userPlot == "" {
+            let badSubmitAlert = UIAlertController(title: "Something's Missing", message: "Erm, you need to provide a movie plot to share with friends.", preferredStyle: UIAlertControllerStyle.Alert)
+            badSubmitAlert.addAction(UIAlertAction(title: "Gotcha", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(badSubmitAlert, animated: true, completion: nil)
+        } else {
+            let textToShare = "I'm playing Emojisodes 🎬. What do you think of this new movie I want to add? \(userPlot!)"
+            let objectsToShare = [textToShare]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = sender as! UIView
+            self.presentViewController(activityVC, animated: true, completion: nil)
+            activityVC.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo]
+            activityVC.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
+                //technically only checks if user presses Cancel at share sheet level, not tweet level
+                print("Shared video activity: \(activityType)")
+                Mixpanel.mainInstance().track(event: "Shared submission with friends")
+                userRef.child(uzer).child("shared_with_friends").setValue(true)
+            }
+        }
+    }
+    
     
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
