@@ -28,10 +28,12 @@ var alias = ""
 class LoginController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, GKGameCenterControllerDelegate {
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicatorView.startAnimating()
         playButton.hidden = true
         self.authenticateLocalPlayer{ (uzer) -> () in
             self.addToFirebase(uzer)
@@ -121,6 +123,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UINavigationContro
                 newUser = "true"
             }
             self.playButton.hidden = false
+            self.activityIndicatorView.stopAnimating()
         })
     }
     

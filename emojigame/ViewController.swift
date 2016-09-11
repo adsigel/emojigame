@@ -17,6 +17,7 @@ import UIKit
 import Firebase
 import CoreFoundation
 import Mixpanel
+import TwitterKit
 
 let ref = FIRDatabase.database().reference()
 let movieRef = ref.child("movies")
@@ -140,6 +141,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             // end track streak
             Mixpanel.mainInstance().track(event: "Correct guess")
+            self.newButtonLabel.hidden = false
             if guessCount > 4 {
                 userRef.child(uzer).child("persistence").setValue(true)
             }
@@ -148,39 +150,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                userRef.child(uzer).child("first_to_be_right").setValue(true)
 //            }
             movieDict["points"] as! Int
+            var newScore: Int = userDict["score"] as! Int
+            newScore = newScore + movieValue
+            userDict["score"] = newScore
+            self.userScore.text = String(userDict["score"]!)
+            // updates user score and count in db
+            userRef.child(uzer).child("score").setValue(newScore)
+            userRef.child(uzer).child("correct").setValue((userDict["correct"]! as! Int) + 1)
+            // adds new child to /exclude with movie key
+            userRef.child(uzer).child("exclude").child(movieToGuess).setValue("correct")
+            print("adding \(movieToGuess) to user's exclude list")
             let guessRightAlert = UIAlertController(title: "That's it!", message: "You got it right!", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "Next movie", style: .Default) { (action) in
                 self.nextRound()
-                var newScore: Int = userDict["score"] as! Int
-                newScore = newScore + movieValue
-                userDict["score"] = newScore
-                self.userScore.text = String(userDict["score"]!)
-                // updates user score and count in db
-                userRef.child(uzer).child("score").setValue(newScore)
-                userRef.child(uzer).child("correct").setValue((userDict["correct"]! as! Int) + 1)
-                // adds new child to /exclude with movie key
-                userRef.child(uzer).child("exclude").child(movieToGuess).setValue("correct")
-                print("adding \(movieToGuess) to user's exclude list")
             }
-//            let ShareAction = UIAlertAction(title: "Share", style: .Default) { (action) in
-//                let composer = TWTRComposer()
-//                let plot = movieDict["plot"]! as! String
-//                composer.setText("I'm playing @emojisodes and I just figured out what movie this is! \(plot)")
-//                
-//                // Called from a UIViewController
-//                composer.showFromViewController(self) { result in
-//                    if (result == TWTRComposerResult.Cancelled) {
-//                        print("Tweet composition cancelled")
-//                        self.newButtonLabel.hidden = false
-//                    }
-//                    else {
-//                        print("Sending tweet!")
-//                    }
-//                }
-//            }
+            let ShareAction = UIAlertAction(title: "Brag", style: .Default) { (action) in
+                let composer = TWTRComposer()
+                let plot = movieDict["plot"]! as! String
+                composer.setText("I'm playing @emojisodes and I just figured out what movie this is! \(plot)")
+                
+                // Called from a UIViewController
+                composer.showFromViewController(self) { result in
+                    if (result == TWTRComposerResult.Cancelled) {
+                        print("Tweet composition cancelled")
+                        self.newButtonLabel.hidden = false
+                    }
+                    else {
+                        print("Sending tweet!")
+                        Mixpanel.mainInstance().track(event: "Twitterbrag")
+                    }
+                }
+            }
 
             guessRightAlert.addAction(OKAction)
-//            guessRightAlert.addAction(ShareAction)
+            guessRightAlert.addAction(ShareAction)
             self.presentViewController(guessRightAlert, animated: true, completion: nil)
         } else {
             print("userGuess is incorrect")

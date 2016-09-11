@@ -17,6 +17,8 @@ var movieValue = 105
 
 var myDict = ["movie1": "plot1", "movie2": "plot2", "movie3": "plot3"]
 
+var array = Array(myDict.keys) as! [String]
+
 myDict.count
 
 var guess = "the matrix"

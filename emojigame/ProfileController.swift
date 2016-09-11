@@ -48,9 +48,9 @@ class ProfileController: UIViewController, UITextFieldDelegate, UINavigationCont
         print("userDict is \(userDict)")
     }
     
-//    @IBAction func viewMovieList(sender:AnyObject) {
-//        performSegueWithIdentifier("movieList", sender: sender)
-//    }
+    @IBAction func viewMovieList(sender:AnyObject) {
+        performSegueWithIdentifier("movieList", sender: sender)
+    }
     
     
     @IBAction func finishUpButton(sender: AnyObject) {

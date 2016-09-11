@@ -21,6 +21,7 @@ var foundDirector = ""
 var foundGenre = ""
 var foundPlot = ""
 var foundYear = ""
+var searchString = ""
 
 class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControllerDelegate {
 
@@ -45,15 +46,16 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
     }
     
     func textFieldDidEndEditing(userSubmitPlot: UITextField) {
-        apiController.searchOMDB(userSubmitPlot.text!)
+        searchString = (userSubmitPlot.text?.stringByReplacingOccurrencesOfString("&", withString: "%26"))!
+        apiController.searchOMDB(searchString)
     }
     
     @IBAction func userSubmitMovie (_ sender: AnyObject) {
         self.currentDate()
         let userTitle = userSubmitTitle.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         let userPlot = userSubmitPlot.text?.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        let characterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
-        if userPlot!.rangeOfCharacterFromSet(characterSetNotAllowed) != nil {
+        let plotCharacterSetNotAllowed = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
+        if userPlot!.rangeOfCharacterFromSet(plotCharacterSetNotAllowed) != nil {
             // plot has actual letters, not cool
             let lettersInPlot = UIAlertController(title: "No Letters Allowed", message: "You can't use letters in your movie plot. Emoji only please. 🙏", preferredStyle: UIAlertControllerStyle.Alert)
             let okay = UIAlertAction(title: "My bad", style: .Default) { (action) in
@@ -64,7 +66,7 @@ class AddMovieController: UIViewController, UITextFieldDelegate, OMDBAPIControll
             self.presentViewController(lettersInPlot, animated: true, completion: nil)
         } else {
             if userTitle != "" && userPlot != "" {
-                apiController.searchOMDB(userSubmitPlot.text!)
+                apiController.searchOMDB(searchString)
                 let movieData = Movies(title: userTitle!, plot: userPlot!, hint: "", addedDate: dateString, addedByUser: uzer, approved: 1, points: 100)
                 let refMovies = ref.child("movies/")
                 let moviePlotRef = refMovies.childByAutoId()
